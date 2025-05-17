@@ -16,6 +16,7 @@
 #include <cwctype> // Para funções de verificação de caracteres wide, como iswalnum
 #include <cstdint>
 
+#include "InitParams.h"
 #include "YaraContradef.h"
 #include "Notifier.h"
 #include "NtStructures.h"
@@ -34,15 +35,13 @@
 #include "TraceDisassembly.h"
 #include "TestSeqInst.h"
 
-extern KNOB<bool> KnobDetailLevel; // Assume que KnobDetailLevel está definido em params.h
-
 BOOL IsMainExecutable(ADDRINT address);
 ADDRINT GetRtnAddr(ADDRINT instAddress);
 std::string getFileName(const std::string& filePath);
 VOID GetSectionInfo(IMG img, std::ofstream& OutFile);
 VOID PauseAtEntryPoint(ADDRINT entryAddress);
 VOID PauseAtAddress(ADDRINT address);
-VOID TraceInstSeq(INS ins, VOID* v);
+VOID InstrumentInstructionSeq(INS ins, VOID* v);
 VOID InstrumentFunctionInterceptor(IMG img, VOID* v);
 VOID InitPauseAtEntryPoint(IMG img, VOID* v);
 VOID configOutput();

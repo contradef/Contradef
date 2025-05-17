@@ -24,6 +24,7 @@
 #include "control_manager.H"
 #include "regvalue_utils.h"
 #include "Instrumentation.h"
+#include "InitParams.h"
 
 namespace TraceInstructions {
 	using namespace CONTROLLER;

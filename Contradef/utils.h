@@ -17,7 +17,6 @@ namespace WindowsAPI
 #include <fstream>
 #include <clocale>
 #include "CallContext.h"
-#include <iostream>
 #include <string>
 #include <cctype>
 #include <deque>

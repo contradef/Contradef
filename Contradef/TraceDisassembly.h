@@ -5,6 +5,7 @@
 #include <fstream>
 #include <string>
 #include "pin.H"
+#include "InitParams.h"
 
 namespace TraceDisassembly {
 

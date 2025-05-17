@@ -13,6 +13,7 @@
 #include "DllFunctionTracker.h"
 #include "DllFunctionMapper.h"
 #include "TraceInstructions.h"
+#include "InitParams.h"
 
 namespace TraceFcnCall {
 

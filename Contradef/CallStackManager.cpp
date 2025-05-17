@@ -32,25 +32,6 @@ void CallStackManager::peekTopFunction() const {
     }
 }
 
-// Desempilha até encontrar o endereço de retorno especificado
-//void CallStackManager::popUntilAddress(unsigned long long targetAddress) {
-//    while (!callStack.empty()) {
-//        const FunctionInfo& topFunction = callStack.top();
-//
-//        if (topFunction.returnAddress == targetAddress || topFunction.stackReturnAddress == targetAddress) {
-//            std::cout << "Função correspondente encontrada: " << topFunction.name
-//                << " no endereço de retorno: " << std::hex << targetAddress << std::dec << std::endl;
-//            callStack.pop();
-//            return;
-//        }
-//
-//        std::cout << "Desempilhando função: " << topFunction.name
-//            << " no endereço: " << std::hex << topFunction.address << std::dec << std::endl;
-//        callStack.pop();
-//    }
-//    std::cerr << "Aviso: Endereço de retorno não encontrado na pilha.\n";
-//}
-
 // Desempilhar até um endereço específico
 void CallStackManager::popUntilAddress(unsigned long long targetAddress) {
     while (!callStack.empty()) {
@@ -73,8 +54,6 @@ void CallStackManager::popUntilAddress(unsigned long long targetAddress) {
                     return;
                 }
             }
-            //std::cout << "[ROP] retorno de função (" << std::hex << topFunction.fromTailCall << ") não empilhada. Nome da fucao de retorno: " << RTN_Name(targetRtn) << ", endereco: " << targetAddress << ". Nome da funcao esperada: " << topFunction.name << " (" << topFunction.returnAddress << ") (" << topFunction.stackReturnAddress << ")" << std::dec << std::endl;
-            //std::cout << "Retorno incorreto para o endereco: " << std::hex << targetAddress << std::dec << ", Funcao: " << RTN_Name(targetRtn) << std::endl;
         }
         else {
             //std::cout << "[ROP] Funcao nao e valida. Retorno incorreto para o endereco: " << std::hex << targetAddress << std::dec << std::endl;

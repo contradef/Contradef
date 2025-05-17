@@ -9,6 +9,7 @@
 #include "pin.H"
 #include "InstrumentationUtils.h"
 //#include "Instrumentation.h"
+#include "InitParams.h"
 
 namespace TraceMemory {
     extern std::ofstream memTraceOut;

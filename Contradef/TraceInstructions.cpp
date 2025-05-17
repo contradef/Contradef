@@ -1,30 +1,10 @@
-/*
- * Copyright (C) 2004-2021 Intel Corporation.
- * SPDX-License-Identifier: MIT
- */
-
- /*! @file
-  *  This file contains a tool that generates instructions traces with values.
-  *  It is designed to help debugging.
-  */
+// Este módulo foi implementado usando como base a Pintool InstLib, disponível no SDK do Pin. 
 
 #include "TraceInstructions.h"
 #include "InstrumentationUtils.h"
 
 using namespace CONTROLLER;
 using namespace INSTLIB;
-
-KNOB< THREADID > KnobWatchThread(KNOB_MODE_WRITEONCE, "pintool", "watch_thread", "-1", "Thread to watch, -1 for all");
-KNOB< BOOL > KnobFlush(KNOB_MODE_WRITEONCE, "pintool", "flush", "0", "Flush output after every instruction");
-KNOB< BOOL > KnobSymbols(KNOB_MODE_WRITEONCE, "pintool", "symbols", "1", "Include symbol information");
-KNOB< BOOL > KnobFullImgName(KNOB_MODE_WRITEONCE, "pintool", "full_img_name", "0", "Include full image name");
-KNOB< BOOL > KnobLines(KNOB_MODE_WRITEONCE, "pintool", "lines", "1", "Include line number information");
-KNOB< BOOL > KnobTraceInstructions(KNOB_MODE_WRITEONCE, "pintool", "instruction", "1", "Trace instructions");
-KNOB< BOOL > KnobTraceCalls(KNOB_MODE_WRITEONCE, "pintool", "call", "1", "Trace calls");
-KNOB< BOOL > KnobTraceOnlyMain(KNOB_MODE_WRITEONCE, "pintool", "only_main", "0", "Trace only main image");
-KNOB< BOOL > KnobTraceMemoryInstructions(KNOB_MODE_WRITEONCE, "pintool", "atmemory", "0", "Attach trace memory to trace instrucions");
-KNOB< BOOL > KnobSilent(KNOB_MODE_WRITEONCE, "pintool", "silent", "0", "Do everything but write file (for debugging).");
-KNOB< BOOL > KnobEarlyOut(KNOB_MODE_WRITEONCE, "pintool", "early_out", "0", "Exit after tracing the first region.");
 
 /* ===================================================================== */
 /* Global Variables */
@@ -639,8 +619,6 @@ VOID TraceInstructions::CallTrace(TRACE trace, INS ins)
 
 VOID TraceInstructions::InstructionTrace(TRACE trace, INS ins)
 {
-    if (!KnobTraceInstructions) return;
-
     ADDRINT addr = INS_Address(ins);
     ASSERTX(addr);
 
@@ -699,7 +677,6 @@ VOID TraceInstructions::InstructionTrace(TRACE trace, INS ins)
     }
 }
 
-/* ===================================================================== */
 
 VOID TraceInstructions::Trace(TRACE trace, VOID* v)
 {
@@ -721,7 +698,6 @@ VOID TraceInstructions::Trace(TRACE trace, VOID* v)
     }
 }
 
-/* ===================================================================== */
 
 static void TraceInstructions::OnSig(THREADID threadIndex, CONTEXT_CHANGE_REASON reason, const CONTEXT* ctxtFrom, CONTEXT* ctxtTo, INT32 sig, VOID* v)
 {
@@ -765,7 +741,6 @@ static void TraceInstructions::OnSig(THREADID threadIndex, CONTEXT_CHANGE_REASON
 
 }
 
-/* ===================================================================== */
 static CONTROL_MANAGER control;
 static SKIPPER skipper;
 
@@ -797,6 +772,3 @@ int TraceInstructions::InitTrace(string pid, std::string filename)
     return 0;
 }
 
-/* ===================================================================== */
-/* eof */
-/* ===================================================================== */

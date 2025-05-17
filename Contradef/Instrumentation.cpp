@@ -5,10 +5,6 @@ PIN_LOCK lock;
 Notifier globalNotifier;
 static std::ofstream MainOutFile;
 
-KNOB<string> KnobOutputFile(KNOB_MODE_WRITEONCE, "pintool", "o", "contradef", "specify file name for output logs ");
-KNOB<string> KnobYaraRulesFile(KNOB_MODE_WRITEONCE, "pintool", "y", "", "specify file name for YARA rules ");
-KNOB<BOOL> KnobAllowAttachDebugger(KNOB_MODE_WRITEONCE, "pintool", "ad", "0", "Allow attach debugger ");
-
 FunctionInterceptor fcnInterceptor; // As estratégias já estão adicionadas no Interceptor
 
 InstructionSequenceDetector seq_detector;
@@ -67,7 +63,7 @@ VOID GetSectionInfo(IMG img, std::ofstream& MainOutFile)
 }
 
 // TODO: Transferir para o detector de seq de inst
-VOID TraceInstSeq(INS ins, VOID* v)
+VOID InstrumentInstructionSeq(INS ins, VOID* v)
 {
     seq_detector.InstructionTrace(ins, &seq_detector, onCall);
     disassembly_seq_detector.InstructionTrace(ins, &disassembly_seq_detector, onDisassembly);
@@ -151,18 +147,7 @@ EXCEPT_HANDLING_RESULT ExceptionHandler(THREADID tid, EXCEPTION_INFO* pExceptInf
     // Pode-se modificar o contexto ou apenas registrar o erro
 }
 
-int InitInstrumentation()
-{
-    testSequences(seq_detector, disassembly_seq_detector);
-
-    // Recuperar o valor do caminho do arquivo YARA
-    std::string yaraRulesPath = KnobYaraRulesFile.Value();
-    if (yaraRulesPath.empty())
-    {
-        //std::cerr << "Por favor, forneça o caminho para o arquivo de regras YARA usando -y." << std::endl;
-        //return 1;
-    }
-
+int InitInstrumentation() {
 
     // Criando observadores dinamicamente com o contexto nulo
     auto* executionCompleted = new Observer(HandleExecutionCompletedEvent, NULL);
@@ -180,29 +165,38 @@ int InitInstrumentation()
     MainOutFile.open(logfilename.c_str(), std::ios::binary);
 
 
-    // Iniciar detector de sequencia de instruções
-    seq_detector.Initialize();
-    disassembly_seq_detector.Initialize();
-
-
     // Iniciar o PIN e instrumentação
     PIN_InitSymbols();
 
-    IMG_AddInstrumentFunction(InstrumentFunctionInterceptor, 0);
+    if (KnobSeqDetector) {
+        // Iniciar detector de sequencia de instruções
+        AddTestSequences(seq_detector, disassembly_seq_detector);
+        seq_detector.Initialize();
+        disassembly_seq_detector.Initialize();
+        INS_AddInstrumentFunction(InstrumentInstructionSeq, 0);
+    }
 
-    //INS_AddInstrumentFunction(TraceInstSeq, 0);
+    if (KnobSaveExternalCallTrace) {
+        TraceFcnCall::InitFcnCallTrace(pid, logsName);
+    }
 
-    TraceInstructions::InitTrace(pid, logsName);
+    if (KnobTraceInterceptor) {
+        IMG_AddInstrumentFunction(InstrumentFunctionInterceptor, 0);
+    }
 
-   // TraceDisassembly::InitTraceDisassembly(pid, logsName);
+    if (KnobTraceInstructions) {
+        TraceInstructions::InitTrace(pid, logsName);
+    }
 
-    //TraceMemory::InitMemoryTrace(pid, logsName);
+    if (KnobDisassembly) {
+        TraceDisassembly::InitTraceDisassembly(pid, logsName);
+    }
 
-    TraceFcnCall::InitFcnCallTrace(pid, logsName);
+    if (KnobTraceMemory) {
+        TraceMemory::InitMemoryTrace(pid, logsName);
+    }
 
-
-    if (KnobAllowAttachDebugger)
-    {
+    if (KnobAllowAttachDebugger) {
         IMG_AddInstrumentFunction(InitPauseAtEntryPoint, nullptr);
     }
 

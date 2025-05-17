@@ -2,9 +2,6 @@
 
 #include "TraceMemory.h"
 
-KNOB< BOOL > KnobTraceMemory(KNOB_MODE_WRITEONCE, "pintool", "memory", "1", "Trace memory");
-KNOB< BOOL > KnobTraceMemoryOnlyStr(KNOB_MODE_WRITEONCE, "pintool", "memory-only-str", "1", "Trace memory");
-
 std::ofstream TraceMemory::memTraceOut;
 PIN_MUTEX TraceMemory::fileMemTraceOutMutex;
 
@@ -98,12 +95,10 @@ VOID TraceMemory::InstTraceMemory(INS ins, VOID* v)
         if (INS_IsValidForIpointAfter(ins))
         {
             ipoint = IPOINT_AFTER;
-            //INS_InsertPredicatedCall(ins, IPOINT_AFTER, AFUNPTR(EmitWrite), IARG_THREAD_ID, IARG_MEMORYWRITE_SIZE, IARG_END);
         }
         if (INS_IsValidForIpointTakenBranch(ins))
         {
             ipoint = IPOINT_TAKEN_BRANCH;
-            //INS_InsertPredicatedCall(ins, IPOINT_TAKEN_BRANCH, AFUNPTR(EmitWrite), IARG_THREAD_ID, IARG_MEMORYWRITE_SIZE, IARG_END);
         }
 
         if (ipoint != LEVEL_VM::IPOINT::IPOINT_INVALID) {
@@ -118,7 +113,6 @@ VOID TraceMemory::InstTraceMemory(INS ins, VOID* v)
 
     if (INS_HasMemoryRead2(ins)) // && INS_IsStandardMemop(ins)
     {
-        //INS_InsertPredicatedCall(ins, IPOINT_BEFORE, AFUNPTR(EmitRead), IARG_THREAD_ID, IARG_MEMORYREAD2_EA, IARG_MEMORYREAD_SIZE, IARG_END);
         traceString += " | [Read 2Op]: \n";
 
         INS_InsertCall(ins, IPOINT_BEFORE, (AFUNPTR)EmitRead,
@@ -132,7 +126,6 @@ VOID TraceMemory::InstTraceMemory(INS ins, VOID* v)
 
     if (INS_IsMemoryRead(ins) && !INS_IsPrefetch(ins)) // && INS_IsStandardMemop(ins)
     {
-        //INS_InsertPredicatedCall(ins, IPOINT_BEFORE, AFUNPTR(EmitRead), IARG_THREAD_ID, IARG_MEMORYREAD_EA, IARG_MEMORYREAD_SIZE, IARG_END);
         traceString += " | [Read 1Op]: \n";
 
         INS_InsertCall(ins, IPOINT_BEFORE, (AFUNPTR)EmitRead,

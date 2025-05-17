@@ -1,7 +1,5 @@
 #include "TraceFcnCall.h"
 
-KNOB<BOOL> KnobSaveExternalCallTrace(KNOB_MODE_WRITEONCE, "pintool", "et", "1", "Save external call trace file ");
-
 namespace TraceFcnCall {
     // Arquivo de saída para rastreamento de chamadas externas
     std::ofstream ExternalCallTraceOutFile;
@@ -95,86 +93,9 @@ namespace TraceFcnCall {
             if (RTN_Valid(rtnt)) {
                 retRtnName = RTN_Name(rtnt);
             }
-            //std::cout << std::hex << RTN_Address(tgtRtn) << " - " << imgName << ":" << tgtRtnName << " T[" << threadid << "] - Return to: " << retRtnName << " (" << returnAddress << ")" << std::dec << std::endl;
 
         }
         PIN_UnlockClient();
-
-
-        return;
-
-
-
-
-
-        if (tailCall)
-        {
-            // A tail call is like an implicit return followed by an immediate call
-        }
-
-        if (!isDirect)
-        {
-            // Uma chamada indireta (!isDirect) é uma forma de invocar uma função quando o endereço da função é determinado em tempo de execução, em vez de ser codificado diretamente na instrução
-        }
-
-        //PIN_LockClient();
-
-        //RTN rtn = RTN_FindByAddress(targetRtnAddr);
-
-        //std::string s = StringFromAddrint(targetRtnAddr);
-
-        //if (RTN_Valid(rtn))
-        //{
-        //    if (RTN_Name(rtn) != tgt) {
-        //        PIN_UnlockClient();
-        //        return;
-        //    }
-
-        //    IMG img = SEC_Img(RTN_Sec(rtn));
-        //    s += " ";
-        //    if (IMG_Valid(img))
-        //    {
-        //        s += IMG_Name(img) + ":";
-        //    }
-
-        //    s += RTN_Name(rtn);
-
-        //    std::cout << s << " [T" << threadid << "] (" << arg0 << ", " << arg1 << ", " << arg2 << ", " << arg3 << ", " << arg4 << ", ...)" << std::endl;
-
-        //    ADDRINT addr = arg0;  // Substitua por um endereço válido em um contexto real.
-
-        //    if (isWstring)
-        //    {
-
-        //        if (PIN_CheckReadAccess(reinterpret_cast<VOID*>(addr)))
-        //        {
-        //            // Leitura de uma wstring a partir do endereço dado
-        //            //wchar_t* wideCharStr = reinterpret_cast<wchar_t*>(addr);
-        //            //wprintf(L" ** WString --> %ls\n", wideCharStr);
-
-        //            std::cout << " STRING -> " << WideStringToStringFromPointer(addr) << std::endl;
-
-        //        }
-        //        else
-        //        {
-        //            std::cout << "Endereço " << StringFromAddrint(addr) << " não está apto para leitura." << std::endl;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        if (PIN_CheckReadAccess(reinterpret_cast<VOID*>(addr)))
-        //        {
-        //            std::string aBuffer = ConvertAddrToAnsiString(addr);
-        //            std::cout << " STRING -> " << aBuffer << std::endl;
-        //        }
-        //        else
-        //        {
-        //            std::cout << "Endereço " << StringFromAddrint(addr) << " não está apto para leitura." << std::endl;
-        //        }
-        //    }
-        //}
-
-        //PIN_UnlockClient();
     }
 
 

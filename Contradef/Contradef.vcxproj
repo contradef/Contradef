@@ -186,6 +186,7 @@
     <ClCompile Include="DllFunctionMapper.h" />
     <ClCompile Include="DllFunctionTracker.cpp" />
     <ClCompile Include="FunctionInterceptor.cpp" />
+    <ClCompile Include="InitParams.cpp" />
     <ClCompile Include="InstBasepConstructSxsCreateProcessMessage.cpp" />
     <ClCompile Include="InstBaseRegEnumKey.cpp" />
     <ClCompile Include="InstBaseRegOpenKey.cpp" />
@@ -326,7 +327,6 @@
     <ClCompile Include="InstWriteConsoleW.cpp" />
     <ClCompile Include="InstWriteFile.cpp" />
     <ClCompile Include="ModulesDetection.cpp" />
-    <ClCompile Include="EvasiveRetDetector.cpp" />
     <ClCompile Include="TestSeqInst.cpp" />
     <ClCompile Include="TraceDisassembly.cpp" />
     <ClCompile Include="TraceFcnCall.cpp" />
@@ -485,6 +485,7 @@
     <ClInclude Include="NtStructures.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="EvasiveRetDetector.h" />
+    <ClInclude Include="InitParams.h" />
     <ClInclude Include="TestSeqInst.h" />
     <ClInclude Include="TraceDisassembly.h" />
     <ClInclude Include="TraceFcnCall.h" />

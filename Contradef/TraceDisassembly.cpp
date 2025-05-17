@@ -2,8 +2,6 @@
 #include "InstrumentationUtils.h"
 #include "CallContext.h"
 
-KNOB<BOOL> KnobDisassembly(KNOB_MODE_WRITEONCE, "pintool", "dasm", "1", "Trace disassembly");
-
 namespace TraceDisassembly {
 
     std::ofstream disassemblyTraceOut;
