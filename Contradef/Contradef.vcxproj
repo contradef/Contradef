@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{0bcf239c-6533-4aa8-bd99-1741a44badab}</ProjectGuid>
+    <RootNamespace>Contradef</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <GenerateManifest>false</GenerateManifest>
+    <TargetExt>.dll</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <GenerateManifest>false</GenerateManifest>
+    <TargetExt>.dll</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>
+      </SDLCheck>
+      <PreprocessorDefinitions>TARGET_IA32E;HOST_IA32E;TARGET_WINDOWS;PIN_CRT=1;__LP64__;_WINDLL;_UNICODE;UNICODE;_WINDOWS_H_PATH_=C:/Program Files (x86)/Windows Kits/10/Include/10.0.22621.0/um</PreprocessorDefinitions>
+      <ConformanceMode>Default</ConformanceMode>
+      <AdditionalIncludeDirectories>..\pin\include\pin;..\pin\include\pin\gen;..\pin\extras\xed-intel64\include\xed;..\pin\extras\components\include;..\pin\extras\stlport\include;..\pin\extras;..\pin\extras\libstdc++\include;..\pin\extras\crt\include;..\pin\extras\crt;..\pin\extras\crt\include\arch-x86_64;..\pin\extras\crt\include\kernel\uapi;..\pin\extras\crt\include\kernel\uapi\asm-x86;..\pin\source\tools\InstLib;..\pin\Utils;..\yaracontradef\yaraCdef;..\yara\libyara;..\yara\libyara\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <DisableSpecificWarnings>4530;5208;4267;4005;4210;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <AdditionalOptions>/GR- /GS- /EHs- /EHa- /FP:strict /Oi- /FIinclude/msvc_compat.h %(AdditionalOptions)</AdditionalOptions>
+      <PrecompiledHeader />
+      <Optimization>Disabled</Optimization>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FloatingPointModel>Strict</FloatingPointModel>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+    </ClCompile>
+    <Link>
+      <SubSystem>NotSet</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>..\pin\intel64\lib;..\pin\intel64\lib-ext;..\pin\extras\xed-intel64\lib;..\pin\extras\components\lib\intel64;..\pin\source\tools\InstLib\obj-intel64;..\pin\intel64\runtime\pincrt;..\yaracontradef\yaraCdef;$(SolutionDir)$(Platform)\$(Configuration)\;Dbghelp.lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>pin.lib;pinipc.lib;xed.lib;atomic.lib;debugger-protocol.lib;pincrt.lib;controller.lib;kernel32.lib;crtbeginS.obj;yaraCdef64.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <BaseAddress>0xC5000000</BaseAddress>
+      <AdditionalOptions>/export:main %(AdditionalOptions)</AdditionalOptions>
+      <EntryPointSymbol>Ptrace_DllMainCRTStartup</EntryPointSymbol>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <SDLCheck>
+      </SDLCheck>
+      <PreprocessorDefinitions>TARGET_IA32E;HOST_IA32E;TARGET_WINDOWS;PIN_CRT=1;__LP64__;_WINDLL;_UNICODE;UNICODE;_WINDOWS_H_PATH_=C:/Program Files (x86)/Windows Kits/10/Include/10.0.22621.0/um</PreprocessorDefinitions>
+      <ConformanceMode>Default</ConformanceMode>
+      <AdditionalIncludeDirectories>..\pin\include\pin;..\pin\include\pin\gen;..\pin\extras\xed-intel64\include\xed;..\pin\extras\components\include;..\pin\extras\stlport\include;..\pin\extras;..\pin\extras\libstdc++\include;..\pin\extras\crt\include;..\pin\extras\crt;..\pin\extras\crt\include\arch-x86_64;..\pin\extras\crt\include\kernel\uapi;..\pin\extras\crt\include\kernel\uapi\asm-x86;..\pin\source\tools\InstLib;..\pin\Utils;..\yaracontradef\yaraCdef;..\yara\libyara;..\yara\libyara\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <DisableSpecificWarnings>4530;5208;4267;4005;4210;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <AdditionalOptions>/GR- /GS- /EHs- /EHa- /FP:strict /Oi- /FIinclude/msvc_compat.h %(AdditionalOptions)</AdditionalOptions>
+      <PrecompiledHeader />
+      <Optimization>Disabled</Optimization>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FloatingPointModel>Strict</FloatingPointModel>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+    </ClCompile>
+    <Link>
+      <SubSystem>NotSet</SubSystem>
+      <EnableCOMDATFolding>
+      </EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>..\pin\intel64\lib;..\pin\intel64\lib-ext;..\pin\extras\xed-intel64\lib;..\pin\extras\components\lib\intel64;..\pin\source\tools\InstLib\obj-intel64;..\pin\intel64\runtime\pincrt;..\yaracontradef\yaraCdef;$(SolutionDir)$(Platform)\$(Configuration)\;Dbghelp.lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>pin.lib;pinipc.lib;xed.lib;atomic.lib;debugger-protocol.lib;pincrt.lib;controller.lib;kernel32.lib;crtbeginS.obj;yaraCdef64.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <BaseAddress>0xC5000000</BaseAddress>
+      <AdditionalOptions>/export:main %(AdditionalOptions)</AdditionalOptions>
+      <EntryPointSymbol>Ptrace_DllMainCRTStartup</EntryPointSymbol>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="CallStackManager.cpp" />
+    <ClCompile Include="ContextOperations.cpp" />
+    <ClCompile Include="Contradef.cpp" />
+    <ClCompile Include="DllFunctionMapper.cpp" />
+    <ClCompile Include="DllFunctionMapper.h" />
+    <ClCompile Include="DllFunctionTracker.cpp" />
+    <ClCompile Include="FunctionInterceptor.cpp" />
+    <ClCompile Include="InstBasepConstructSxsCreateProcessMessage.cpp" />
+    <ClCompile Include="InstBaseRegEnumKey.cpp" />
+    <ClCompile Include="InstBaseRegOpenKey.cpp" />
+    <ClCompile Include="InstBlockInput.cpp" />
+    <ClCompile Include="InstCheckRemoteDebuggerPresent.cpp" />
+    <ClCompile Include="InstCoCreateInstance.cpp" />
+    <ClCompile Include="InstCompareStringEx.cpp" />
+    <ClCompile Include="InstCreateEventW.cpp" />
+    <ClCompile Include="InstCreateFileW.cpp" />
+    <ClCompile Include="InstCreateProcess.cpp" />
+    <ClCompile Include="InstCreateProcessAsUser.cpp" />
+    <ClCompile Include="InstCreateService.cpp" />
+    <ClCompile Include="InstCreateThread.cpp" />
+    <ClCompile Include="InstCreateToolhelp32Snapshot.cpp" />
+    <ClCompile Include="InstDeleteFileA.cpp" />
+    <ClCompile Include="InstDeviceIoControl.cpp" />
+    <ClCompile Include="InstEnumProcessModules.cpp" />
+    <ClCompile Include="InstEnumProcessModulesEx.cpp" />
+    <ClCompile Include="InstExitProcess.cpp" />
+    <ClCompile Include="InstFindWindowA.cpp" />
+    <ClCompile Include="InstFindWindowW.cpp" />
+    <ClCompile Include="InstGetCommandLineA.cpp" />
+    <ClCompile Include="InstGetCommandLineW.cpp" />
+    <ClCompile Include="InstGetComputerNameA.cpp" />
+    <ClCompile Include="InstGetCurrentProcess.cpp" />
+    <ClCompile Include="InstGetCurrentThread.cpp" />
+    <ClCompile Include="InstGetEnvironmentStringsW.cpp" />
+    <ClCompile Include="InstGetEnvironmentVariableA.cpp" />
+    <ClCompile Include="InstGetEnvironmentVariableW.cpp" />
+    <ClCompile Include="InstGetFileSizeEx.cpp" />
+    <ClCompile Include="InstGetForegroundWindow.cpp" />
+    <ClCompile Include="InstGetLocalTime.cpp" />
+    <ClCompile Include="InstGetModuleFileNameExA.cpp" />
+    <ClCompile Include="InstGetModuleFileNameExW.cpp" />
+    <ClCompile Include="InstGetModuleFileNameW.cpp" />
+    <ClCompile Include="InstGetModuleFileNameA.cpp" />
+    <ClCompile Include="InstGetModuleHandleA.cpp" />
+    <ClCompile Include="InstGetModuleHandleW.cpp" />
+    <ClCompile Include="InstGetProcAddress.cpp" />
+    <ClCompile Include="InstGetSystemFirmwareTable.cpp" />
+    <ClCompile Include="InstGetSystemTime.cpp" />
+    <ClCompile Include="InstGetThreadContext.cpp" />
+    <ClCompile Include="InstGetTickCount.cpp" />
+    <ClCompile Include="InstGetTickCount64.cpp" />
+    <ClCompile Include="InstGetVersionExW.cpp" />
+    <ClCompile Include="InstGetVolumePathNameW.cpp" />
+    <ClCompile Include="InstGetWindowTextA.cpp" />
+    <ClCompile Include="InstGetWindowTextW.cpp" />
+    <ClCompile Include="InstGetWriteWatch.cpp" />
+    <ClCompile Include="InstIsDebuggerPresent.cpp" />
+    <ClCompile Include="InstKiUserExceptionDispatcher.cpp" />
+    <ClCompile Include="InstLCMapStringEx.cpp" />
+    <ClCompile Include="InstLoadLibrary.cpp" />
+    <ClCompile Include="InstLoadLibraryEx.cpp" />
+    <ClCompile Include="InstLstrcpy.cpp" />
+    <ClCompile Include="InstLstrcpynA.cpp" />
+    <ClCompile Include="InstNtClose.cpp" />
+    <ClCompile Include="InstNtContinue.cpp" />
+    <ClCompile Include="InstNtCreateProcessEx.cpp" />
+    <ClCompile Include="InstNtCreateThreadEx.cpp" />
+    <ClCompile Include="InstNtCreateTimer2.cpp" />
+    <ClCompile Include="InstNtdllDefWindowProc_W.cpp" />
+    <ClCompile Include="InstNtEnumKey.cpp" />
+    <ClCompile Include="InstNtGetContextThread.cpp" />
+    <ClCompile Include="InstNtOpenKey.cpp" />
+    <ClCompile Include="InstNtOpenProcess.cpp" />
+    <ClCompile Include="InstNtQueryInformationProcess.cpp" />
+    <ClCompile Include="InstNtQueryInformationThread.cpp" />
+    <ClCompile Include="InstNtQueryKey.cpp" />
+    <ClCompile Include="InstNtQueryObject.cpp" />
+    <ClCompile Include="InstNtQueryPerformanceCounter.cpp" />
+    <ClCompile Include="InstNtQuerySystemInformation.cpp" />
+    <ClCompile Include="InstNtQuerySystemInformationEx.cpp" />
+    <ClCompile Include="InstNtQuerySystemTime.cpp" />
+    <ClCompile Include="InstNtQueryValueKey.cpp" />
+    <ClCompile Include="InstNtQueryVirtualMemory.cpp" />
+    <ClCompile Include="InstNtQueryVirtualMemory.h" />
+    <ClCompile Include="InstNtSetContextThread.cpp" />
+    <ClCompile Include="InstNtSetDebugFilterState.cpp" />
+    <ClCompile Include="InstNtSetInformationProcess.cpp" />
+    <ClCompile Include="InstNtSetInformationThread.cpp" />
+    <ClCompile Include="InstNtUserBuildHwndList.cpp" />
+    <ClCompile Include="InstNtUserFindWindowEx.cpp" />
+    <ClCompile Include="InstNtUserQueryWindow.cpp" />
+    <ClCompile Include="InstNtYieldExecution.cpp" />
+    <ClCompile Include="InstOpenProcess.cpp" />
+    <ClCompile Include="InstOpenThread.cpp" />
+    <ClCompile Include="InstOutputDebugStringA.cpp" />
+    <ClCompile Include="InstOutputDebugStringW.cpp" />
+    <ClCompile Include="InstQueryDosDeviceW.cpp" />
+    <ClCompile Include="InstQueryPerformanceCounter.cpp" />
+    <ClCompile Include="InstQueueUserAPC2.cpp" />
+    <ClCompile Include="InstRaiseException.cpp" />
+    <ClCompile Include="InstReadFile.cpp" />
+    <ClCompile Include="InstRegEnumKeyA.cpp" />
+    <ClCompile Include="InstRegEnumKeyExA.cpp" />
+    <ClCompile Include="InstRegEnumKeyExW.cpp" />
+    <ClCompile Include="InstRegEnumKeyW.cpp" />
+    <ClCompile Include="InstRegOpenKeyA.cpp" />
+    <ClCompile Include="InstRegOpenKeyExA.cpp" />
+    <ClCompile Include="InstRegOpenKeyExW.cpp" />
+    <ClCompile Include="InstRegOpenKeyW.cpp" />
+    <ClCompile Include="InstRegQueryValueA.cpp" />
+    <ClCompile Include="InstRegQueryValueExA.cpp" />
+    <ClCompile Include="InstRegQueryValueExW.cpp" />
+    <ClCompile Include="InstRegQueryValueW.cpp" />
+    <ClCompile Include="InstResetEvent.cpp" />
+    <ClCompile Include="InstResumeThread.cpp" />
+    <ClCompile Include="InstRtlAddFunctionTable.cpp" />
+    <ClCompile Include="InstRtlAddVectoredExceptionHandler.cpp" />
+    <ClCompile Include="InstRtlDeleteFunctionTable.cpp" />
+    <ClCompile Include="InstRtlGetNativeSystemInformation.cpp" />
+    <ClCompile Include="InstRtlInstallFunctionTableCallback.cpp" />
+    <ClCompile Include="InstRtlQueryPerformanceCounter.cpp" />
+    <ClCompile Include="InstRtlRemoveVectoredExceptionHandler.cpp" />
+    <ClCompile Include="InstructionSequenceDetector.cpp" />
+    <ClCompile Include="Instrumentation.cpp" />
+    <ClCompile Include="InstrumentationUtils.cpp" />
+    <ClCompile Include="InstrumentationCallbacks.cpp" />
+    <ClCompile Include="InstSetEvent.cpp" />
+    <ClCompile Include="InstSetFilePointerEx.cpp" />
+    <ClCompile Include="InstSetThreadContext.cpp" />
+    <ClCompile Include="InstShellExecute.cpp" />
+    <ClCompile Include="InstShellExecuteEx.cpp" />
+    <ClCompile Include="InstSleepEx.cpp" />
+    <ClCompile Include="InstStartService.cpp" />
+    <ClCompile Include="InstSuspendThread.cpp" />
+    <ClCompile Include="InstVirtualAlloc.cpp" />
+    <ClCompile Include="InstVirtualFree.cpp" />
+    <ClCompile Include="InstVirtualProtect.cpp" />
+    <ClCompile Include="InstVirtualProtectEx.cpp" />
+    <ClCompile Include="InstVirtualQuery.cpp" />
+    <ClCompile Include="InstVirtualQueryEx.cpp" />
+    <ClCompile Include="InstWaitForSingleObject.cpp" />
+    <ClCompile Include="InstWinExec.cpp" />
+    <ClCompile Include="InstWmi.cpp" />
+    <ClCompile Include="InstWmiEx.cpp" />
+    <ClCompile Include="InstWriteConsoleW.cpp" />
+    <ClCompile Include="InstWriteFile.cpp" />
+    <ClCompile Include="ModulesDetection.cpp" />
+    <ClCompile Include="EvasiveRetDetector.cpp" />
+    <ClCompile Include="TestSeqInst.cpp" />
+    <ClCompile Include="TraceDisassembly.cpp" />
+    <ClCompile Include="TraceFcnCall.cpp" />
+    <ClCompile Include="TraceInstructions.cpp" />
+    <ClCompile Include="RegistryKeys.cpp" />
+    <ClCompile Include="TraceMemory.cpp" />
+    <ClCompile Include="Utils.cpp" />
+    <ClCompile Include="YaraContradef.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CallContext.h" />
+    <ClInclude Include="CallStackManager.h" />
+    <ClInclude Include="ContextOperations.h" />
+    <ClInclude Include="DllFunctionTracker.h" />
+    <ClInclude Include="EventData.h" />
+    <ClInclude Include="FunctionInterceptor.h" />
+    <ClInclude Include="InstBasepConstructSxsCreateProcessMessage.h" />
+    <ClInclude Include="InstBaseRegEnumKey.h" />
+    <ClInclude Include="InstBaseRegOpenKey.h" />
+    <ClInclude Include="InstBlockInput.h" />
+    <ClInclude Include="InstCheckRemoteDebuggerPresent.h" />
+    <ClInclude Include="InstCoCreateInstance.h" />
+    <ClInclude Include="InstCompareStringEx.h" />
+    <ClInclude Include="InstCreateEventW.h" />
+    <ClInclude Include="InstCreateFileW.h" />
+    <ClInclude Include="InstCreateProcess.h" />
+    <ClInclude Include="InstCreateProcessAsUser.h" />
+    <ClInclude Include="InstCreateService.h" />
+    <ClInclude Include="InstCreateThread.h" />
+    <ClInclude Include="InstCreateToolhelp32Snapshot.h" />
+    <ClInclude Include="InstDeleteFileA.h" />
+    <ClInclude Include="InstDeviceIoControl.h" />
+    <ClInclude Include="InstEnumProcessModules.h" />
+    <ClInclude Include="InstEnumProcessModulesEx.h" />
+    <ClInclude Include="InstExitProcess.h" />
+    <ClInclude Include="InstFindWindowA.h" />
+    <ClInclude Include="InstFindWindowW.h" />
+    <ClInclude Include="InstGetCommandLineA.h" />
+    <ClInclude Include="InstGetCommandLineW.h" />
+    <ClInclude Include="InstGetComputerNameA.h" />
+    <ClInclude Include="InstGetCurrentProcess.h" />
+    <ClInclude Include="InstGetCurrentThread.h" />
+    <ClInclude Include="InstGetEnvironmentStringsW.h" />
+    <ClInclude Include="InstGetEnvironmentVariableA.h" />
+    <ClInclude Include="InstGetEnvironmentVariableW.h" />
+    <ClInclude Include="InstGetFileSizeEx.h" />
+    <ClInclude Include="InstGetForegroundWindow.h" />
+    <ClInclude Include="InstGetLocalTime.h" />
+    <ClInclude Include="InstGetModuleFileNameExA.h" />
+    <ClInclude Include="InstGetModuleFileNameExW.h" />
+    <ClInclude Include="InstGetModuleFileNameW.h" />
+    <ClInclude Include="InstGetModuleFileNameA.h" />
+    <ClInclude Include="InstGetModuleHandleA.h" />
+    <ClInclude Include="InstGetModuleHandleW.h" />
+    <ClInclude Include="InstGetProcAddress.h" />
+    <ClInclude Include="InstGetSystemFirmwareTable.h" />
+    <ClInclude Include="InstGetSystemTime.h" />
+    <ClInclude Include="InstGetThreadContext.h" />
+    <ClInclude Include="InstGetTickCount.h" />
+    <ClInclude Include="InstGetTickCount64.h" />
+    <ClInclude Include="InstGetVersionExW.h" />
+    <ClInclude Include="InstGetVolumePathNameW.h" />
+    <ClInclude Include="InstGetWindowTextA.h" />
+    <ClInclude Include="InstGetWindowTextW.h" />
+    <ClInclude Include="InstGetWriteWatch.h" />
+    <ClInclude Include="InstIsDebuggerPresent.h" />
+    <ClInclude Include="InstKiUserExceptionDispatcher.h" />
+    <ClInclude Include="InstLCMapStringEx.h" />
+    <ClInclude Include="InstLoadLibrary.h" />
+    <ClInclude Include="InstLoadLibraryEx.h" />
+    <ClInclude Include="InstLstrcpy.h" />
+    <ClInclude Include="InstLstrcpynA.h" />
+    <ClInclude Include="InstNtClose.h" />
+    <ClInclude Include="InstNtContinue.h" />
+    <ClInclude Include="InstNtCreateProcessEx.h" />
+    <ClInclude Include="InstNtCreateThreadEx.h" />
+    <ClInclude Include="InstNtCreateTimer2.h" />
+    <ClInclude Include="InstNtdllDefWindowProc_W.h" />
+    <ClInclude Include="InstNtEnumKey.h" />
+    <ClInclude Include="InstNtGetContextThread.h" />
+    <ClInclude Include="InstNtOpenKey.h" />
+    <ClInclude Include="InstNtOpenProcess.h" />
+    <ClInclude Include="InstNtQueryInformationProcess.h" />
+    <ClInclude Include="InstNtQueryInformationThread.h" />
+    <ClInclude Include="InstNtQueryObject.h" />
+    <ClInclude Include="InstNtQueryPerformanceCounter.h" />
+    <ClInclude Include="InstNtQuerySystemInformation.h" />
+    <ClInclude Include="InstNtQuerySystemInformationEx.h" />
+    <ClInclude Include="InstNtQuerySystemTime.h" />
+    <ClInclude Include="InstNtQueryValueKey.h" />
+    <ClInclude Include="InstNtSetContextThread.h" />
+    <ClInclude Include="InstNtSetDebugFilterState.h" />
+    <ClInclude Include="InstNtSetInformationProcess.h" />
+    <ClInclude Include="InstNtSetInformationThread.h" />
+    <ClInclude Include="InstNtUserBuildHwndList.h" />
+    <ClInclude Include="InstNtUserFindWindowEx.h" />
+    <ClInclude Include="InstNtUserQueryWindow.h" />
+    <ClInclude Include="InstNtYieldExecution.h" />
+    <ClInclude Include="InstOpenProcess.h" />
+    <ClInclude Include="InstOpenThread.h" />
+    <ClInclude Include="InstOutputDebugStringA.h" />
+    <ClInclude Include="InstOutputDebugStringW.h" />
+    <ClInclude Include="InstQueryDosDeviceW.h" />
+    <ClInclude Include="InstQueryPerformanceCounter.h" />
+    <ClInclude Include="InstQueueUserAPC2.h" />
+    <ClInclude Include="InstRaiseException.h" />
+    <ClInclude Include="InstReadFile.h" />
+    <ClInclude Include="InstRegEnumKeyA.h" />
+    <ClInclude Include="InstRegEnumKeyExA.h" />
+    <ClInclude Include="InstRegEnumKeyExW.h" />
+    <ClInclude Include="InstRegEnumKeyW.h" />
+    <ClInclude Include="InstRegOpenKeyA.h" />
+    <ClInclude Include="InstRegOpenKeyExA.h" />
+    <ClInclude Include="InstRegOpenKeyExW.h" />
+    <ClInclude Include="InstRegOpenKeyW.h" />
+    <ClInclude Include="InstRegQueryValueA.h" />
+    <ClInclude Include="InstRegQueryValueExA.h" />
+    <ClInclude Include="InstRegQueryValueExW.h" />
+    <ClInclude Include="InstRegQueryValueW.h" />
+    <ClInclude Include="InstResetEvent.h" />
+    <ClInclude Include="InstResumeThread.h" />
+    <ClInclude Include="InstRtlAddFunctionTable.h" />
+    <ClInclude Include="InstRtlAddVectoredExceptionHandler.h" />
+    <ClInclude Include="InstRtlDeleteFunctionTable.h" />
+    <ClInclude Include="InstRtlGetNativeSystemInformation.h" />
+    <ClInclude Include="InstRtlInstallFunctionTableCallback.h" />
+    <ClInclude Include="InstRtlQueryPerformanceCounter.h" />
+    <ClInclude Include="InstRtlRemoveVectoredExceptionHandler.h" />
+    <ClInclude Include="InstructionSequenceDetector.h" />
+    <ClInclude Include="Instrumentation.h" />
+    <ClInclude Include="InstrumentationCallbacks.h" />
+    <ClInclude Include="InstrumentationStrategy.h" />
+    <ClInclude Include="InstrumentationUtils.h" />
+    <ClInclude Include="InstSetEvent.h" />
+    <ClInclude Include="InstSetFilePointerEx.h" />
+    <ClInclude Include="InstSetThreadContext.h" />
+    <ClInclude Include="InstShellExecute.h" />
+    <ClInclude Include="InstShellExecuteEx.h" />
+    <ClInclude Include="InstSleepEx.h" />
+    <ClInclude Include="InstStartService.h" />
+    <ClInclude Include="InstSuspendThread.h" />
+    <ClInclude Include="InstVirtualAlloc.h" />
+    <ClInclude Include="InstVirtualFree.h" />
+    <ClInclude Include="InstVirtualProtect.h" />
+    <ClInclude Include="InstVirtualProtectEx.h" />
+    <ClInclude Include="InstVirtualQuery.h" />
+    <ClInclude Include="InstVirtualQueryEx.h" />
+    <ClInclude Include="InstWaitForSingleObject.h" />
+    <ClInclude Include="InstWinExec.h" />
+    <ClInclude Include="InstWmi.h" />
+    <ClInclude Include="InstWmiEx.h" />
+    <ClInclude Include="InstWriteConsoleW.h" />
+    <ClInclude Include="InstWriteFile.h" />
+    <ClInclude Include="ModulesDetection.h" />
+    <ClInclude Include="Notifier.h" />
+    <ClInclude Include="NtStructures.h" />
+    <ClInclude Include="Observer.h" />
+    <ClInclude Include="EvasiveRetDetector.h" />
+    <ClInclude Include="TestSeqInst.h" />
+    <ClInclude Include="TraceDisassembly.h" />
+    <ClInclude Include="TraceFcnCall.h" />
+    <ClInclude Include="TraceInstructions.h" />
+    <ClInclude Include="RegistryErrors.h" />
+    <ClInclude Include="RegistryKeys.h" />
+    <ClInclude Include="TraceMemory.h" />
+    <ClInclude Include="Utils.h" />
+    <ClInclude Include="InstNtQueryKey.h" />
+    <ClInclude Include="YaraContradef.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

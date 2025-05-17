@@ -1,0 +1,158 @@
+#include "pin.H"
+#include <iostream>
+#include <fstream>
+#include <set>
+
+
+using std::string;
+using std::cerr;
+using std::cout;
+using std::wcout;
+using std::wcerr;
+using std::endl;
+using std::flush;
+using std::set;
+using std::wstring;
+
+typedef UINT64 HWND;   // HWND é normalmente um ponteiro ou um valor integral
+typedef const wchar_t* LPCWSTR;  // Para LPCWSTR, use um ponteiro para wchar_t
+typedef unsigned int UINT;   // UINT é um inteiro sem sinal
+
+
+/* Ao usar o PIN para instrumentar chamadas de função, capturar os parâmetros de entrada de uma função em um
+callback do tipo IPOINT_AFTER pode ser um pouco desafiador.Isso ocorre porque, no ponto IPOINT_AFTER, a função
+já foi executada, e a pilha ou os registradores podem ter sido modificados, tornando difícil acessar diretamente
+os parâmetros originais.No entanto, existem estratégias que você pode usar para contornar isso:
+A abordagem de capturar os parâmetros de uma função no IPOINT_BEFORE e armazená-los para uso posterior
+no IPOINT_AFTER é uma técnica eficaz em instrumentação dinâmica, especialmente quando se utiliza uma ferramenta como o PIN.
+A ideia básica é criar uma estrutura de dados global ou específica para cada thread que armazene os parâmetros de interesse.
+Essa estrutura pode ser um mapa, onde a chave é um identificador único (como o ID da thread ou o endereço da instrução) e
+o valor é uma estrutura ou vetor que contém os valores dos parâmetros.
+*/
+////////////////////////////////////////////////
+struct RegQueryValueExArgs {
+    ADDRINT hKey;
+    //std::string lpValueName;  // String para armazenar o nome do valor
+    std::wstring lpValueName;  // Para armazenar a string Unicode
+    ADDRINT lpReserved;
+    ADDRINT lpType;
+    ADDRINT lpData;
+    ADDRINT lpcbData;
+};
+
+std::map<ADDRINT, RegQueryValueExArgs> argsMap;
+
+VOID CallbackBeforeRegQueryValueEx(ADDRINT instrPtr, ADDRINT hKey, ADDRINT lpValueName, ADDRINT lpReserved, ADDRINT lpType, ADDRINT lpData, ADDRINT lpcbData) {
+    RegQueryValueExArgs args;
+    args.hKey = hKey;
+    args.lpReserved = lpReserved;
+    args.lpType = lpType;
+    args.lpData = lpData;
+    args.lpcbData = lpcbData;
+
+    // Copiar a string apontada por lpValueName
+
+    if (lpValueName != 0) {
+        //wchar_t valueName[128];  // Ajuste o tamanho conforme necessário
+        //size_t copiedBytes = PIN_SafeCopy(valueName, reinterpret_cast<void*>(lpValueName), (sizeof(valueName) - sizeof(wchar_t)));
+        //if (copiedBytes > 0) {
+        //    args.lpValueName = std::wstring(valueName);
+        //}
+        //cout << "copiado ->" << copiedBytes << endl;
+
+        wchar_t* lpValueNameStr = reinterpret_cast<wchar_t*>(lpValueName);
+        wstring wsLpValueName(lpValueNameStr);
+        args.lpValueName = std::wstring(wsLpValueName.begin(), wsLpValueName.end());
+    }
+    else {
+        args.lpValueName.clear();  // Limpa a string se o ponteiro for NULL
+    }
+
+    argsMap[instrPtr] = args;
+
+
+    std::cout << "RegQueryValueExW será chamada com os seguintes parâmetros:" << std::endl;
+    std::cout << "HKEY: " << hKey << std::endl;
+    std::cout << "lpValueName (Endereço): " << lpValueName << std::endl;
+    std::cout << "lpReserved (Endereço): " << lpReserved << std::endl;
+    std::cout << "lpType (Endereço): " << lpType << std::endl;
+    std::cout << "lpData (Endereço): " << lpData << std::endl;
+    std::cout << "lpcbData (Endereço): " << lpcbData << std::endl;
+    if (lpValueName != 0) {
+        wchar_t* lpValueNameStr = reinterpret_cast<wchar_t*>(lpValueName);
+        wstring wsLpValueName(lpValueNameStr);
+        cout << "ccccccRegQueryValue será chamada com lpValueName: " << std::string(wsLpValueName.begin(), wsLpValueName.end()) << std::endl;
+    }
+    else {
+        cout << "RegQueryValue será chamada com lpValueName: NULL" << std::endl;
+    }
+}
+
+
+VOID CallbackAfterRegQueryValueEx(ADDRINT instrPtr, ADDRINT* retValAddr, ADDRINT hKey, ADDRINT lpValueName, ADDRINT lpReserved, ADDRINT lpType, ADDRINT lpData, ADDRINT lpcbData)
+{
+    cerr << "-----------------------------------------" << endl;
+    //*retValAddr = 2;
+    auto it = argsMap.find(instrPtr);
+    if (it != argsMap.end()) {
+        const RegQueryValueExArgs& args = it->second;
+
+        // Utilizar os valores armazenados
+        if (!args.lpValueName.empty()) {
+            wprintf(L"RegQueryValueEx foi chamada com lpValueName: %ls\n", args.lpValueName.c_str());
+        }
+        else {
+            wprintf(L"RegQueryValueEx foi chamada com lpValueName: NULL\n");
+        }
+
+        std::wstring wsMessage(reinterpret_cast<wchar_t*>(args.lpData));
+        std::cout << "Valor:fffffffff- " << std::string(wsMessage.begin(), wsMessage.end()) << std::endl;
+
+        // Limpeza após o uso
+        argsMap.erase(it);
+    }
+
+    std::wstring wsMessage(reinterpret_cast<wchar_t*>(lpData));
+    std::cout << "Valor:cccccccccc- " << std::string(wsMessage.begin(), wsMessage.end()) << std::endl;
+
+
+}
+
+VOID InstRegQueryValueEx(RTN rtn) {
+    PROTO protoRegQueryValueEx = PROTO_Allocate(PIN_PARG(ADDRINT), CALLINGSTD_STDCALL,
+        "RegQueryValueExW",
+        PIN_PARG(ADDRINT),   // HKEY é tratado como ADDRINT
+        PIN_PARG(ADDRINT),   // LPCWSTR é tratado como ADDRINT (ponteiro)
+        PIN_PARG(ADDRINT),   // LPDWORD é tratado como ADDRINT (ponteiro)
+        PIN_PARG(ADDRINT),   // LPDWORD é tratado como ADDRINT (ponteiro)
+        PIN_PARG(ADDRINT),   // LPBYTE é tratado como ADDRINT (ponteiro)
+        PIN_PARG(ADDRINT),   // LPDWORD é tratado como ADDRINT (ponteiro)
+        PIN_PARG_END());
+
+    RTN_InsertCallProbed(rtn, IPOINT_BEFORE, AFUNPTR(CallbackBeforeRegQueryValueEx),
+        IARG_PROTOTYPE, protoRegQueryValueEx,
+        IARG_INST_PTR,
+        IARG_FUNCARG_ENTRYPOINT_VALUE, 0, // hKey
+        IARG_FUNCARG_ENTRYPOINT_VALUE, 1, // lpValueName
+        IARG_FUNCARG_ENTRYPOINT_VALUE, 2, // lpReserved
+        IARG_FUNCARG_ENTRYPOINT_VALUE, 3, // lpType
+        IARG_FUNCARG_ENTRYPOINT_VALUE, 4, // lpData
+        IARG_FUNCARG_ENTRYPOINT_VALUE, 5, // lpcbData
+        IARG_END);
+
+
+    RTN_InsertCallProbed(rtn, IPOINT_AFTER, AFUNPTR(CallbackAfterRegQueryValueEx),
+        IARG_PROTOTYPE, protoRegQueryValueEx,
+        IARG_INST_PTR,
+        IARG_REG_REFERENCE, REG_GAX,
+        IARG_FUNCARG_ENTRYPOINT_VALUE, 0, // hKey
+        IARG_FUNCARG_ENTRYPOINT_VALUE, 1, // lpValueName
+        IARG_FUNCARG_ENTRYPOINT_VALUE, 2, // lpReserved
+        IARG_FUNCARG_ENTRYPOINT_VALUE, 3, // lpType
+        IARG_FUNCARG_ENTRYPOINT_VALUE, 4, // lpData
+        IARG_FUNCARG_ENTRYPOINT_VALUE, 5, // lpcbData
+        IARG_END);
+
+    PROTO_Free(protoRegQueryValueEx);
+}
+///////////////////////////////////

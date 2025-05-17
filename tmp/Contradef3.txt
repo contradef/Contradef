@@ -1,0 +1,147 @@
+#include "pin.H"
+#include <iostream>
+#include <fstream>
+#include <set>
+using std::string;
+using std::cerr;
+using std::wcerr;
+using std::endl;
+using std::set;
+using std::wstring;
+
+std::ofstream TraceFile;
+set<string> functionsToIntercept;  // Lista de fun��es a serem interceptadas
+
+string ExtractFileName(const std::string& fullPath) {
+    size_t lastSlashPos = fullPath.find_last_of("\\/");
+    if (lastSlashPos != std::string::npos) {
+        return fullPath.substr(lastSlashPos + 1);
+    }
+    else {
+        return fullPath; // Retorna o fullPath original se n�o houver separador de diret�rio
+    }
+}
+const wchar_t* newText = L"Texto da mensage2";
+//
+//VOID BeforeFunctionCall(ADDRINT address, ADDRINT* message) {
+//	PIN_LockClient();
+//	RTN rtn = RTN_FindByAddress(address);
+//	if (RTN_Valid(rtn)) {
+//		string funcName = RTN_Name(rtn);
+//		TraceFile << "MessageBoxW interceptada: " << funcName << " - Mensagem original: " << (wchar_t*)*message << endl;
+//		TraceFile << "Mensagem substitu�da: " << newText << endl;
+//		//*message = (ADDRINT)newMessage;
+//		//wchar_t** messageArg = reinterpret_cast<wchar_t**>(&message); // O segundo argumento � o texto da mensagem
+//		//*messageArg = const_cast<wchar_t*>(newText);
+//		//*message = (ADDRINT)messageArg;
+//	}
+//	PIN_UnlockClient();
+//}
+
+//VOID BeforeFunctionCall(ADDRINT address, const wchar_t* message) {
+//    PIN_LockClient();
+//    RTN rtn = RTN_FindByAddress(address);
+//    if (RTN_Valid(rtn)) {
+//        string funcName = RTN_Name(rtn);
+//        wstring wsMessage(message); // Converte wchar_t* para wstring
+//        std::cerr << " - Mensagem: " << std::string(wsMessage.begin(), wsMessage.end()) << std::endl;
+//    }
+//    PIN_UnlockClient();
+//}
+
+
+//VOID BeforeFunctionCall(ADDRINT* args) {
+//    PIN_LockClient();
+//
+//    // Presumindo que args[1] � um ponteiro para wchar_t (string wide)
+//    wchar_t* messageArg = reinterpret_cast<wchar_t*>(args[1]);
+//
+//    // Criar wstring a partir do ponteiro wchar_t
+//    if (messageArg != nullptr) {
+//        std::wstring wsMessage(messageArg);
+//        // Aqui voc� precisar� de uma fun��o de convers�o adequada para imprimir
+//        // A convers�o direta pode n�o funcionar corretamente para caracteres Unicode
+//        std::wcerr << L" - Mensagem: " << wsMessage << std::endl;
+//    }
+//
+//    PIN_UnlockClient();
+//}
+
+
+
+VOID BeforeFunctionCall(ADDRINT* args) {
+    // Suponha que voc� queira modificar o primeiro argumento da fun��o
+    ADDRINT* firstArgAddress = &args[3];
+
+    cerr << "MessageBoxW interceptada: " << " - Mensagem original: " << (wchar_t*)*firstArgAddress << endl;
+    wchar_t* message = reinterpret_cast<wchar_t*>((wchar_t*)*firstArgAddress); // Cast para wchar_t*
+    cerr << "Mensagem interceptada2: " << message << endl;
+    wstring wsMessage((wchar_t*)*firstArgAddress); // Converte wchar_t* para wstring
+    cerr << " - Mensagem: " << std::string(wsMessage.begin(), wsMessage.end()) << std::endl;
+    cerr << "Mensagem substitu�da: " << newText << endl;
+
+    // Novo valor que voc� deseja escrever
+    ADDRINT newValue = (ADDRINT)newText;
+
+    // Escrevendo o novo valor de forma segura
+    //PIN_SafeCopy(firstArgAddress, &newValue, sizeof(ADDRINT));
+}
+
+//VOID BeforeFunctionCall(ADDRINT* args) {
+    //wchar_t* message = reinterpret_cast<wchar_t*>(args[3]); // Cast para wchar_t*
+    //wcerr << L"Mensagem interceptada: " << message << endl;
+
+    //char buffer[256]; // Ajuste o tamanho conforme necess�rio
+    //if (PIN_SafeCopy(buffer, reinterpret_cast<void*>(args[2]), sizeof(buffer)) > 0) {
+    //    cerr << "Mensagem interceptada: " << buffer << endl;
+    //}
+
+//}
+
+
+
+
+
+VOID InstrumentFunction(IMG img, VOID* v) {
+    string moduleName = IMG_Name(img);
+    for (SYM sym = IMG_RegsymHead(img); SYM_Valid(sym); sym = SYM_Next(sym)) {
+        RTN rtn = RTN_FindByAddress(IMG_LowAddress(img) + SYM_Value(sym));
+        if (RTN_Valid(rtn) && RTN_IsSafeForProbedInsertion(rtn)) {
+            string fullFunctionName = ExtractFileName(moduleName) + "#" + RTN_Name(rtn);
+            if (functionsToIntercept.find(fullFunctionName) != functionsToIntercept.end()) {
+                cerr << "---->" << fullFunctionName << endl;
+                //RTN_InsertCallProbed(rtn, IPOINT_BEFORE, AFUNPTR(BeforeFunctionCall),
+                //    IARG_ADDRINT, RTN_Address(rtn),
+                //    IARG_FUNCARG_ENTRYPOINT_VALUE, 1, // Captura o segundo argumento (texto da mensagem)
+                //    IARG_END);
+
+                RTN_InsertCallProbed(rtn, IPOINT_BEFORE, AFUNPTR(BeforeFunctionCall),
+                    IARG_FUNCARG_ENTRYPOINT_REFERENCE, 0, // Passa todos os argumentos
+                    IARG_END);
+            }
+        }
+    }
+}
+
+
+VOID FillInterceptSet() {
+    functionsToIntercept.insert("USER32.dll#MessageBoxW");
+}
+
+int main(int argc, char* argv[]) {
+    FillInterceptSet();
+
+    // Inicializa o PIN
+    PIN_Init(argc, argv);
+
+    // Abre o arquivo de rastreamento
+    TraceFile.open("TraceFile.txt");
+
+    // Adiciona a rotina de instrumenta��o
+    IMG_AddInstrumentFunction(InstrumentFunction, 0);
+
+    // Inicia o programa
+    PIN_StartProgramProbed();
+
+    return 0;
+}

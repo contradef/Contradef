@@ -1,0 +1,42 @@
+#pragma once
+#ifndef INST_RTL_INSTALL_FUNCTION_TABLE_CALLBACK_H
+#define INST_RTL_INSTALL_FUNCTION_TABLE_CALLBACK_H
+
+#include "pin.H"
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <map>
+#include "utils.h"
+#include "CallContext.h"
+#include "Notifier.h"
+#include "Observer.h"
+#include "Instrumentation.h"
+#include "InstrumentationStrategy.h"
+
+struct RtlInstallFunctionTableCallbackArgs {
+    ADDRINT TableIdentifier;
+    ADDRINT BaseAddress;
+    ADDRINT Length;
+    ADDRINT Callback;
+    ADDRINT Context;
+    ADDRINT OutOfProcessCallback;
+};
+
+class InstRtlInstallFunctionTableCallback : public InstrumentationStrategy {
+public:
+    static VOID InstrumentFunction(RTN rtn, Notifier& globalNotifier);
+    static VOID HandleInstructionEvent(const EventData* data, void* context);
+    static VOID HandleTraceEvent(const EventData* data, void* context);
+
+private:
+    static std::map<CallContextKey, CallContext*> callContextMap;
+    static UINT32 imgCallId;
+    static UINT32 fcnCallId;
+    static Notifier* globalNotifierPtr;
+    static VOID CallbackBefore(THREADID tid, UINT32 callId, ADDRINT instAddress, ADDRINT rtn, CONTEXT* ctx, ADDRINT returnAddress,
+        ADDRINT TableIdentifier, ADDRINT BaseAddress, ADDRINT Length, ADDRINT Callback, ADDRINT Context, ADDRINT OutOfProcessCallback);
+    static VOID CallbackAfter(THREADID tid, UINT32 callId, ADDRINT instAddress, ADDRINT rtn, CONTEXT* ctx, ADDRINT returnAddress, ADDRINT retVal);
+};
+
+#endif // INST_RTL_INSTALL_FUNCTION_TABLE_CALLBACK_H

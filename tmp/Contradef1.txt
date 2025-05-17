@@ -1,0 +1,75 @@
+#include "pin.H"
+#include <iostream>
+#include <fstream>
+#include <set>
+
+using std::string;
+using std::cerr;
+using std::endl;
+using std::set;
+using std::wstring;
+
+std::ofstream TraceFile;
+set<string> functionsToIntercept;  // Lista de fun��es a serem interceptadas
+
+string ExtractFileName(const std::string& fullPath) {
+    size_t lastSlashPos = fullPath.find_last_of("\\/");
+    if (lastSlashPos != std::string::npos) {
+        return fullPath.substr(lastSlashPos + 1);
+    }
+    else {
+        return fullPath; // Retorna o fullPath original se n�o houver separador de diret�rio
+    }
+}
+
+VOID BeforeFunctionCall(ADDRINT address, const wchar_t* message) {
+    const wchar_t* newMessage = L"Texto substitu�do";
+    PIN_LockClient();
+    RTN rtn = RTN_FindByAddress(address);
+    if (RTN_Valid(rtn)) {
+        string funcName = RTN_Name(rtn);
+        wstring wsMessage(message); // Converte wchar_t* para wstring
+        TraceFile << "MessageBoxW interceptada: " << funcName << " - Mensagem: " << std::string(wsMessage.begin(), wsMessage.end()) << std::endl;
+    }
+    PIN_UnlockClient();
+}
+
+VOID InstrumentFunction(IMG img, VOID* v) {
+    string moduleName = IMG_Name(img);
+    for (SYM sym = IMG_RegsymHead(img); SYM_Valid(sym); sym = SYM_Next(sym)) {
+        RTN rtn = RTN_FindByAddress(IMG_LowAddress(img) + SYM_Value(sym));
+        if (RTN_Valid(rtn) && RTN_IsSafeForProbedInsertion(rtn)) {
+            string fullFunctionName = ExtractFileName(moduleName) + "#" + RTN_Name(rtn);
+            if (functionsToIntercept.find(fullFunctionName) != functionsToIntercept.end()) {
+                cerr << "---->" << fullFunctionName << endl;
+                RTN_InsertCallProbed(rtn, IPOINT_BEFORE, AFUNPTR(BeforeFunctionCall),
+                    IARG_ADDRINT, RTN_Address(rtn),
+                    IARG_FUNCARG_ENTRYPOINT_VALUE, 1, // Captura o segundo argumento (texto da mensagem)
+                    IARG_END);
+            }
+        }
+    }
+}
+
+
+VOID FillInterceptSet() {
+    functionsToIntercept.insert("USER32.dll#MessageBoxW");
+}
+
+int main(int argc, char* argv[]) {
+    FillInterceptSet();
+
+    // Inicializa o PIN
+    PIN_Init(argc, argv);
+
+    // Abre o arquivo de rastreamento
+    TraceFile.open("TraceFile.txt");
+
+    // Adiciona a rotina de instrumenta��o
+    IMG_AddInstrumentFunction(InstrumentFunction, 0);
+
+    // Inicia o programa
+    PIN_StartProgramProbed();
+
+    return 0;
+}

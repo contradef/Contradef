@@ -1,0 +1,121 @@
+#include "pin.H"
+#include <iostream>
+#include <fstream>
+#include <set>
+
+using std::string;
+using std::cerr;
+using std::endl;
+using std::set;
+using std::wstring;
+
+std::ofstream TraceFile;
+set<string> functionsToIntercept;  // Lista de fun��es a serem interceptadas
+
+string ExtractFileName(const std::string& fullPath) {
+    size_t lastSlashPos = fullPath.find_last_of("\\/");
+    if (lastSlashPos != std::string::npos) {
+        return fullPath.substr(lastSlashPos + 1);
+    }
+    else {
+        return fullPath; // Retorna o fullPath original se n�o houver separador de diret�rio
+    }
+}
+
+//
+//VOID BeforeFunctionCall(ADDRINT address, ADDRINT* message) {
+//	PIN_LockClient();
+//	RTN rtn = RTN_FindByAddress(address);
+//	if (RTN_Valid(rtn)) {
+//		string funcName = RTN_Name(rtn);
+//		TraceFile << "MessageBoxW interceptada: " << funcName << " - Mensagem original: " << (wchar_t*)*message << endl;
+//		TraceFile << "Mensagem substitu�da: " << newMessage << endl;
+//		//*message = (ADDRINT)newMessage;
+//		wchar_t** messageArg = reinterpret_cast<wchar_t**>(&message); // O segundo argumento � o texto da mensagem
+//		*messageArg = const_cast<wchar_t*>(newMessage);
+//		*message = (ADDRINT)messageArg;
+//	}
+//	PIN_UnlockClient();
+//}
+//
+//VOID BeforeFunctionCall(ADDRINT* args) {
+//	PIN_LockClient();
+//	wchar_t** messageArg = reinterpret_cast<wchar_t**>(&args[1]); // O segundo argumento � o texto da mensagem
+//	*messageArg = const_cast<wchar_t*>(newMessage);
+//	PIN_UnlockClient();
+//}
+
+const wchar_t* newText = L"Texto da mensagem";
+
+//VOID BeforeFunctionCall(ADDRINT* args) {
+//    // Suponha que voc� queira modificar o primeiro argumento da fun��o
+//    ADDRINT* firstArgAddress = &args[0];
+//
+//    TraceFile << "MessageBoxW interceptada: " << " - Mensagem original: " << (wchar_t*)*firstArgAddress << endl;
+//    TraceFile << "Mensagem substitu�da: " << newMessage << endl;
+//
+//    // Novo valor que voc� deseja escrever
+//    ADDRINT newValue = (ADDRINT)newMessage;
+//
+//    // Escrevendo o novo valor de forma segura
+//    PIN_SafeCopy(firstArgAddress, &newValue, sizeof(ADDRINT));
+//}
+
+
+VOID BeforeFunctionCall(ADDRINT* args) {
+    // Obter o endere�o do segundo argumento (supondo que seja uma string)
+    ADDRINT* addressOfArg1 = &args[1];
+    cerr << "1---->" << (wchar_t*)*addressOfArg1 << endl;
+
+    ADDRINT* addressOfArg2 = &args[2];
+    cerr << "2---->" << (wchar_t*)*addressOfArg2 << endl;
+    // Escrever a nova string no processo instrumentado de forma segura
+    // PIN_SafeCopy espera um ponteiro para o destino, a fonte e o tamanho dos dados a serem copiados
+    //PIN_SafeCopy(reinterpret_cast<VOID*>(*addressOfArg), newText, (wcslen(newText) + 1) * sizeof(wchar_t));
+}
+
+
+
+VOID InstrumentFunction(IMG img, VOID* v) {
+    string moduleName = IMG_Name(img);
+    for (SYM sym = IMG_RegsymHead(img); SYM_Valid(sym); sym = SYM_Next(sym)) {
+        RTN rtn = RTN_FindByAddress(IMG_LowAddress(img) + SYM_Value(sym));
+        if (RTN_Valid(rtn) && RTN_IsSafeForProbedInsertion(rtn)) {
+            string fullFunctionName = ExtractFileName(moduleName) + "#" + RTN_Name(rtn);
+            if (functionsToIntercept.find(fullFunctionName) != functionsToIntercept.end()) {
+                cerr << "---->" << fullFunctionName << endl;
+                //RTN_InsertCallProbed(rtn, IPOINT_BEFORE, AFUNPTR(BeforeFunctionCall),
+                //    IARG_ADDRINT, RTN_Address(rtn),
+                //    IARG_FUNCARG_ENTRYPOINT_VALUE, 1, // Captura o segundo argumento (texto da mensagem)
+                //    IARG_END);
+
+                RTN_InsertCallProbed(rtn, IPOINT_BEFORE, AFUNPTR(BeforeFunctionCall),
+                    IARG_FUNCARG_ENTRYPOINT_REFERENCE, 0, // Passa todos os argumentos
+                    IARG_END);
+            }
+        }
+    }
+}
+
+
+VOID FillInterceptSet() {
+    functionsToIntercept.insert("USER32.dll#MessageBoxW");
+}
+
+int main(int argc, char* argv[]) {
+    FillInterceptSet();
+
+    // Inicializa o PIN
+    PIN_Init(argc, argv);
+
+    // Abre o arquivo de rastreamento
+    TraceFile.open("TraceFile.txt");
+
+    // Adiciona a rotina de instrumenta��o
+    IMG_AddInstrumentFunction(InstrumentFunction, 0);
+
+    // Inicia o programa
+    PIN_StartProgramProbed();
+
+    return 0;
+}

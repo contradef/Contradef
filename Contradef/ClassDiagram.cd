@@ -1,0 +1,1981 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="InstNtQueryVirtualMemory" Collapsed="true">
+    <Position X="22.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstNtQueryVirtualMemory.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EventData">
+    <Position X="1" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="EventData::EventType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>EventData.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAABAAAAAAAAAABAAAA=</HashCode>
+      <FileName>EventData.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ExecutionEventData">
+    <Position X="1.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>EventData.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstBaseRegEnumKey" Collapsed="true">
+    <Position X="83.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstBaseRegEnumKey.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstBaseRegOpenKey" Collapsed="true">
+    <Position X="108.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstBaseRegOpenKey.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstBlockInput" Collapsed="true">
+    <Position X="128.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstBlockInput.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstCheckRemoteDebuggerPresent" Collapsed="true">
+    <Position X="148.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstCheckRemoteDebuggerPresent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstCoCreateInstance" Collapsed="true">
+    <Position X="173.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstCoCreateInstance.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstCreateProcess" Collapsed="true">
+    <Position X="11.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstCreateProcess.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstCreateProcessAsUser" Collapsed="true">
+    <Position X="36.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstCreateProcessAsUser.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstCreateService" Collapsed="true">
+    <Position X="56.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstCreateService.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstEnumProcessModules" Collapsed="true">
+    <Position X="74.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABCAAAABAAABAAAAAABABAACA=</HashCode>
+      <FileName>InstEnumProcessModules.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstEnumProcessModulesEx" Collapsed="true">
+    <Position X="94.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABCAAAABAAABAAAAAABABAACA=</HashCode>
+      <FileName>InstEnumProcessModulesEx.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstFindWindowA" Collapsed="true">
+    <Position X="117.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstFindWindowA.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstFindWindowW" Collapsed="true">
+    <Position X="137.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstFindWindowW.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstGetForegroundWindow" Collapsed="true">
+    <Position X="151" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstGetForegroundWindow.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstGetLocalTime" Collapsed="true">
+    <Position X="175.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstGetLocalTime.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstGetModuleFileNameExA" Collapsed="true">
+    <Position X="13.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstGetModuleFileNameExA.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstGetModuleFileNameExW" Collapsed="true">
+    <Position X="38.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstGetModuleFileNameExW.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstGetModuleFileNameW" Collapsed="true">
+    <Position X="58.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstGetModuleFileNameW.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstGetModuleFileNameA" Collapsed="true">
+    <Position X="76.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstGetModuleFileNameA.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstGetModuleHandleA" Collapsed="true">
+    <Position X="97" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstGetModuleHandleA.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstGetModuleHandleW" Collapsed="true">
+    <Position X="119.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstGetModuleHandleW.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstGetSystemTime" Collapsed="true">
+    <Position X="139.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstGetSystemTime.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstGetTickCount" Collapsed="true">
+    <Position X="153.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstGetTickCount.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstGetTickCount64" Collapsed="true">
+    <Position X="164.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstGetTickCount64.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstGetWindowTextA" Collapsed="true">
+    <Position X="184.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstGetWindowTextA.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstGetWindowTextW" Collapsed="true">
+    <Position X="25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstGetWindowTextW.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstIsDebuggerPresent" Collapsed="true">
+    <Position X="40.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAAACAAAABAACBBAAIAABABAAAA=</HashCode>
+      <FileName>InstIsDebuggerPresent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstKiUserExceptionDispatcher" Collapsed="true">
+    <Position X="61" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstKiUserExceptionDispatcher.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstLoadLibrary" Collapsed="true">
+    <Position X="79" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstLoadLibrary.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstLoadLibraryEx" Collapsed="true">
+    <Position X="99.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstLoadLibraryEx.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstNtClose" Collapsed="true">
+    <Position X="121.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABCAAAABAAABAAAAAABABAACA=</HashCode>
+      <FileName>InstNtClose.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstNtContinue" Collapsed="true">
+    <Position X="142" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstNtContinue.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstNtCreateProcessEx" Collapsed="true">
+    <Position X="166.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstNtCreateProcessEx.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstNtCreateThreadEx" Collapsed="true">
+    <Position X="187" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstNtCreateThreadEx.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstNtCreateTimer2" Collapsed="true">
+    <Position X="27.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstNtCreateTimer2.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstNtEnumKey" Collapsed="true">
+    <Position X="47.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstNtEnumKey.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstNtGetContextThread" Collapsed="true">
+    <Position X="65.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstNtGetContextThread.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstNtOpenKey" Collapsed="true">
+    <Position X="85.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstNtOpenKey.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstNtOpenProcess" Collapsed="true">
+    <Position X="110.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstNtOpenProcess.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstNtQueryInformationThread" Collapsed="true">
+    <Position X="130.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstNtQueryInformationThread.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstNtQueryObject" Collapsed="true">
+    <Position X="155.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstNtQueryObject.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstNtQueryPerformanceCounter" Collapsed="true">
+    <Position X="178" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABCAAAABAAABAAAAAABABAACA=</HashCode>
+      <FileName>InstNtQueryPerformanceCounter.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstNtQuerySystemInformation" Collapsed="true">
+    <Position X="16" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABCAAAABAAABAAAAAABABAACA=</HashCode>
+      <FileName>InstNtQuerySystemInformation.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstNtQuerySystemTime" Collapsed="true">
+    <Position X="43" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstNtQuerySystemTime.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstNtQueryValueKey" Collapsed="true">
+    <Position X="124" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAgAAAAAAgAABCAAAABAAABBAAIAARABAACA=</HashCode>
+      <FileName>InstNtQueryValueKey.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstNtSetContextThread" Collapsed="true">
+    <Position X="144.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstNtSetContextThread.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstNtSetDebugFilterState" Collapsed="true">
+    <Position X="169" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstNtSetDebugFilterState.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstNtSetInformationProcess" Collapsed="true">
+    <Position X="189.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstNtSetInformationProcess.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstNtSetInformationThread" Collapsed="true">
+    <Position X="29.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABCAAAABAAABAAAAAABABAACA=</HashCode>
+      <FileName>InstNtSetInformationThread.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstNtUserBuildHwndList" Collapsed="true">
+    <Position X="49.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstNtUserBuildHwndList.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstNtUserFindWindowEx" Collapsed="true">
+    <Position X="67.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstNtUserFindWindowEx.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstNtUserQueryWindow" Collapsed="true">
+    <Position X="88" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstNtUserQueryWindow.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstNtYieldExecution" Collapsed="true">
+    <Position X="101.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstNtYieldExecution.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstOpenProcess" Collapsed="true">
+    <Position X="126.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstOpenProcess.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstOutputDebugStringA" Collapsed="true">
+    <Position X="146.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstOutputDebugStringA.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstOutputDebugStringW" Collapsed="true">
+    <Position X="171.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstOutputDebugStringW.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstQueryPerformanceCounter" Collapsed="true">
+    <Position X="191.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABCAAAABAAABAAAAAABABAACA=</HashCode>
+      <FileName>InstQueryPerformanceCounter.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstRegEnumKeyA" Collapsed="true">
+    <Position X="31.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstRegEnumKeyA.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstRegEnumKeyExA" Collapsed="true">
+    <Position X="52" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstRegEnumKeyExA.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstRegEnumKeyExW" Collapsed="true">
+    <Position X="70" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstRegEnumKeyExW.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstRegEnumKeyW" Collapsed="true">
+    <Position X="90.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstRegEnumKeyW.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstRegOpenKeyA" Collapsed="true">
+    <Position X="112.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstRegOpenKeyA.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstRegOpenKeyExA" Collapsed="true">
+    <Position X="133" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstRegOpenKeyExA.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstRegOpenKeyExW" Collapsed="true">
+    <Position X="157.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstRegOpenKeyExW.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstRegOpenKeyW" Collapsed="true">
+    <Position X="180.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstRegOpenKeyW.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstRegQueryValueA" Collapsed="true">
+    <Position X="18.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstRegQueryValueA.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstRegQueryValueExA" Collapsed="true">
+    <Position X="45.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstRegQueryValueExA.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstRegQueryValueExW" Collapsed="true">
+    <Position X="63.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstRegQueryValueExW.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstNtQueryInformationProcess" Collapsed="true">
+    <Position X="81.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAEAAAABCAAgABQIABBAAIIABABACCA=</HashCode>
+      <FileName>InstNtQueryInformationProcess.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstRegQueryValueW" Collapsed="true">
+    <Position X="103.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstRegQueryValueW.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FunctionInterceptor" Collapsed="true">
+    <Position X="194" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAACAAAAgAAABAAAAAAAAAAIAAAAAAIAAAAAA=</HashCode>
+      <FileName>FunctionInterceptor.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstrumentationStrategy">
+    <Position X="101.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAACAAAAAAA=</HashCode>
+      <FileName>InstrumentationStrategy.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstShellExecute" Collapsed="true">
+    <Position X="160" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstShellExecute.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstShellExecuteEx" Collapsed="true">
+    <Position X="34" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstShellExecuteEx.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstStartService" Collapsed="true">
+    <Position X="54.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstStartService.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstVirtualProtect" Collapsed="true">
+    <Position X="72.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABCAAAABAAABAAAAAABABAACA=</HashCode>
+      <FileName>InstVirtualProtect.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstVirtualProtectEx" Collapsed="true">
+    <Position X="92.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABCAAAABAAABAAAAAABABAACA=</HashCode>
+      <FileName>InstVirtualProtectEx.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstVirtualQuery" Collapsed="true">
+    <Position X="115" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAAAABCAAAABAAABAAAAAABABAACA=</HashCode>
+      <FileName>InstVirtualQuery.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstVirtualQueryEx" Collapsed="true">
+    <Position X="135.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAAAABCAAAABAAABAAAAAABABAACA=</HashCode>
+      <FileName>InstVirtualQueryEx.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstWinExec" Collapsed="true">
+    <Position X="162.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstWinExec.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstWmi" Collapsed="true">
+    <Position X="182.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstWmi.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstWmiEx" Collapsed="true">
+    <Position X="20.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstWmiEx.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Notifier" Collapsed="true">
+    <Position X="195.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAIAAAAAAAAAAIAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Notifier.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Observer" Collapsed="true">
+    <Position X="197.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABCAAAAAAIAAAAAAAAAAAAAAAAAAABAAAAAAAAACAA=</HashCode>
+      <FileName>Observer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InstNtQueryKey" Collapsed="true">
+    <Position X="106" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAABCAAAABAAABBAAIAABABAACA=</HashCode>
+      <FileName>InstNtQueryKey.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="InstNtQueryVirtualMemoryArgs" Collapsed="true">
+    <Position X="204.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAQAAAAAAAAAIACAAAAAAAAAAEAAAABAAA=</HashCode>
+      <FileName>InstNtQueryVirtualMemory.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="CallRtnInformation" Collapsed="true">
+    <Position X="197.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAgIAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>EventData.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ExecutionInformation" Collapsed="true">
+    <Position X="199.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EventData.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstBaseRegEnumKeyArgs" Collapsed="true">
+    <Position X="199.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAIAQAAAAAAAAAAAAAAAAgAAAAQAAAAAgAAAQ=</HashCode>
+      <FileName>InstBaseRegEnumKey.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="BaseRegOpenKeyArgs" Collapsed="true">
+    <Position X="195.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAEAAAAAAAAAgAAAAAAAAAAAAAAAAEAAAAQ=</HashCode>
+      <FileName>InstBaseRegOpenKey.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstBlockInputArgs" Collapsed="true">
+    <Position X="201" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>InstBlockInput.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstCheckRemoteDebuggerPresentArgs" Collapsed="true">
+    <Position X="202.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>InstCheckRemoteDebuggerPresent.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstCoCreateInstanceArgs" Collapsed="true">
+    <Position X="204.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAkAAAAAAAAAAAAAAAAAAAAAAAQEAAAgA=</HashCode>
+      <FileName>InstCoCreateInstance.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstCreateProcessArgs" Collapsed="true">
+    <Position X="206.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAIAAAAAIAgAAgAgAAAAAAAAAAAAAIgAAAEAAAAA=</HashCode>
+      <FileName>InstCreateProcess.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstCreateProcessAsUserArgs" Collapsed="true">
+    <Position X="208" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAIAAQAAIAgAAgAgAAAAAAAAAAAAAIgAAAEAAAAA=</HashCode>
+      <FileName>InstCreateProcessAsUser.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstCreateServiceArgs" Collapsed="true">
+    <Position X="194" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAgAgBAQIGECAAAAAAAKAAAAEA=</HashCode>
+      <FileName>InstCreateService.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstEnumProcessModulesArgs" Collapsed="true">
+    <Position X="195.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAgAAAAAAAAAAAIAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>InstEnumProcessModules.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstEnumProcessModulesExArgs" Collapsed="true">
+    <Position X="197.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAgAAAAAAAAAAAIAAAAAAIAAAQAAAAAA=</HashCode>
+      <FileName>InstEnumProcessModulesEx.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstFindWindowAArgs" Collapsed="true">
+    <Position X="199.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAQIAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InstFindWindowA.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstFindWindowWArgs" Collapsed="true">
+    <Position X="201" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAQIAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InstFindWindowW.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstGetLocalTimeArgs" Collapsed="true">
+    <Position X="202.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>InstGetLocalTime.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="GetModuleFileNameExAArgs" Collapsed="true">
+    <Position X="202.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAACAAAAAAAAABAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InstGetModuleFileNameExA.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="GetModuleFileNameExWArgs" Collapsed="true">
+    <Position X="204.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAACAAAAAAAAABAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InstGetModuleFileNameExW.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="GetModuleFileNameWArgs" Collapsed="true">
+    <Position X="206.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAABAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InstGetModuleFileNameW.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="GetModuleFileNameAArgs" Collapsed="true">
+    <Position X="201" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAABAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InstGetModuleFileNameA.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="GetModuleHandleAArgs" Collapsed="true">
+    <Position X="208" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>InstGetModuleHandleA.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="GetModuleHandleWArgs" Collapsed="true">
+    <Position X="194" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>InstGetModuleHandleW.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstGetSystemTimeArgs" Collapsed="true">
+    <Position X="204.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>InstGetSystemTime.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="GetWindowTextAArgs" Collapsed="true">
+    <Position X="195.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAIAAAAAAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>InstGetWindowTextA.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="GetWindowTextWArgs" Collapsed="true">
+    <Position X="197.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAIAAAAAAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>InstGetWindowTextW.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstKiUserExceptionDispatcherArgs" Collapsed="true">
+    <Position X="206.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>InstKiUserExceptionDispatcher.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstLoadLibraryArgs" Collapsed="true">
+    <Position X="208" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>InstLoadLibrary.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstLoadLibraryExArgs" Collapsed="true">
+    <Position X="194" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAABA=</HashCode>
+      <FileName>InstLoadLibraryEx.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstNtCloseArgs" Collapsed="true">
+    <Position X="195.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>InstNtClose.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstNtContinueArgs" Collapsed="true">
+    <Position X="197.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InstNtContinue.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstNtCreateProcessExArgs" Collapsed="true">
+    <Position X="199.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAQAACAAAAAAAAAgAABAEQRAAAAAAAAAAA=</HashCode>
+      <FileName>InstNtCreateProcessEx.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstNtCreateThreadExArgs" Collapsed="true">
+    <Position X="201" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAICAAABAQAAAAAAAAAAAAAAISEEQAAAAgAAAAAAA=</HashCode>
+      <FileName>InstNtCreateThreadEx.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstNtCreateTimer2Args" Collapsed="true">
+    <Position X="202.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACABiAAAAAAAABAAAAAAAAACAAAAEAAAAAAAAAAAEA=</HashCode>
+      <FileName>InstNtCreateTimer2.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstNtEnumKeyArgs" Collapsed="true">
+    <Position X="204.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAIAQAAAAAAAAAAAAAAAAgAAAAQAAAAAgAAAQ=</HashCode>
+      <FileName>InstNtEnumKey.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstNtGetContextThreadArgs" Collapsed="true">
+    <Position X="206.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InstNtGetContextThread.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="NtOpenKeyArgs" Collapsed="true">
+    <Position X="194" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAACAAAAAAAAAAAAAAAAAAAAAEAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>InstNtOpenKey.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstNtOpenProcessArgs" Collapsed="true">
+    <Position X="208" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAQAAAAgAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>InstNtOpenProcess.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstNtQueryInformationThreadArgs" Collapsed="true">
+    <Position X="194" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAABABAAAAAAAAAAAAAAAAAAgAAAAEAAAAAAAA=</HashCode>
+      <FileName>InstNtQueryInformationThread.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstNtQueryObjectArgs" Collapsed="true">
+    <Position X="197.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAgAAAAAAAAAAAAAAAAAICAAEAAAAAAAA=</HashCode>
+      <FileName>InstNtQueryObject.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstNtQueryPerformanceCounterArgs" Collapsed="true">
+    <Position X="199.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InstNtQueryPerformanceCounter.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstNtQuerySystemInformationArgs" Collapsed="true">
+    <Position X="201" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAIAAAgAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>InstNtQuerySystemInformation.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstNtQuerySystemTimeArgs" Collapsed="true">
+    <Position X="202.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InstNtQuerySystemTime.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="_STRING" Collapsed="true">
+    <Position X="3.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAABAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>InstNtQueryValueKey.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="_KEY_BASIC_INFORMATION" Collapsed="true">
+    <Position X="24.5" Y="15.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAAAAAAAQAEAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>InstNtQueryValueKey.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="_KEY_VALUE_BASIC_INFORMATION" Collapsed="true">
+    <Position X="11.5" Y="22.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAEAAAAAgAAQAAAAAAAAA=</HashCode>
+      <FileName>InstNtQueryValueKey.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="_KEY_VALUE_PARTIAL_INFORMATION" Collapsed="true">
+    <Position X="0.5" Y="22.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAACAAAAEAAAABAAAQAAAAAAAAA=</HashCode>
+      <FileName>InstNtQueryValueKey.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="KEY_VALUE_FULL_INFORMATION" Collapsed="true">
+    <Position X="208" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAACAAQAEAAAAAgAAQAAAAAAAAA=</HashCode>
+      <FileName>InstNtQueryValueKey.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="NtQueryValueKeyArgs" Collapsed="true">
+    <Position X="197.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAAAAAAAAEBAAAEAAAAAAAIAAAgAAAA=</HashCode>
+      <FileName>InstNtQueryValueKey.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstNtSetContextThreadArgs" Collapsed="true">
+    <Position X="206.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InstNtSetContextThread.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstNtSetDebugFilterStateArgs" Collapsed="true">
+    <Position X="208" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAADAAAAAA=</HashCode>
+      <FileName>InstNtSetDebugFilterState.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstNtSetInformationProcessArgs" Collapsed="true">
+    <Position X="194" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAAAIAAAAAAABAAAAgAA=</HashCode>
+      <FileName>InstNtSetInformationProcess.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstNtSetInformationThreadArgs" Collapsed="true">
+    <Position X="195.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAABABAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>InstNtSetInformationThread.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstNtUserBuildHwndListArgs" Collapsed="true">
+    <Position X="197.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEgAAAAAAAAAAAAAAAAEgAAAAAAAAAFAA=</HashCode>
+      <FileName>InstNtUserBuildHwndList.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstNtUserFindWindowExArgs" Collapsed="true">
+    <Position X="199.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgCAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>InstNtUserFindWindowEx.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstNtUserQueryWindowArgs" Collapsed="true">
+    <Position X="201" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAgAAAA=</HashCode>
+      <FileName>InstNtUserQueryWindow.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstOpenProcessArgs" Collapsed="true">
+    <Position X="202.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAIAAAAAAAAAQAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InstOpenProcess.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstOutputDebugStringAArgs" Collapsed="true">
+    <Position X="204.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>InstOutputDebugStringA.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="OutputDebugStringWArgs" Collapsed="true">
+    <Position X="199.25" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>InstOutputDebugStringW.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstQueryPerformanceCounterArgs" Collapsed="true">
+    <Position X="206.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InstQueryPerformanceCounter.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstRegEnumKeyAArgs" Collapsed="true">
+    <Position X="208" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAQAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>InstRegEnumKeyA.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstRegEnumKeyExAArgs" Collapsed="true">
+    <Position X="194" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAIAQAAAAAAAAAAAAAAAAgAAAAQAQAAAgAAAQ=</HashCode>
+      <FileName>InstRegEnumKeyExA.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstRegEnumKeyExWArgs" Collapsed="true">
+    <Position X="195.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAIAQAAAAAAAAAAAAAAAAgAAAAQAQAAAgAAAQ=</HashCode>
+      <FileName>InstRegEnumKeyExW.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstRegEnumKeyWArgs" Collapsed="true">
+    <Position X="197.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAQAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>InstRegEnumKeyW.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstRegOpenKeyAArgs" Collapsed="true">
+    <Position X="199.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAEAAAAAAAAAgAAAAAAAAAAAAAAAAEAAAAQ=</HashCode>
+      <FileName>InstRegOpenKeyA.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="RegOpenKeyExAArgs" Collapsed="true">
+    <Position X="201" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAEAAAAAAAAEgAAAAAAAAAAAAAAAQEAAAAQ=</HashCode>
+      <FileName>InstRegOpenKeyExA.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="RegOpenKeyExWArgs" Collapsed="true">
+    <Position X="202.75" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAEAAAAAAAAEgAAAAAAAAAAAAAAAQEAAAAQ=</HashCode>
+      <FileName>InstRegOpenKeyExW.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstRegOpenKeyWArgs" Collapsed="true">
+    <Position X="201" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAEAAAAAAAAAgAAAAAAAAAAAAAAAAEAAAAQ=</HashCode>
+      <FileName>InstRegOpenKeyW.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="RegQueryValueAArgs" Collapsed="true">
+    <Position X="204.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAgAAAAAAAAAAAAAQAAAAAAAQ=</HashCode>
+      <FileName>InstRegQueryValueA.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstRegQueryValueExAArgs" Collapsed="true">
+    <Position X="202.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAQAAAAACCAAAAAAAAAAQAAAAAAAQ=</HashCode>
+      <FileName>InstRegQueryValueExA.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstRegQueryValueExWArgs" Collapsed="true">
+    <Position X="204.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAQAAAAACCAAAAAAAAAAQAAAAAAAQ=</HashCode>
+      <FileName>InstRegQueryValueExW.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="NtQueryInformationProcessArgs" Collapsed="true">
+    <Position X="195.75" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAAAIAAAAAAEBAAAAgAA=</HashCode>
+      <FileName>InstNtQueryInformationProcess.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="RegQueryValueWArgs" Collapsed="true">
+    <Position X="206.25" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAgAAAAAAAAAAAAAQAAAAAAAQ=</HashCode>
+      <FileName>InstRegQueryValueW.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstShellExecuteArgs" Collapsed="true">
+    <Position X="206.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQCAAAAAAAgAAAAAAAAAAAIAAEAAAAAAAgAAAA=</HashCode>
+      <FileName>InstShellExecute.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="_SHELLEXECUTEINFO" Collapsed="true">
+    <Position X="194" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgBAAAEAAAAABAAkAAAAAAAAgAAIAAMAQAgAAAgAAIA=</HashCode>
+      <FileName>InstShellExecuteEx.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstShellExecuteExArgs" Collapsed="true">
+    <Position X="208" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>InstShellExecuteEx.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstStartServiceArgs" Collapsed="true">
+    <Position X="194" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InstStartService.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstVirtualProtectArgs" Collapsed="true">
+    <Position X="195.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACCAQAAAAAAAAAAQAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InstVirtualProtect.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstVirtualProtectExArgs" Collapsed="true">
+    <Position X="197.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAACCAQAAAAAAAAAAQAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InstVirtualProtectEx.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstVirtualQueryArgs" Collapsed="true">
+    <Position X="199.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQQAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InstVirtualQuery.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstVirtualQueryExArgs" Collapsed="true">
+    <Position X="201" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAQQAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InstVirtualQueryEx.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstWinExecArgs" Collapsed="true">
+    <Position X="202.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InstWinExec.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstWmiArgs" Collapsed="true">
+    <Position X="204.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIBwAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InstWmi.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstWmiExArgs" Collapsed="true">
+    <Position X="206.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIBwAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InstWmiEx.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="_UNICODE_STRING" Collapsed="true">
+    <Position X="16.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAABAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>NtStructures.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="_OBJECT_ATTRIBUTES" Collapsed="true">
+    <Position X="18.5" Y="19.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIABQAAAAAGEAAAAAAAAAAAA=</HashCode>
+      <FileName>NtStructures.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="_LIST_ENTRY" Collapsed="true">
+    <Position X="11.5" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="_PEB_LDR_DATA" Collapsed="true">
+    <Position X="21.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>NtStructures.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="_RTL_USER_PROCESS_PARAMETERS" Collapsed="true">
+    <Position X="7.5" Y="19.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>NtStructures.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="_PEB" Collapsed="true">
+    <Position X="19.5" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gEAAAAAAAAgAAiAAAAA4AAAIAAAAAAAAAAAAAAAQEAA=</HashCode>
+      <FileName>NtStructures.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="_PROCESS_BASIC_INFORMATION" Collapsed="true">
+    <Position X="7.5" Y="24.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAIBAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAECAA=</HashCode>
+      <FileName>NtStructures.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="_LARGE_INTEGER" Collapsed="true">
+    <Position X="14.5" Y="17.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="_MEMORY_BASIC_INFORMATION" Collapsed="true">
+    <Position X="17.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAQAAAAAACAAAABAIAAQAABAAAAIA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="_MEMORY_BASIC_INFORMATION32" Collapsed="true">
+    <Position X="7.5" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAQAAAAAACAAAABAIAAQAABAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="_MEMORY_BASIC_INFORMATION64" Collapsed="true">
+    <Position X="15.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAQAEAAAACAAAABAIAAQAABAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="InstNtQueryKeyArgs" Collapsed="true">
+    <Position X="195.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAAAEAAAAFBAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InstNtQueryKey.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Typedef Name="STRING" Collapsed="true">
+    <Position X="6.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InstNtQueryValueKey.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="PSTRING" Collapsed="true">
+    <Position X="9.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InstNtQueryValueKey.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="OEM_STRING" Collapsed="true">
+    <Position X="9.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InstNtQueryValueKey.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="POEM_STRING" Collapsed="true">
+    <Position X="3.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InstNtQueryValueKey.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="ANSI_STRING" Collapsed="true">
+    <Position X="6.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InstNtQueryValueKey.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="PANSI_STRING" Collapsed="true">
+    <Position X="6.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InstNtQueryValueKey.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="KEY_INFORMATION_CLASS" Collapsed="true">
+    <Position X="11.5" Y="29.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InstNtQueryValueKey.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="KEY_BASIC_INFORMATION" Collapsed="true">
+    <Position X="24.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InstNtQueryValueKey.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="PKEY_BASIC_INFORMATION" Collapsed="true">
+    <Position X="24.5" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InstNtQueryValueKey.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="KEY_VALUE_BASIC_INFORMATION" Collapsed="true">
+    <Position X="14.5" Y="22.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InstNtQueryValueKey.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="PKEY_VALUE_BASIC_INFORMATION" Collapsed="true">
+    <Position X="11.5" Y="24.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InstNtQueryValueKey.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="KEY_VALUE_PARTIAL_INFORMATION" Collapsed="true">
+    <Position X="3.5" Y="22.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InstNtQueryValueKey.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="PKEY_VALUE_PARTIAL_INFORMATION" Collapsed="true">
+    <Position X="3.5" Y="24.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InstNtQueryValueKey.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="KEY_VALUE_INFORMATION_CLASS" Collapsed="true">
+    <Position X="3.5" Y="29.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InstNtQueryValueKey.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="NTQUERYVALUEKEY" Collapsed="true">
+    <Position X="28.5" Y="16.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InstNtQueryValueKey.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="LPNTQUERYVALUEKEY" Collapsed="true">
+    <Position X="28.5" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InstNtQueryValueKey.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="RTNFunction" Collapsed="true">
+    <Position X="204.5" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>FunctionInterceptor.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="SHELLEXECUTEINFO" Collapsed="true">
+    <Position X="206.25" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\shellapi.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="LPSHELLEXECUTEINFO" Collapsed="true">
+    <Position X="199.25" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\shellapi.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="HWND" Collapsed="true">
+    <Position X="206.25" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\wtypes.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="LPCTSTR" Collapsed="true">
+    <Position X="197.5" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="HINSTANCE" Collapsed="true">
+    <Position X="202.75" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\wtypes.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="LPVOID" Collapsed="true">
+    <Position X="201" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="HKEY" Collapsed="true">
+    <Position X="204.5" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\atlmfc\include\afxv_w32.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="PBOOL" Collapsed="true">
+    <Position X="202.75" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="LONG" Collapsed="true">
+    <Position X="22.5" Y="26.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="PVOID" Collapsed="true">
+    <Position X="202.75" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="USHORT" Collapsed="true">
+    <Position X="28.5" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="PUSHORT" Collapsed="true">
+    <Position X="28.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="UCHAR" Collapsed="true">
+    <Position X="26.5" Y="25.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="PUCHAR" Collapsed="true">
+    <Position X="26.5" Y="23.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="NTSTATUS" Collapsed="true">
+    <Position X="22.5" Y="24.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\bcrypt.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="WCHAR" Collapsed="true">
+    <Position X="3.5" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="ULONG" Collapsed="true">
+    <Position X="26.5" Y="20.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Users\henri\source\repos\Contradef\pin\extras\stlport\include\stl\_threads.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="PULONG" Collapsed="true">
+    <Position X="26.5" Y="18.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="PWSTR" Collapsed="true">
+    <Position X="6.5" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="HANDLE" Collapsed="true">
+    <Position X="201" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="DWORD" Collapsed="true">
+    <Position X="195.75" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="BYTE" Collapsed="true">
+    <Position X="194" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="WORD" Collapsed="true">
+    <Position X="195.75" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="FLOAT" Collapsed="true">
+    <Position X="199.25" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="INT" Collapsed="true">
+    <Position X="208" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Users\henri\source\repos\Contradef\pin\include\pin\gen\types_foundation.PH</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="UINT" Collapsed="true">
+    <Position X="208" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Users\henri\source\repos\Contradef\pin\include\pin\gen\types_foundation.PH</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="PUINT" Collapsed="true">
+    <Position X="197.5" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="ULONG_PTR" Collapsed="true">
+    <Position X="7.5" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\basetsd.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="INT_PTR" Collapsed="true">
+    <Position X="194" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\basetsd.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="PINT_PTR" Collapsed="true">
+    <Position X="208" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\basetsd.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="UINT_PTR" Collapsed="true">
+    <Position X="194" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\basetsd.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="PUINT_PTR" Collapsed="true">
+    <Position X="199.25" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\basetsd.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="LONG_PTR" Collapsed="true">
+    <Position X="22.5" Y="19.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\basetsd.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="PLONG_PTR" Collapsed="true">
+    <Position X="194" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\basetsd.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="PULONG_PTR" Collapsed="true">
+    <Position X="201" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\basetsd.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="DWORD_PTR" Collapsed="true">
+    <Position X="10.5" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\basetsd.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="PDWORD_PTR" Collapsed="true">
+    <Position X="4.5" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\basetsd.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="SIZE_T" Collapsed="true">
+    <Position X="7.5" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\basetsd.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="PSIZE_T" Collapsed="true">
+    <Position X="7.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\basetsd.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="SSIZE_T" Collapsed="true">
+    <Position X="22.5" Y="21.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\basetsd.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="PSSIZE_T" Collapsed="true">
+    <Position X="22.5" Y="17.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\basetsd.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="UNICODE_STRING" Collapsed="true">
+    <Position X="13.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>NtStructures.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="PUNICODE_STRING" Collapsed="true">
+    <Position X="10.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>NtStructures.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="PCUNICODE_STRING" Collapsed="true">
+    <Position X="13.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>NtStructures.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="OBJECT_ATTRIBUTES" Collapsed="true">
+    <Position X="15.5" Y="19.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>NtStructures.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="POBJECT_ATTRIBUTES" Collapsed="true">
+    <Position X="18.5" Y="21.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>NtStructures.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="PROCESSINFOCLASS" Collapsed="true">
+    <Position X="18.5" Y="26.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>NtStructures.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="PCHAR" Collapsed="true">
+    <Position X="206.25" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="LPCH" Collapsed="true">
+    <Position X="195.75" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="PCH" Collapsed="true">
+    <Position X="204.5" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="PWCHAR" Collapsed="true">
+    <Position X="0.5" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="LPWCH" Collapsed="true">
+    <Position X="1.5" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="PWCH" Collapsed="true">
+    <Position X="3.5" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="LIST_ENTRY" Collapsed="true">
+    <Position X="14.5" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="PLIST_ENTRY" Collapsed="true">
+    <Position X="13.5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="RESTRICTED_POINTER" Collapsed="true">
+    <Position X="11.5" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>NtStructures.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="PEB_LDR_DATA" Collapsed="true">
+    <Position X="22.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>NtStructures.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="PPEB_LDR_DATA" Collapsed="true">
+    <Position X="21.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>NtStructures.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="RTL_USER_PROCESS_PARAMETERS" Collapsed="true">
+    <Position X="10.5" Y="19.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>NtStructures.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="PRTL_USER_PROCESS_PARAMETERS" Collapsed="true">
+    <Position X="7.5" Y="21.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>NtStructures.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="PPS_POST_PROCESS_INIT_ROUTINE" Collapsed="true">
+    <Position X="195.75" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>NtStructures.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="PEB" Collapsed="true">
+    <Position X="20.5" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>NtStructures.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="PPEB" Collapsed="true">
+    <Position X="19.5" Y="16.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>NtStructures.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="PROCESS_BASIC_INFORMATION" Collapsed="true">
+    <Position X="7.5" Y="26.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>NtStructures.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="LONGLONG" Collapsed="true">
+    <Position X="3.5" Y="17.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="ULONGLONG" Collapsed="true">
+    <Position X="26.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="PLONGLONG" Collapsed="true">
+    <Position X="1.5" Y="15.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="PULONGLONG" Collapsed="true">
+    <Position X="26.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="USN" Collapsed="true">
+    <Position X="3.5" Y="19.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="LARGE_INTEGER" Collapsed="true">
+    <Position X="11.5" Y="15.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="PLARGE_INTEGER" Collapsed="true">
+    <Position X="11.5" Y="17.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MEMORY_BASIC_INFORMATION" Collapsed="true">
+    <Position X="19.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="PMEMORY_BASIC_INFORMATION" Collapsed="true">
+    <Position X="17.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MEMORY_BASIC_INFORMATION32" Collapsed="true">
+    <Position X="4.5" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="PMEMORY_BASIC_INFORMATION32" Collapsed="true">
+    <Position X="7.5" Y="16.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MEMORY_BASIC_INFORMATION64" Collapsed="true">
+    <Position X="17.5" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="PMEMORY_BASIC_INFORMATION64" Collapsed="true">
+    <Position X="15.5" Y="15.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winnt.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="EventCallback" Collapsed="true">
+    <Position X="197.5" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Observer.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Enum Name="_KEY_INFORMATION_CLASS" Collapsed="true">
+    <Position X="11.5" Y="27.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAEAAAAAQAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>InstNtQueryValueKey.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="_KEY_VALUE_INFORMATION_CLASS" Collapsed="true">
+    <Position X="3.5" Y="27.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAABAAAAAAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>InstNtQueryValueKey.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="_PROCESSINFOCLASS" Collapsed="true">
+    <Position X="18.5" Y="24.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CPmUKbZJiGQEiGIKTIzhjQGCQiY8UtC2QaAhQBMYJYo=</HashCode>
+      <FileName>NtStructures.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="RegistryError" Collapsed="true">
+    <Position X="194" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAgAAAAAAAAAiAEAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RegistryErrors.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

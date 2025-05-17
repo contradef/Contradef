@@ -1,0 +1,5 @@
+Pin: pin-3.28-98749-6643ecee5
+Copyright 2002-2023 Intel Corporation.
+E:  [tid:59508] Cannot execute file. System error: System error 193 : %1 não é um aplicativo Win32 válido.
+. File name: "C:\Users\henri\source\repos\Contradef\x64\Debug\Contradef.dll"
+E:  Pin is exiting due to fatal error
