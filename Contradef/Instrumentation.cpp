@@ -159,7 +159,7 @@ int InitInstrumentation() {
     string pid = decstr(WindowsAPI::getpid());
 
 
-    // Log Principal
+    // Log para o interceptador de funções
     string logsName = KnobOutputFile.Value();
     string logfilename = logsName + "." + pid + ".log.cdf";
     MainOutFile.open(logfilename.c_str(), std::ios::binary);

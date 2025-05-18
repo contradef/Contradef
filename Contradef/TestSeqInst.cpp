@@ -8,7 +8,7 @@ void AddTestSequences(InstructionSequenceDetector& seq_detector, InstructionSequ
 	sequence.push_back(CreateInstVector("jz 0x000000000000"));
 	sequence.push_back(CreateInstVector("test word ptr [r?i+0xa], 0x2")); // "?" substitui qualquer valor
 	sequence.push_back(CreateInstVector("jmp 0x000000000000", "jnb 0x000000000000", "jb 0x000000000000")); // Qualquer dessas instruções é considerada
-	sequence.push_back(CreateInstVector("j?? 0x000000000000")); // "?" substitui qualquer valor
+	sequence.push_back(CreateInstVector("ja 0x000000000000"));
 	sequence.push_back(CreateInstVector("jnz 0x000000000000"));
 
 	//seq_detector.AddInstructionSequence(sequence, SequenceMatchCallback, 34, 34); // O callback será disparado na ocorrência 34 da mesma sequência de instruções
