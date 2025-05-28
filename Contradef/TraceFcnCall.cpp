@@ -84,7 +84,7 @@ namespace TraceFcnCall {
                 imgName = "[forced] " + fcnData.fullModuleName;
             }
             callTracker.addFunctionCall(threadid, imgName, tgtRtnName, tgtRtnAddr);
-            if (KnobSaveExternalCallTrace && !saveAtFini) {
+            if (KnobTraceExternalCallTrace && !saveAtFini) {
                 saveLastExternalCall(ExternalCallTraceOutFile);
             }
 
@@ -328,7 +328,7 @@ namespace TraceFcnCall {
 
 
     VOID Fini(int, VOID* v) {
-        if (KnobSaveExternalCallTrace && saveAtFini) {
+        if (KnobTraceExternalCallTrace && saveAtFini) {
             saveAllExternalCalls(ExternalCallTraceOutFile);
         }
         ExternalCallTraceOutFile.close();
@@ -338,7 +338,7 @@ namespace TraceFcnCall {
     int InitFcnCallTrace(std::string pid, std::string filename)
     {
 
-        if (KnobSaveExternalCallTrace)
+        if (KnobTraceExternalCallTrace)
         {
             std::string logfilename = filename + "." + pid + ".externalcalltraceM1.cdf";
             ExternalCallTraceOutFile.open(logfilename.c_str(), std::ios::binary);

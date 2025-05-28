@@ -157,16 +157,18 @@ int InitInstrumentation() {
 
     // Obter o PID do Processo
     string pid = decstr(WindowsAPI::getpid());
-
-
     // Log para o interceptador de funções
     string logsName = KnobOutputFile.Value();
-    string logfilename = logsName + "." + pid + ".log.cdf";
-    MainOutFile.open(logfilename.c_str(), std::ios::binary);
 
 
     // Iniciar o PIN e instrumentação
     PIN_InitSymbols();
+    
+    if (KnobFunctionInterceptor) {
+        string logfilename = logsName + "." + pid + ".log.cdf";
+        MainOutFile.open(logfilename.c_str(), std::ios::binary);
+        IMG_AddInstrumentFunction(InstrumentFunctionInterceptor, 0);
+    }
 
     if (KnobSeqDetector) {
         // Iniciar detector de sequencia de instruções
@@ -176,19 +178,15 @@ int InitInstrumentation() {
         INS_AddInstrumentFunction(InstrumentInstructionSeq, 0);
     }
 
-    if (KnobSaveExternalCallTrace) {
+    if (KnobTraceExternalCallTrace) {
         TraceFcnCall::InitFcnCallTrace(pid, logsName);
-    }
-
-    if (KnobTraceInterceptor) {
-        IMG_AddInstrumentFunction(InstrumentFunctionInterceptor, 0);
     }
 
     if (KnobTraceInstructions) {
         TraceInstructions::InitTrace(pid, logsName);
     }
 
-    if (KnobDisassembly) {
+    if (KnobTraceDisassembly) {
         TraceDisassembly::InitTraceDisassembly(pid, logsName);
     }
 

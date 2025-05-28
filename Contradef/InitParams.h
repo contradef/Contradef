@@ -9,8 +9,8 @@
 extern KNOB<std::string> KnobOutputFile;
 extern KNOB<std::string> KnobYaraRulesFile;
 extern KNOB<BOOL> KnobAllowAttachDebugger;
-extern KNOB<BOOL> KnobTraceInterceptor;
-extern KNOB<BOOL> KnobSaveExternalCallTrace;
+extern KNOB<BOOL> KnobFunctionInterceptor;
+extern KNOB<BOOL> KnobTraceExternalCallTrace;
 extern KNOB<BOOL> KnobTraceMemory;
 extern KNOB<BOOL> KnobTraceMemoryOnlyStr;
 extern KNOB<BOOL> KnobTraceInstructions;
@@ -24,7 +24,7 @@ extern KNOB<BOOL> KnobTraceOnlyMain;
 extern KNOB<BOOL> KnobTraceMemoryInstructions;
 extern KNOB<BOOL> KnobSilent;
 extern KNOB<BOOL> KnobEarlyOut;
-extern KNOB<BOOL> KnobDisassembly;
+extern KNOB<BOOL> KnobTraceDisassembly;
 extern KNOB<BOOL> KnobSeqDetector;
 
 #endif // INIT_PARAMS_H

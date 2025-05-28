@@ -3,6 +3,10 @@
 #include "TraceMemory.h"
 
 std::ofstream TraceMemory::memTraceOut;
+// Buffer de 512 KB para memTraceOut
+const std::size_t TraceMemory::bufferSize = 512 * 1024;
+std::vector<char> TraceMemory::buffer(bufferSize);  // o buffer precisa durar enquanto o ofstream estiver aberto
+
 PIN_MUTEX TraceMemory::fileMemTraceOutMutex;
 
 VOID* WriteEa[PIN_MAX_THREADS];
@@ -146,6 +150,7 @@ int TraceMemory::InitMemoryTrace(std::string pid, std::string filename)
     memTraceOut.open(filename.c_str());
     memTraceOut << std::hex << std::right;
     memTraceOut.setf(std::ios_base::showbase);
+    memTraceOut.rdbuf()->pubsetbuf(&buffer[0], bufferSize);
 
     INS_AddInstrumentFunction(InstTraceMemory, 0);
 

@@ -13,6 +13,10 @@ using namespace INSTLIB;
 PIN_MUTEX TraceInstructions::fileOutMutex;
 
 std::ofstream TraceInstructions::out;
+// Buffer de 512 KB para out
+const std::size_t TraceInstructions::bufferSize = 512 * 1024;
+std::vector<char> TraceInstructions::buffer(bufferSize);  // o buffer precisa durar enquanto o ofstream estiver aberto
+
 INT32 TraceInstructions::enabled = 0;
 FILTER TraceInstructions::filter;
 ICOUNT TraceInstructions::icount;
@@ -757,6 +761,7 @@ int TraceInstructions::InitTrace(string pid, std::string filename)
     out.open(filename.c_str());
     out << hex << right;
     out.setf(ios::showbase);
+    out.rdbuf()->pubsetbuf(&buffer[0], bufferSize);
 
     control.RegisterHandler(Handler, 0, FALSE);
     control.Activate();

@@ -17,21 +17,21 @@ namespace TraceDisassembly {
 
         std::string disassembledInstr = INS_Disassemble(ins);
 
-        if (KnobDisassembly) {
+        if (KnobTraceDisassembly) {
             disassemblyTraceOut << INS_Address(ins) << " | " << disassembledInstr << std::endl;
         }
     }
 
     VOID Fini(INT32 code, VOID* v)
     {
-        if (KnobDisassembly && disassemblyTraceOut.is_open()) {
+        if (KnobTraceDisassembly && disassemblyTraceOut.is_open()) {
             disassemblyTraceOut.close();
         }
     }
 
     int InitTraceDisassembly(std::string pid, std::string filename)
     {
-        if (KnobDisassembly) {
+        if (KnobTraceDisassembly) {
             filename += "." + pid + ".disassembly.cdf";
             disassemblyTraceOut.open(filename.c_str());
             disassemblyTraceOut << std::hex << std::right;

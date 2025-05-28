@@ -35,6 +35,8 @@ namespace TraceInstructions {
 	/* ===================================================================== */
 
 	extern PIN_MUTEX fileOutMutex;
+	extern const std::size_t bufferSize;
+	extern std::vector<char> buffer;
 	extern std::ofstream out;
 	extern INT32 enabled;
 	extern FILTER filter;

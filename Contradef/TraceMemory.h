@@ -12,6 +12,8 @@
 #include "InitParams.h"
 
 namespace TraceMemory {
+    extern const std::size_t bufferSize;
+    extern std::vector<char> buffer;
     extern std::ofstream memTraceOut;
     extern PIN_MUTEX fileMemTraceOutMutex;
 

@@ -11,6 +11,7 @@ void AddTestSequences(InstructionSequenceDetector& seq_detector, InstructionSequ
 	sequence.push_back(CreateInstVector("ja 0x000000000000"));
 	sequence.push_back(CreateInstVector("jnz 0x000000000000"));
 
+	//seq_detector.AddInstructionSequence(sequence, SequenceMatchCallback, 10, 15); // O callback será disparado entre as ocorrências 10 e 15 da mesma sequência de instruções
 	//seq_detector.AddInstructionSequence(sequence, SequenceMatchCallback, 34, 34); // O callback será disparado na ocorrência 34 da mesma sequência de instruções
 	seq_detector.AddInstructionSequence(sequence, SequenceMatchCallback); // O callback SequenceMatchCallback será disparado em todas as ocorrências 
 

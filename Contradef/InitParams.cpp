@@ -10,10 +10,10 @@ KNOB<std::string> KnobYaraRulesFile(KNOB_MODE_WRITEONCE, "pintool", "yara", "", 
 KNOB<BOOL> KnobAllowAttachDebugger(KNOB_MODE_WRITEONCE, "pintool", "ad", "0", "Allow attach debugger ");
 
 // Interceptador de Funções
-KNOB<BOOL> KnobTraceInterceptor(KNOB_MODE_WRITEONCE, "pintool", "intercept_fcn", "0", "Activate function interceptor");
+KNOB<BOOL> KnobFunctionInterceptor(KNOB_MODE_WRITEONCE, "pintool", "intercept_fcn", "0", "Activate function interceptor");
 
 // Trace de funções
-KNOB<BOOL> KnobSaveExternalCallTrace(KNOB_MODE_WRITEONCE, "pintool", "trace_exfcn", "0", "Save external call trace file ");
+KNOB<BOOL> KnobTraceExternalCallTrace(KNOB_MODE_WRITEONCE, "pintool", "trace_exfcn", "0", "Save external call trace file ");
 
 // Trace de memoria
 KNOB<BOOL> KnobTraceMemory(KNOB_MODE_WRITEONCE, "pintool", "trace_mem", "0", "Trace memory");
@@ -33,7 +33,7 @@ KNOB<BOOL> KnobSilent(KNOB_MODE_WRITEONCE, "pintool", "silent", "0", "Do everyth
 KNOB<BOOL> KnobEarlyOut(KNOB_MODE_WRITEONCE, "pintool", "early_out", "0", "Exit after tracing the first region.");
 
 // Trace disassembly
-KNOB<BOOL> KnobDisassembly(KNOB_MODE_WRITEONCE, "pintool", "trace_dasm", "0", "Trace disassembly");
+KNOB<BOOL> KnobTraceDisassembly(KNOB_MODE_WRITEONCE, "pintool", "trace_dasm", "0", "Trace disassembly");
 
 // Ativa o detector de sequencia de instruções
 KNOB<BOOL> KnobSeqDetector(KNOB_MODE_WRITEONCE, "pintool", "detect_seq", "0", "Enables the instruction sequence detector");
