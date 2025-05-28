@@ -23,7 +23,7 @@ Embora possua contramedidas específicas para técnicas _anti-analysis_ (anti-de
 
 1. Crie uma VM no **VirtualBox** (snapshot limpo).  
 ```text
-   • SO convidado: Windows 10 x64 (22H2)  
+   • SO convidado: Windows 10/11 x64
    • Disco SSD (recomendado)  
    • Desative: Windows Defender e UAC  
    • Execute o CMD/PowerShell como Administrador
