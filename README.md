@@ -30,12 +30,12 @@ A figura acima resume o fluxo interno da **Contradef**:
 | **Instrumentation** <br>*(verde)* | Núcleo que injeta *callbacks* em tempo de execução e despacha eventos para os módulos especializados. |
 | **TraceMemory / TraceInstructions / TraceFcnCall / TraceDisassembly** <br>*(laranja)* | Módulos de coleta: registram, respectivamente, acessos à memória, instruções executadas, chamadas de função e trechos desassemblados. Todos gravam resultados em **Arquivos Logs**. |
 | **FunctionInterceptor** <br>*(laranja, à esquerda)* | Implementa *hooking* seletivo de APIs sensíveis, redirecionando parâmetros/retornos aos arquivos de log. |
-| **Instrumentation Strategy + Strategies** <br>*(azul-claro/azul-escuro)* | Camada de estratégias: regras de instrumentação que podem ser ativadas ou trocadas em tempo de execução (ex.: interceptar apenas `GetWindowTextA`, `GetWriteWatch`, etc.). |
-| **Yara Lib** <br>*(cinza-azulado)* | Integração opcional para escanear o binário antes da execução; as detecções definem quais estratégias ou módulos serão habilitados. |
-| **Notifier → Observer** <br>*(cinza-médio/escuro)* | Implementa um padrão publicador-assinante, permitindo que rotinas externas sejam notificadas de eventos relevantes (ex.: detecção de *anti-debug*). |
-| **Arquivos Logs** <br>*(verde-claro)* | Ponto de convergência de todos os traços; cada módulo escreve em seu próprio arquivo para facilitar a correlação posterior. |
+| **Instrumentation Strategy + Strategies** <br>*(cinza)* | Camada de estratégias: regras de instrumentação que podem ser ativadas ou trocadas em tempo de execução (ex.: interceptar apenas `GetWindowTextA`, `GetWriteWatch`, etc.). |
+| **Yara Lib** <br>*(cinza)* | Integração opcional para escanear o binário antes da execução; as detecções podem definir quais estratégias ou módulos serão habilitados. |
+| **Notifier → Observer** <br>*(cinza)* | Implementa um padrão publicador-assinante, permitindo que qualquer estratégia consiga notificar o registro de um log que será salvo. |
+| **Arquivos Logs** <br>*(verde-claro)* | Ponto de convergência de todos os traces; cada módulo escreve em seu próprio arquivo para facilitar a correlação posterior. |
 
-Esse desenho evidencia a natureza modular da Contradef: é possível ativar apenas os blocos necessários—ou adicionar novos—sem recompilar o restante da ferramenta. .
+Esse desenho evidencia a natureza modular da Contradef: é possível ativar apenas os blocos necessários, sem recompilar o restante da ferramenta.
 
 
 ## 3. Ambiente recomendado para testes
