@@ -17,7 +17,28 @@ Embora possua contramedidas específicas para técnicas _anti-analysis_ (anti-de
 
 ---
 
-## 2. Ambiente recomendado para testes
+## 2. Arquitetura da Ferramenta
+
+<p align="center">
+  <img src="docs/Contradef-Arquitetura.png" alt="Arquitetura da Contradef" width="75%">
+</p>
+
+A figura acima resume o fluxo interno da **Contradef**:
+
+| Componente (cor) | Função resumida |
+|------------------|-----------------|
+| **Instrumentation** <br>*(verde)* | Núcleo que injeta *callbacks* em tempo de execução e despacha eventos para os módulos especializados. |
+| **TraceMemory / TraceInstructions / TraceFcnCall / TraceDisassembly** <br>*(laranja)* | Módulos de coleta: registram, respectivamente, acessos à memória, instruções executadas, chamadas de função e trechos desassemblados. Todos gravam resultados em **Arquivos Logs**. |
+| **FunctionInterceptor** <br>*(laranja, à esquerda)* | Implementa *hooking* seletivo de APIs sensíveis, redirecionando parâmetros/retornos aos arquivos de log. |
+| **Instrumentation Strategy + Strategies** <br>*(azul-claro/azul-escuro)* | Camada de estratégias: regras de instrumentação que podem ser ativadas ou trocadas em tempo de execução (ex.: interceptar apenas `GetWindowTextA`, `GetWriteWatch`, etc.). |
+| **Yara Lib** <br>*(cinza-azulado)* | Integração opcional para escanear o binário antes da execução; as detecções definem quais estratégias ou módulos serão habilitados. |
+| **Notifier → Observer** <br>*(cinza-médio/escuro)* | Implementa um padrão publicador-assinante, permitindo que rotinas externas sejam notificadas de eventos relevantes (ex.: detecção de *anti-debug*). |
+| **Arquivos Logs** <br>*(verde-claro)* | Ponto de convergência de todos os traços; cada módulo escreve em seu próprio arquivo para facilitar a correlação posterior. |
+
+Esse desenho evidencia a natureza modular da Contradef: é possível ativar apenas os blocos necessários—ou adicionar novos—sem recompilar o restante da ferramenta. .
+
+
+## 3. Ambiente recomendado para testes
 > **IMPORTANTE:** sempre execute amostras reais de _malware_ em ambiente isolado.
 
 1. Crie uma VM no **VirtualBox** (snapshot limpo).  
@@ -33,7 +54,7 @@ Embora possua contramedidas específicas para técnicas _anti-analysis_ (anti-de
 
 ---
 
-## 3. Compilação
+## 4. Compilação
 
 Contradef funciona no C++ 11 (compatível com a biblioteca STL Port usada no Pin).
 
@@ -55,7 +76,7 @@ Requisitos:
 
 ---
 
-## 4. Sintaxe de execução
+## 5. Sintaxe de execução
 
 ```powershell
 <PATH_PIN>\pin.exe ^
@@ -70,7 +91,7 @@ Deseja usar outra pasta? Forneça caminhos absolutos tanto para `pin.exe` quanto
 
 ---
 
-## 5. Parâmetros mais comuns
+## 6. Parâmetros mais comuns
 
 | Parâmetro         | Descrição                           |
 | ----------------- | -------------------------------------------------------- |
@@ -85,7 +106,7 @@ Deseja usar outra pasta? Forneça caminhos absolutos tanto para `pin.exe` quanto
 
 ---
 
-## 6. Observações finais
+## 7. Observações finais
 
 * Os módulos são **complementares**: dados de memória podem ser correlacionados com a linha temporal de chamadas e com o fluxo exato de instruções.
 * O desempenho depende do perfil do alvo; use apenas os traços necessários ou condicione a ativação via detector de sequência.
