@@ -77,7 +77,7 @@ VOID InstLoadLibrary::CallbackAfter(THREADID tid, UINT32 callId, ADDRINT instAdd
 VOID InstLoadLibrary::InstrumentFunction(RTN rtn, Notifier& globalNotifier) {
 
    std::string rtnName = RTN_Name(rtn);
-    if (rtnName == "LoadLibraryA" || rtnName == "LoadLibraryW") {
+    if (rtnName == "LoadLibraryA") {
         imgCallId++;
         globalNotifierPtr = &globalNotifier;
 

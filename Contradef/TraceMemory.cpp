@@ -14,45 +14,45 @@ VOID* WriteEa[PIN_MAX_THREADS];
 VOID TraceMemory::CaptureWriteEa(THREADID threadid, VOID* addr) {
     WriteEa[threadid] = addr;
 }
-
 VOID TraceMemory::WriteMemTraceOut(THREADID threadid, std::string* str, VOID* ea, UINT32 size)
 {
-    std::string opval = "";
+    ADDRINT address = reinterpret_cast<ADDRINT>(ea);
+    std::string opval;
     std::stringstream hexval;
     hexval << GetNumericHexValue((UINT64)ea, 8);
-    ADDRINT address = reinterpret_cast<ADDRINT>(ea);
 
-    if (PIN_CheckReadAccess(reinterpret_cast<VOID*>(ea)))
+    if (PIN_CheckReadAccess(ea))
     {
-        std::string str = CopyLPCSTR(address);
-        if (IsValidString(str)) {
-            opval = GetNumericValueFromRef(ea, size) + " | \"" + str + "\"";
+        std::string asciiStr = CopyLPCSTR(address);
+        if (IsValidString(asciiStr)) {
+            opval = GetNumericValueFromRef(ea, size) + " -> \"" + asciiStr + "\"";
         }
         else {
-            std::wstring wstr = CopyLPCWSTR(address);
-            if (IsValidWideString(wstr)) {
-                opval = GetNumericValueFromRef(ea, size) + " | \"" + WStringToString(wstr) + "\"";
+            std::wstring wideStr = CopyLPCWSTR(address);
+            if (IsValidWideString(wideStr)) {
+                opval = GetNumericValueFromRef(ea, size) + " -> \"" + WStringToString(wideStr) + "\"";
+            }
+            else if (IsStringPointer(address)) {
+                opval = GetNumericValueFromRef(ea, size) + " -> \"" + std::string(reinterpret_cast<const char*>(ea)) + "\"";
             }
             else {
-                if (IsStringPointer(address)) {
-                    opval = GetNumericValueFromRef(ea, size) + " | \"" + std::string(reinterpret_cast<const char*>(ea)) + "\"";
-                }
-                else {
-                    std::stringstream ss;
-                    opval = GetNumericValueFromRef(ea, size);
-                }
+                opval = GetNumericValueFromRef(ea, size);
             }
         }
-
+    }
+    else {
+        opval = " -> \"" + InterpretAddrIntAsASCII(address) + "\"";
     }
 
-
-
     PIN_MutexLock(&fileMemTraceOutMutex);
-    memTraceOut << "[T" << std::dec << threadid << std::hex << "] " << *str << "        [" << hexval.str() << "] = " << opval << "\n" << std::string(133, '-') << "\n";
+    memTraceOut
+        << "[T" << std::dec << threadid << std::hex << "] "
+        << *str << "        [" << hexval.str() << "] = "
+        << opval << "\n"
+        << std::string(133, '-') << "\n";
     PIN_MutexUnlock(&fileMemTraceOutMutex);
-
 }
+
 
 VOID TraceMemory::EmitWrite(ADDRINT addr, THREADID threadid, std::string* str, UINT32 size)
 {
@@ -106,7 +106,7 @@ VOID TraceMemory::InstTraceMemory(INS ins, VOID* v)
         }
 
         if (ipoint != LEVEL_VM::IPOINT::IPOINT_INVALID) {
-            INS_InsertCall(ins, IPOINT_BEFORE, (AFUNPTR)EmitWrite,
+            INS_InsertCall(ins, ipoint, AFUNPTR(EmitWrite),
                 IARG_ADDRINT, INS_Address(ins),
                 IARG_THREAD_ID,
                 IARG_PTR, new std::string(traceString),

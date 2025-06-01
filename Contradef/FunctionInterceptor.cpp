@@ -191,7 +191,10 @@ void FunctionInterceptor::InitStrategies() {
     strategyMap["StartService"] = &InstStartService::InstrumentFunction;
     strategyMap["CoCreateInstance"] = &InstCoCreateInstance::InstrumentFunction;
     strategyMap["LoadLibrary"] = &InstLoadLibrary::InstrumentFunction;
+    strategyMap["LoadLibraryA"] = &InstLoadLibrary::InstrumentFunction;
     strategyMap["LoadLibraryEx"] = &InstLoadLibraryEx::InstrumentFunction;
+    strategyMap["LoadLibraryExA"] = &InstLoadLibraryEx::InstrumentFunction; 
+    strategyMap["LoadLibraryExW"] = &InstLoadLibraryEx::InstrumentFunction; 
     strategyMap["NtOpenProcess"] = &InstNtOpenProcess::InstrumentFunction;
     strategyMap["NtSetInformationThread"] = &InstNtSetInformationThread::InstrumentFunction;
     strategyMap["ZwSetInformationThread"] = &InstNtSetInformationThread::InstrumentFunction;
@@ -225,19 +228,22 @@ void FunctionInterceptor::InitStrategies() {
     strategyMap["ZwQuerySystemTime"] = &InstNtQuerySystemTime::InstrumentFunction;
     strategyMap["NtQueryInformationThread"] = &InstNtQueryInformationThread::InstrumentFunction;
     strategyMap["ZwQueryInformationThread"] = &InstNtQueryInformationThread::InstrumentFunction;
-    //strategyMap["NtQueryVirtualMemory"] = &InstNtQueryVirtualMemory::InstrumentFunction;
-    //strategyMap["ZwQueryVirtualMemory"] = &InstNtQueryVirtualMemory::InstrumentFunction;
+    strategyMap["NtQueryVirtualMemory"] = &InstNtQueryVirtualMemory::InstrumentFunction;
+    strategyMap["ZwQueryVirtualMemory"] = &InstNtQueryVirtualMemory::InstrumentFunction;
     strategyMap["NtQuerySystemInformation"] = &InstNtQuerySystemInformation::InstrumentFunction;
     strategyMap["ZwQuerySystemInformation"] = &InstNtQuerySystemInformation::InstrumentFunction;
     strategyMap["EnumProcessModulesEx"] = &InstEnumProcessModulesEx::InstrumentFunction;
     strategyMap["EnumProcessModules"] = &InstEnumProcessModules::InstrumentFunction;
     strategyMap["VirtualProtect"] = &InstVirtualProtect::InstrumentFunction;
     strategyMap["VirtualProtectEx"] = &InstVirtualProtectEx::InstrumentFunction;
-    //strategyMap["VirtualQuery"] = &InstVirtualQuery::InstrumentFunction;
-    //strategyMap["VirtualQueryEx"] = &InstVirtualQueryEx::InstrumentFunction;
+    strategyMap["VirtualQuery"] = &InstVirtualQuery::InstrumentFunction;
+    strategyMap["VirtualQueryEx"] = &InstVirtualQueryEx::InstrumentFunction;
     strategyMap["QueryPerformanceCounter"] = &InstQueryPerformanceCounter::InstrumentFunction;
     strategyMap["NtQueryPerformanceCounter"] = &InstNtQueryPerformanceCounter::InstrumentFunction;
     strategyMap["ZwQueryPerformanceCounter"] = &InstNtQueryPerformanceCounter::InstrumentFunction;
+    strategyMap["EnumSystemFirmwareTables"] = &InstEnumSystemFirmwareTables::InstrumentFunction;
+    strategyMap["RtlAllocateHeap"] = &InstRtlAllocateHeap::InstrumentFunction;
+    strategyMap["AllocateHeap"] = &InstRtlAllocateHeap::InstrumentFunction;
 
 }
 

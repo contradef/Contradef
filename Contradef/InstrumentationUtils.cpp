@@ -1,5 +1,7 @@
 #include "InstrumentationUtils.h"
 #include "Utils.h"
+#include "HeapTracker.h"
+#include "SectionTracker.h"
 
 BOOL IsMainExecutable(ADDRINT address) {
     PIN_LockClient();
@@ -11,6 +13,18 @@ BOOL IsMainExecutable(ADDRINT address) {
         }
     }
     PIN_UnlockClient();
+
+    if (HeapTracker::IsInTrackedHeap(address)) {
+        std::cout << "Endereco " << std::hex << address << std::dec << " Esta no heap\n";
+        return TRUE;
+    }
+
+    if (SectionTracker::IsInKnownSection(address)) {
+        std::cout << "Endereco " << std::hex << address << std::dec << " Esta na seção\n";
+        return TRUE;
+    }
+    std::cout << "Endereco " << std::hex << address << std::dec << " Não é do principal\n";
+
     return FALSE;
 }
 

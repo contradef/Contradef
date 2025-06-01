@@ -215,6 +215,20 @@ bool IsValidString(const std::string& str) {
     return true; // Todos os caracteres são válidos
 }
 
+std::string InterpretAddrIntAsASCII(ADDRINT value) {
+    std::string result;
+    for (std::size_t i = 0; i < sizeof(ADDRINT); ++i) {
+        char c = static_cast<char>((value >> (i * 8)) & 0xFF);
+        if (std::isprint(static_cast<unsigned char>(c)) || c == '\0') {
+            result += c;
+        }
+        else {
+            break; // interrompe no primeiro caractere não imprimível
+        }
+    }
+    return result;
+}
+
 std::wstring CopyLPCWSTR(ADDRINT addr) {
     const size_t MAX_STRING_LENGTH = 800; // Defina o tamanho máximo da string
     wchar_t buffer[MAX_STRING_LENGTH];    // Buffer para armazenar a string copiada
@@ -298,7 +312,7 @@ std::string GetStringValueFromRegister(UINT64 value, UINT32 size) {
     }
 
     if (isString) {
-        result << "\"" << std::string(str, size).c_str() << "\""; // Converte para string
+        result << std::string(str, size).c_str(); // Converte para string
     }
     else {
         result << "";

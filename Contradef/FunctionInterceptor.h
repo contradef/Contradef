@@ -42,8 +42,8 @@
 #include "InstGetWindowTextW.h"
 #include "InstGetWindowTextA.h"
 #include "InstGetTickCount.h"
-//#include "InstVirtualQuery.h"
-//#include "InstVirtualQueryEx.h"
+#include "InstVirtualQuery.h"
+#include "InstVirtualQueryEx.h"
 
 #include "InstWmi.h"
 #include "InstWmiEx.h"
@@ -145,6 +145,8 @@
 #include "InstLCMapStringEx.h"
 #include "InstWriteFile.h"
 #include "InstCompareStringEx.h"
+#include "InstEnumSystemFirmwareTables.h"
+#include "InstRtlAllocateHeap.h"
 
 typedef void (*RTNFunction)(RTN, Notifier&);
 

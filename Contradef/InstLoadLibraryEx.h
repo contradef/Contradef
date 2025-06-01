@@ -33,6 +33,7 @@ private:
     static UINT32 imgCallId;
     static UINT32 fcnCallId;
     static Notifier* globalNotifierPtr;
+    static BOOL InstLoadLibraryEx::wideVersion;
     static VOID CheckPrintConditions(CallContext* callContext);
     static VOID CallbackBefore(THREADID tid, UINT32 callId, ADDRINT instAddress, ADDRINT  rtn, CONTEXT* ctx, ADDRINT returnAddress,
         ADDRINT lpLibFileName, ADDRINT hFile, ADDRINT dwFlags);

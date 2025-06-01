@@ -4,7 +4,7 @@ std::map<CallContextKey, CallContext*> InstLoadLibraryEx::callContextMap;
 UINT32 InstLoadLibraryEx::imgCallId = 0;
 UINT32 InstLoadLibraryEx::fcnCallId = 0;
 Notifier* InstLoadLibraryEx::globalNotifierPtr;
-
+BOOL InstLoadLibraryEx::wideVersion = false;
 
 VOID InstLoadLibraryEx::CallbackBefore(THREADID tid, UINT32 callId, ADDRINT instAddress, ADDRINT  rtn, CONTEXT* ctx, ADDRINT returnAddress,
     ADDRINT lpLibFileName, ADDRINT hFile, ADDRINT dwFlags) {
@@ -49,8 +49,16 @@ VOID InstLoadLibraryEx::CallbackAfter(THREADID tid, UINT32 callId, ADDRINT instA
         const InstLoadLibraryExArgs* args = reinterpret_cast<InstLoadLibraryExArgs*>(callContext->functionArgs);
         std::stringstream& stringStream = callContext->stringStream;
 
-        std::string libFileName = args->lpLibFileName ? ConvertAddrToAnsiString(args->lpLibFileName) : "NULL";
-
+        std::string libFileName;
+        if (wideVersion) {
+            std::wstring libFileNameW;
+            libFileNameW = args->lpLibFileName ? ConvertAddrToWideString(args->lpLibFileName) : L"NULL";
+            libFileName = WStringToString(libFileNameW);
+        }
+        else {
+            libFileName = args->lpLibFileName ? ConvertAddrToAnsiString(args->lpLibFileName) : "NULL";
+        }
+        
         // Obter a RTN da instru��o atual
         RTN rtnCurrent = RTN_FindByAddress(instAddress);
         stringStream << std::endl << "[+] " << RTN_Name(rtnCurrent) << "..." << std::endl;
@@ -81,7 +89,11 @@ VOID InstLoadLibraryEx::CallbackAfter(THREADID tid, UINT32 callId, ADDRINT instA
 VOID InstLoadLibraryEx::InstrumentFunction(RTN rtn, Notifier& globalNotifier) {
 
    std::string rtnName = RTN_Name(rtn);
-    if (rtnName == "LoadLibraryExA" || rtnName == "LoadLibraryExW") {
+    if (rtnName == "LoadLibraryEx" || rtnName == "LoadLibraryExA" || rtnName == "LoadLibraryExW") {
+        if (rtnName == "LoadLibraryExW") {
+            wideVersion = true;
+        }
+
         imgCallId++;
         globalNotifierPtr = &globalNotifier;
 

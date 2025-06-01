@@ -186,6 +186,7 @@
     <ClCompile Include="DllFunctionMapper.h" />
     <ClCompile Include="DllFunctionTracker.cpp" />
     <ClCompile Include="FunctionInterceptor.cpp" />
+    <ClCompile Include="HeapTracker.cpp" />
     <ClCompile Include="InitParams.cpp" />
     <ClCompile Include="InstBasepConstructSxsCreateProcessMessage.cpp" />
     <ClCompile Include="InstBaseRegEnumKey.cpp" />
@@ -205,6 +206,7 @@
     <ClCompile Include="InstDeviceIoControl.cpp" />
     <ClCompile Include="InstEnumProcessModules.cpp" />
     <ClCompile Include="InstEnumProcessModulesEx.cpp" />
+    <ClCompile Include="InstEnumSystemFirmwareTables.cpp" />
     <ClCompile Include="InstExitProcess.cpp" />
     <ClCompile Include="InstFindWindowA.cpp" />
     <ClCompile Include="InstFindWindowW.cpp" />
@@ -297,6 +299,7 @@
     <ClCompile Include="InstResumeThread.cpp" />
     <ClCompile Include="InstRtlAddFunctionTable.cpp" />
     <ClCompile Include="InstRtlAddVectoredExceptionHandler.cpp" />
+    <ClCompile Include="InstRtlAllocateHeap.cpp" />
     <ClCompile Include="InstRtlDeleteFunctionTable.cpp" />
     <ClCompile Include="InstRtlGetNativeSystemInformation.cpp" />
     <ClCompile Include="InstRtlInstallFunctionTableCallback.cpp" />
@@ -327,6 +330,7 @@
     <ClCompile Include="InstWriteConsoleW.cpp" />
     <ClCompile Include="InstWriteFile.cpp" />
     <ClCompile Include="ModulesDetection.cpp" />
+    <ClCompile Include="SectionTracker.cpp" />
     <ClCompile Include="TestSeqInst.cpp" />
     <ClCompile Include="TraceDisassembly.cpp" />
     <ClCompile Include="TraceFcnCall.cpp" />
@@ -343,6 +347,7 @@
     <ClInclude Include="DllFunctionTracker.h" />
     <ClInclude Include="EventData.h" />
     <ClInclude Include="FunctionInterceptor.h" />
+    <ClInclude Include="HeapTracker.h" />
     <ClInclude Include="InstBasepConstructSxsCreateProcessMessage.h" />
     <ClInclude Include="InstBaseRegEnumKey.h" />
     <ClInclude Include="InstBaseRegOpenKey.h" />
@@ -361,6 +366,7 @@
     <ClInclude Include="InstDeviceIoControl.h" />
     <ClInclude Include="InstEnumProcessModules.h" />
     <ClInclude Include="InstEnumProcessModulesEx.h" />
+    <ClInclude Include="InstEnumSystemFirmwareTables.h" />
     <ClInclude Include="InstExitProcess.h" />
     <ClInclude Include="InstFindWindowA.h" />
     <ClInclude Include="InstFindWindowW.h" />
@@ -450,6 +456,7 @@
     <ClInclude Include="InstResumeThread.h" />
     <ClInclude Include="InstRtlAddFunctionTable.h" />
     <ClInclude Include="InstRtlAddVectoredExceptionHandler.h" />
+    <ClInclude Include="InstRtlAllocateHeap.h" />
     <ClInclude Include="InstRtlDeleteFunctionTable.h" />
     <ClInclude Include="InstRtlGetNativeSystemInformation.h" />
     <ClInclude Include="InstRtlInstallFunctionTableCallback.h" />
@@ -486,6 +493,7 @@
     <ClInclude Include="Observer.h" />
     <ClInclude Include="EvasiveRetDetector.h" />
     <ClInclude Include="InitParams.h" />
+    <ClInclude Include="SectionTracker.h" />
     <ClInclude Include="TestSeqInst.h" />
     <ClInclude Include="TraceDisassembly.h" />
     <ClInclude Include="TraceFcnCall.h" />

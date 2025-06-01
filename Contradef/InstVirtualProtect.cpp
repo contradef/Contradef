@@ -78,7 +78,7 @@ VOID InstVirtualProtect::CallbackAfter(THREADID tid, UINT32 callId, ADDRINT inst
         stringStream << "    Valor de retorno: " << returnAddress << std::endl;
         stringStream << "    Proteção antiga: " << oldProtect << std::endl;
         stringStream << "  [-] Alteração de proteção de memória concluída" << std::endl;
-        stringStream << "[*] ConcluídO" << std::endl << std::endl;
+        stringStream << "[*] Concluído" << std::endl << std::endl;
 
         ExecutionInformation executionCompletedInfo = { stringStream.str() };
         ExecutionEventData executionEvent(executionCompletedInfo);

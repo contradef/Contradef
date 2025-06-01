@@ -29,6 +29,7 @@ std::string GetNumericValueFromRef(VOID* ea, UINT32 size);
 bool IsStringPointer(UINT64 addr);
 bool IsValidWideString(const std::wstring& str);
 bool IsValidString(const std::string& str);
+std::string InterpretAddrIntAsASCII(ADDRINT value);
 std::wstring CopyLPCWSTR(ADDRINT addr);
 std::string CopyLPCSTR(ADDRINT addr);
 std::string GetStringValueFromRegister(UINT64 value, UINT32 size);

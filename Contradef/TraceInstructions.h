@@ -61,6 +61,8 @@ namespace TraceInstructions {
 	VOID AddXMMEmit(INS ins, IPOINT point, REG xmm_dst);
 	VOID EmitCmpValues(ADDRINT addr, THREADID threadid, std::string* str, std::string* reg1str, INT32 reg1ismem, UINT32 reg1size, VOID* reg1val, std::string* reg2str, INT32 reg2ismem, UINT32 reg2size, VOID* reg2val, std::string* reg3str, UINT64 reg3val);
 	VOID AddEmitCmp(INS ins, IPOINT point, std::string& traceString, REG reg3val);
+	VOID EmitMovValue(ADDRINT addr, THREADID threadid, std::string* str, REG dstReg, ADDRINT value, UINT32 movSize);
+	VOID AddEmitMov(INS ins, IPOINT point, std::string& traceString);
 	VOID AddEmit(INS ins, IPOINT point, std::string& traceString, UINT32 regCount, REG regs[]);
 	VOID CaptureWriteEa(THREADID threadid, VOID* addr);
 	VOID ShowN(UINT32 n, VOID* ea);

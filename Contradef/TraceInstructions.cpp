@@ -1,4 +1,4 @@
-// Este módulo foi implementado usando como base a Pintool InstLib, disponível no SDK do Pin. 
+ï»¿// Este mÃ³dulo foi implementado usando como base a Pintool InstLib, disponÃ­vel no SDK do Pin. 
 
 #include "TraceInstructions.h"
 #include "InstrumentationUtils.h"
@@ -127,50 +127,57 @@ VOID TraceInstructions::EmitCmpValues(ADDRINT addr, THREADID threadid, std::stri
     std::string valnum1 = "";
     std::stringstream val1;
     if (reg1ismem) {
-        val1 << GetNumericHexValue((UINT64)reg1val, 8);
+        val1 << " [" << GetNumericHexValue((UINT64)reg1val, 8) << "]";
 
         if (IsStringPointer((ADDRINT)reg1val)) {
-            valnum1 = GetNumericValueFromRef(reg1val, reg1size) + " | \"" + std::string(reinterpret_cast<const char*>(reg1val)) + "\"";
+            valnum1 = " -> " + GetNumericValueFromRef(reg1val, reg1size) + " = \"" + std::string(reinterpret_cast<const char*>(reg1val)) + "\"";
         }
         else {
             std::stringstream ss;
-            valnum1 = GetNumericValueFromRef(reg1val, reg1size);
+            valnum1 = " -> " + GetNumericValueFromRef(reg1val, reg1size);
         }
     }
     else {
-        val1 << GetNumericHexValue((UINT64)reg1val, reg1size);
+        val1 << " [" << GetNumericHexValue((UINT64)reg1val, reg1size) << "]";
         std::string reg1str = GetStringValueFromRegister((UINT64)reg1val, reg1size);
         if (!reg1str.empty()) {
-            val1 << " (" << reg1str << ")";
+            valnum1 = " -> " + GetNumericValue((UINT64)reg1val, reg1size) + " = \"" + reg1str + "\"";
         }
-        valnum1 = GetNumericValue((UINT64)reg1val, reg1size);
+        else
+        {
+            valnum1 = " -> " + GetNumericValue((UINT64)reg1val, reg1size);
+        }
     }
 
     std::string valnum2 = "";
     std::stringstream val2;
     if (reg2ismem) {
-        val2 << std::hex << GetNumericHexValue((UINT64)reg2val, 8);
+        val2 << " [" << GetNumericHexValue((UINT64)reg2val, 8) << "]";
 
         if (IsStringPointer((ADDRINT)reg2val)) {
-            valnum2 = GetNumericValueFromRef(reg2val, reg2size) + " | \"" + std::string(reinterpret_cast<const char*>(reg2val)) + "\"";
+            valnum2 = " -> " + GetNumericValueFromRef(reg2val, reg2size) + " = \"" + std::string(reinterpret_cast<const char*>(reg2val)) + "\"";
         }
         else {
-            valnum2 = GetNumericValueFromRef(reg2val, reg2size);
+            std::stringstream ss;
+            valnum2 = " -> " + GetNumericValueFromRef(reg2val, reg2size);
         }
     }
     else {
-        val2 << GetNumericHexValue((UINT64)reg2val, reg2size);
+        val2 << " [" << GetNumericHexValue((UINT64)reg2val, reg2size) << "]";
         std::string reg2str = GetStringValueFromRegister((UINT64)reg2val, reg2size);
         if (!reg2str.empty()) {
-            val2 << " (" << reg2str << ")";
+            valnum2 = " -> " + GetNumericValue((UINT64)reg2val, reg2size) + " = \"" + reg2str + "\"";
         }
-        valnum2 = GetNumericValue((UINT64)reg2val, reg2size);
+        else 
+        {
+            valnum2 = " -> " + GetNumericValue((UINT64)reg2val, reg2size);
+        }
     }
 
     PIN_MutexLock(&fileOutMutex);
     out << *str << " | [T" << std::dec << threadid << std::hex << "] "
-        << *reg1str << " [" << val1.str() << "] = " << valnum1 << ", "
-        << *reg2str << " [" << val2.str() << "] = " << valnum2 << ", "
+        << *reg1str << val1.str() << valnum1 << ", "
+        << *reg2str << val2.str() << valnum2 << ", "
         << *reg3str << " = " << reg3val << std::endl;
 
     Flush();
@@ -178,7 +185,7 @@ VOID TraceInstructions::EmitCmpValues(ADDRINT addr, THREADID threadid, std::stri
 }
 
 VOID TraceInstructions::AddEmitCmp(INS ins, IPOINT point, std::string& traceString, REG reg3val) {
-    // Instrumenta a instrução CMP
+    // Instrumenta a instruÃ§Ã£o CMP
     if (INS_OperandIsReg(ins, 0) && INS_OperandIsReg(ins, 1)) {
         // CMP com dois registradores
         REG reg1 = INS_OperandReg(ins, 0);
@@ -200,7 +207,7 @@ VOID TraceInstructions::AddEmitCmp(INS ins, IPOINT point, std::string& traceStri
             IARG_END);
     }
     else if (INS_OperandIsReg(ins, 0) && INS_OperandIsMemory(ins, 1)) {
-        // CMP entre registrador e memória
+        // CMP entre registrador e memÃ³ria
         REG reg1 = INS_OperandReg(ins, 0);
         INS_InsertCall(ins, IPOINT_BEFORE, (AFUNPTR)EmitCmpValues,
             IARG_ADDRINT, INS_Address(ins),
@@ -219,7 +226,7 @@ VOID TraceInstructions::AddEmitCmp(INS ins, IPOINT point, std::string& traceStri
             IARG_END);
     }
     else if (INS_OperandIsMemory(ins, 0) && INS_OperandIsReg(ins, 1)) {
-        // CMP entre memória e registrador
+        // CMP entre memÃ³ria e registrador
         REG reg2 = INS_OperandReg(ins, 1);
         INS_InsertCall(ins, IPOINT_BEFORE, (AFUNPTR)EmitCmpValues,
             IARG_ADDRINT, INS_Address(ins),
@@ -238,7 +245,7 @@ VOID TraceInstructions::AddEmitCmp(INS ins, IPOINT point, std::string& traceStri
             IARG_END);
     }
     else if (INS_OperandIsImmediate(ins, 1)) {
-        // CMP entre registrador/memória e imediato
+        // CMP entre registrador/memÃ³ria e imediato
         if (INS_OperandIsReg(ins, 0)) {
             REG reg1 = INS_OperandReg(ins, 0);
             INS_InsertCall(ins, IPOINT_BEFORE, (AFUNPTR)EmitCmpValues,
@@ -277,6 +284,98 @@ VOID TraceInstructions::AddEmitCmp(INS ins, IPOINT point, std::string& traceStri
     }
 }
 
+VOID TraceInstructions::EmitMovValue(ADDRINT addr, THREADID threadid, std::string* str, REG dstReg, ADDRINT value, UINT32 movSize) {
+    if (!Emit(threadid)) return;
+    PIN_MutexLock(&fileOutMutex);
+    std::string strVal = GetStringValueFromRegister(value, movSize);
+    std::string strValOut;
+    if (!strVal.empty()) {
+        strValOut = " -> \"" + strVal + "\"";
+    }
+    out << *str << " | [T" << std::dec << threadid << std::hex << "] "
+        << REG_StringShort(dstReg) << " = " << std::hex << value 
+        << " (" << std::dec << value << ")" << strValOut << "\n";
+    Flush();
+    PIN_MutexUnlock(&fileOutMutex);
+}
+
+
+VOID TraceInstructions::AddEmitMov(INS ins, IPOINT point, std::string& traceString) {
+    UINT32 movSize = 0;
+
+    if (INS_OperandIsReg(ins, 0) && INS_OperandIsReg(ins, 1)) {
+        // Caso 1: mov reg, reg
+        REG dst = INS_OperandReg(ins, 0);
+        REG src = INS_OperandReg(ins, 1);
+        movSize = REG_Size(dst);
+
+        INS_InsertCall(ins, point, (AFUNPTR)EmitMovValue,
+            IARG_INST_PTR,
+            IARG_THREAD_ID,
+            IARG_PTR, new std::string(traceString),
+            IARG_UINT32, dst,
+            IARG_REG_VALUE, src,
+            IARG_UINT32, movSize,
+            IARG_END);
+    }
+    else if (INS_OperandIsReg(ins, 0) && INS_OperandIsImmediate(ins, 1)) {
+        // Caso 2: mov reg, imediato
+        REG dst = INS_OperandReg(ins, 0);
+        ADDRINT imm = INS_OperandImmediate(ins, 1);
+        movSize = REG_Size(dst);
+
+        INS_InsertCall(ins, point, (AFUNPTR)EmitMovValue,
+            IARG_INST_PTR,
+            IARG_THREAD_ID,
+            IARG_PTR, new std::string(traceString),
+            IARG_UINT32, dst,
+            IARG_ADDRINT, imm,
+            IARG_UINT32, movSize,
+            IARG_END);
+    }
+    else if (INS_OperandIsReg(ins, 0) && INS_OperandIsMemory(ins, 1)) {
+        // Caso 3: mov reg, [mem]
+        REG dst = INS_OperandReg(ins, 0);
+        movSize = INS_MemoryReadSize(ins);
+
+        INS_InsertCall(ins, IPOINT_BEFORE, (AFUNPTR)EmitMovValue,
+            IARG_INST_PTR,
+            IARG_THREAD_ID,
+            IARG_PTR, new std::string(traceString),
+            IARG_UINT32, dst,
+            IARG_MEMORYREAD_EA,
+            IARG_UINT32, movSize,
+            IARG_END);
+    }
+    else if (INS_OperandIsMemory(ins, 0) && INS_OperandIsReg(ins, 1)) {
+        // Caso 4: mov [mem], reg
+        REG src = INS_OperandReg(ins, 1);
+        movSize = INS_MemoryWriteSize(ins);
+
+        INS_InsertCall(ins, IPOINT_BEFORE, (AFUNPTR)EmitMovValue,
+            IARG_INST_PTR,
+            IARG_THREAD_ID,
+            IARG_PTR, new std::string(traceString),
+            IARG_MEMORYWRITE_EA,
+            IARG_UINT32, src,
+            IARG_UINT32, movSize,
+            IARG_END);
+    }
+    else if (INS_OperandIsMemory(ins, 0) && INS_OperandIsImmediate(ins, 1)) {
+        // Caso 5: mov [mem], imediato
+        ADDRINT imm = INS_OperandImmediate(ins, 1);
+        movSize = INS_MemoryWriteSize(ins);
+
+        INS_InsertCall(ins, IPOINT_BEFORE, (AFUNPTR)EmitMovValue,
+            IARG_INST_PTR,
+            IARG_THREAD_ID,
+            IARG_PTR, new std::string(traceString),
+            IARG_MEMORYWRITE_EA,
+            IARG_ADDRINT, imm,
+            IARG_UINT32, movSize,
+            IARG_END);
+    }
+}
 
 VOID TraceInstructions::AddEmit(INS ins, IPOINT point, std::string& traceString, UINT32 regCount, REG regs[]) {
     if (regCount > MaxEmitArgs) regCount = MaxEmitArgs;
@@ -288,7 +387,14 @@ VOID TraceInstructions::AddEmit(INS ins, IPOINT point, std::string& traceString,
     std::string mnemonic = INS_Mnemonic(ins);
     if (INS_Opcode(ins) == XED_ICLASS_CMP || mnemonic.rfind("CMOV", 0) == 0) {
         AddEmitCmp(ins, point, traceString, regs[0]);
-    } else {
+    }
+    else if (INS_Opcode(ins) == XED_ICLASS_MOV ||
+        INS_Opcode(ins) == XED_ICLASS_MOVZX ||
+        INS_Opcode(ins) == XED_ICLASS_MOVSX) 
+    {
+        AddEmitMov(ins, point, traceString);
+    }
+    else {
         INS_InsertCall(ins, point, emitFuns[regCount], IARG_THREAD_ID, IARG_PTR, new std::string(traceString), IARG_IARGLIST, args, IARG_END);
     }
     IARGLIST_Free(args);

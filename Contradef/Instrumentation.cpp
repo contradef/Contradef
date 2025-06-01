@@ -1,4 +1,6 @@
 #include "Instrumentation.h"
+#include "HeapTracker.h"
+#include "SectionTracker.h"
 
 PIN_LOCK lock;
 
@@ -21,47 +23,6 @@ VOID PauseAtEntryPoint(ADDRINT entryAddress) {
 }
 
 
-VOID GetSectionInfo(IMG img, std::ofstream& MainOutFile)
-{
-    MainOutFile << std::endl << "[+] Informação de seções..." << std::endl;
-    MainOutFile << "    Nome da imagem: " << std::string(IMG_Name(img)) << std::endl;
-
-    // Índice da seção
-    int index = 0;
-
-    // Itera sobre as seções da imagem
-    for (SEC sec = IMG_SecHead(img); SEC_Valid(sec); sec = SEC_Next(sec), ++index)
-    {
-        std::string secName = SEC_Name(sec);
-        secName = secName.empty() ? "[VAZIO]" : secName;
-        ADDRINT secAddr = SEC_Address(sec);
-        UINT64 secSize = SEC_Size(sec);
-
-        MainOutFile << "    Seção [" << index << "]" << std::endl;
-        MainOutFile << "        Nome da seção: " << secName << std::endl;
-        MainOutFile << "        Endereço: 0x" << std::hex << static_cast<uint64_t>(secAddr) << std::dec << std::endl;
-        MainOutFile << "        Tamanho: " << static_cast<uint64_t>(secSize) << " bytes" << std::endl;
-
-        MainOutFile << "        Características: " << std::endl;
-        if (SEC_IsExecutable(sec))
-        {
-            MainOutFile << "            A seção é executável." << std::endl;
-        }
-        if (SEC_IsReadable(sec))
-        {
-            MainOutFile << "            A seção é legível." << std::endl;
-        }
-        if (SEC_IsWriteable(sec))
-        {
-            MainOutFile << "            A seção é gravável." << std::endl;
-        }
-    }
-
-    MainOutFile << "[*] Concluído" << std::endl << std::endl;
-
-    MainOutFile.flush();  // Esvazia o buffer de saída
-}
-
 // TODO: Transferir para o detector de seq de inst
 VOID InstrumentInstructionSeq(INS ins, VOID* v)
 {
@@ -73,8 +34,6 @@ VOID InstrumentInstructionSeq(INS ins, VOID* v)
 VOID InstrumentFunctionInterceptor(IMG img, VOID* v) {
     if (IMG_IsMainExecutable(img))
     {
-        GetSectionInfo(img, MainOutFile);
-
         std::string execName = IMG_Name(img);
         std::string rules_file = KnobYaraRulesFile.Value();
 
@@ -163,6 +122,9 @@ int InitInstrumentation() {
 
     // Iniciar o PIN e instrumentação
     PIN_InitSymbols();
+
+    HeapTracker::Init();
+    SectionTracker::Init(&globalNotifier);
     
     if (KnobFunctionInterceptor) {
         string logfilename = logsName + "." + pid + ".log.cdf";
