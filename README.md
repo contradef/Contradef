@@ -37,8 +37,12 @@ A figura acima resume o fluxo interno da **Contradef**:
 
 Esse desenho evidencia a natureza modular da Contradef: é possível ativar apenas os blocos necessários, sem recompilar o restante da ferramenta.
 
+## 3. Instalação e clonagem do repositório
+```console
+git clone https://github.com/<USUARIO>/<REPO>.git
+cd <REPO>
 
-## 3. Ambiente recomendado para testes
+## 4. Ambiente recomendado para testes
 > **IMPORTANTE:** sempre execute amostras reais de _malware_ em ambiente isolado.
 
 1. Crie uma VM no **VirtualBox** (snapshot limpo).  
@@ -54,7 +58,7 @@ Esse desenho evidencia a natureza modular da Contradef: é possível ativar apen
 
 ---
 
-## 4. Compilação
+## 5. Compilação
 
 Contradef funciona no C++ 11 (compatível com a biblioteca STL Port usada no Pin).
 
@@ -74,9 +78,20 @@ Requisitos:
 
 *Uma release está disponível no diretório* `ContradefDll` 
 
+## 6. Ambiente de Execução Recomendado
+
+Para obter desempenho estável ao instrumentar binários grandes e gerar *traces* volumosos, recomendamos a configuração a seguir (ajuste proporcionalmente caso seu hardware seja mais modesto):
+
+| Camada            | Especificação sugerida |
+|-------------------|------------------------|
+| **Máquina hospedeira** | • CPU multi-core com suporte a VT-x/AMD-V <br>• **RAM:** ≥ 32 GB <br>• **Storage:** SSD NVMe ≥ 1 TB |
+| **Hypervisor**    | Oracle **VirtualBox 7.0**   |
+| **Máquina virtual** | • **SO convidado:** Windows 10/11 Pro x64 <br>• **vCPU:** ≥ 4 núcleos dedicados <br>• **RAM:** 6 – 8 GB <br>• **Disco:** 200 – 250 GB fixo, pré-alocado <br>• **Snapshots:** base limpa + checkpoint incremental |
+| **Boas-práticas** | • Desative *shared clipboard* e *drag & drop* <br>• Redirecione logs para disco virtual secundário |
+
 ---
 
-## 5. Sintaxe de execução
+## 7. Sintaxe de execução
 
 ```powershell
 <PATH_PIN>\pin.exe ^
@@ -89,9 +104,18 @@ Requisitos:
 *Os arquivos de log são gravados **no diretório atual do terminal**.
 Deseja usar outra pasta? Forneça caminhos absolutos tanto para `pin.exe` quanto para `contradef.dll`.*
 
+### Exemplo rápido de execução
+
+```powershell
+# Caminhos ilustrativos – ajuste aos seus diretórios
+"C:\pin-3.28\pin.exe" ^
+  -t "C:\Contradef\bin\x64\Release\contradef.dll" ^
+  -intercept_fcn -trace_exfcn -trace_mem -trace_instr -trace_dasm ^
+  -yara "C:\Regras\malware.yar" ^
+  -- "C:\Samples\alvo.exe"
 ---
 
-## 6. Parâmetros mais comuns
+## 8. Parâmetros mais comuns
 
 | Parâmetro         | Descrição                           |
 | ----------------- | -------------------------------------------------------- |
@@ -104,9 +128,83 @@ Deseja usar outra pasta? Forneça caminhos absolutos tanto para `pin.exe` quanto
 
 *Para logs superiores a 2 GB recomenda-se abrir com o **EmEditor**.*
 
+## 9. Reproduzindo os experimentos
+
+A seguir encontra-se um roteiro mínimo para repetir os testes descritos no artigo, executado dentro da *guest* Windows 10 ×64 apresentada no tópico **Ambiente de Execução Recomendado**.
+Todos os caminhos partem do diretório-raiz `C:\Experimentos` do repositório.
+
+### Organização das pastas
+
+```text
+C:\Experimentos
+ ├── pin\                   → binários originais do Pin 3.28
+ ├── ContradefDll\          → contradef.dll já compilado (toolset v142)
+ └── Amostras\              → amostras compactadas (.zip)
+     ├── 36685efc.zip       → amostra 1 (VMProtect)
+     └── 0f20b0c9.zip       → amostra 2 (Themida)
+```
+
+### Descompactação das amostras
+
+As amostras são distribuídas em `.zip` protegidos pela senha `infected` (padrão da comunidade de malware).
+
+```powershell
+cd C:\Experimentos\Amostras
+
+# descompacta amostra 1
+powershell -c "Expand-Archive -Path 36685efc.zip -DestinationPath . -Password infected"
+
+# descompacta amostra 2
+powershell -c "Expand-Archive -Path 0f20b0c9.zip -DestinationPath . -Password infected"
+```
+
+Serão criados os executáveis:
+
+* `36685efc.exe`
+* `0f20b0c9.exe`
+
+### Execução exemplo — módulos leves
+
+Intercepta APIs e grava o *trace* de chamadas externas na amostra 1:
+
+```powershell
+C:\Experimentos\pin\pin.exe `
+  -t C:\Experimentos\ContradefDll\contradef.dll `
+  -intercept_fcn -trace_exfcn -- `
+  C:\Experimentos\Amostras\36685efc.exe
+```
+
+### Execução completa — todos os módulos
+
+Executar todos os módulos na amostra 2:
+
+```powershell
+C:\Experimentos\pin\pin.exe `
+  -t C:\Experimentos\ContradefDll\contradef.dll `
+  -intercept_fcn -trace_exfcn -trace_mem `
+  -trace_instr -trace_dasm -- `
+  C:\Experimentos\Amostras\0f20b0c9.exe
+```
+
+> **Nota:** os arquivos de saída são criados no diretório corrente.
+> Se desejar manter resultados segregados, crie uma pasta por execução
+> e invoque o comando dentro dela **ou** forneça caminhos absolutos para `pin.exe`,
+> `contradef.dll` e o executável-alvo.
+
+### Observações de desempenho
+
+* O tempo de (\~ 36 min) da amostra 2 decorre de uma chamada
+  `Sleep(2000000)`.
+* Em hardware **bare-metal** ou em SSD/NVMe a coleta é consideravelmente mais rápida,
+  pois o gargalo principal é a escrita de *logs*.
+* Arquivos até **2 GB** abrem sem esforço no **Visual Studio Code**; arquivos maiores
+  podem ser inspecionados com **EmEditor** ([https://www.emeditor.com/](https://www.emeditor.com/)).
+
+Seguindo estes passos é possível replicar, com pequenas variações, os experimentos apresentados no estudo.
+
 ---
 
-## 7. Observações finais
+## 9. Observações finais
 
 * Os módulos são **complementares**: dados de memória podem ser correlacionados com a linha temporal de chamadas e com o fluxo exato de instruções.
 * O desempenho depende do perfil do alvo; use apenas os traços necessários ou condicione a ativação via detector de sequência.
