@@ -90,9 +90,23 @@ Para obter desempenho estável ao instrumentar binários grandes e gerar *traces
 | **Máquina virtual** | • **SO convidado:** Windows 10/11 Pro x64 <br>• **vCPU:** ≥ 4 núcleos dedicados <br>• **RAM:** 6 – 8 GB <br>• **Disco:** 200 – 250 GB fixo, pré-alocado <br>• **Snapshots:** base limpa + checkpoint incremental |
 | **Boas-práticas** | • Desative *shared clipboard* e *drag & drop* <br>• Redirecione logs para disco virtual secundário |
 
+
+## 7. Parâmetros mais comuns
+
+| Parâmetro         | Descrição                           |
+| ----------------- | -------------------------------------------------------- |
+| `-intercept_fcn`  | Ativa o **FunctionInterceptor** (hooking de APIs)        |
+| `-trace_exfcn`    | Ativa o **TraceFcnCall**                                 |
+| `-trace_mem`      | Ativa o **TraceMemory**                                  |
+| `-trace_instr`    | Ativa o **TraceInstructions**                            |
+| `-trace_dasm`     | Ativa o **TraceDisassembly**                             |
+| `-yara <arquivo>` | Especifica regras YARA a aplicar antes da instrumentação |
+
+*Para logs superiores a 2 GB recomenda-se abrir com o **EmEditor**.*
+
 ---
 
-## 7. Sintaxe de execução
+## 8. Sintaxe de execução
 
 ```powershell
 <PATH_PIN>\pin.exe ^
@@ -116,19 +130,6 @@ Deseja usar outra pasta? Forneça caminhos absolutos tanto para `pin.exe` quanto
   -- "C:\Samples\alvo.exe"
 ```
 ---
-
-## 8. Parâmetros mais comuns
-
-| Parâmetro         | Descrição                           |
-| ----------------- | -------------------------------------------------------- |
-| `-intercept_fcn`  | Ativa o **FunctionInterceptor** (hooking de APIs)        |
-| `-trace_exfcn`    | Ativa o **TraceFcnCall**                                 |
-| `-trace_mem`      | Ativa o **TraceMemory**                                  |
-| `-trace_instr`    | Ativa o **TraceInstructions**                            |
-| `-trace_dasm`     | Ativa o **TraceDisassembly**                             |
-| `-yara <arquivo>` | Especifica regras YARA a aplicar antes da instrumentação |
-
-*Para logs superiores a 2 GB recomenda-se abrir com o **EmEditor**.*
 
 ## 9. Reproduzindo os experimentos
 
