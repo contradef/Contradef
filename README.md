@@ -41,6 +41,7 @@ Esse desenho evidencia a natureza modular da Contradef: é possível ativar apen
 ```console
 git clone https://github.com/contradef/Contradef.git
 cd <REPO>
+```
 
 ## 4. Ambiente recomendado para testes
 > **IMPORTANTE:** sempre execute amostras reais de _malware_ em ambiente isolado.
