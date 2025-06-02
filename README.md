@@ -39,7 +39,7 @@ Esse desenho evidencia a natureza modular da Contradef: é possível ativar apen
 
 ## 3. Instalação e clonagem do repositório
 ```console
-git clone https://github.com/<USUARIO>/<REPO>.git
+git clone https://github.com/contradef/Contradef.git
 cd <REPO>
 
 ## 4. Ambiente recomendado para testes
