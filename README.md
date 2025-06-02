@@ -141,8 +141,8 @@ C:\Experimentos
  ├── pin\                   → binários originais do Pin 3.28
  ├── ContradefDll\          → contradef.dll já compilado (toolset v142)
  └── Amostras\              → amostras compactadas (.zip)
-     ├── 36685efc.zip       → amostra 1 (VMProtect)
-     └── 0f20b0c9.zip       → amostra 2 (Themida)
+     ├── 36685efcf34c7a7a6f6dd2e48199e4700b5ab8fe3945a50297703dd8daced74f.zip       → amostra 1 (VMProtect)
+     └── 0f20b0c906f3ad95dbf75ed526b2fe4341fdf62ab8c971fc10e340091af75b3b.zip       → amostra 2 (Themida)
 ```
 
 ### Descompactação das amostras
@@ -153,16 +153,16 @@ As amostras são distribuídas em `.zip` protegidos pela senha `infected` (padr�
 cd C:\Experimentos\Amostras
 
 # descompacta amostra 1
-powershell -c "Expand-Archive -Path 36685efc.zip -DestinationPath . -Password infected"
+powershell -c "Expand-Archive -Path 36685efcf34c7a7a6f6dd2e48199e4700b5ab8fe3945a50297703dd8daced74f.zip -DestinationPath . -Password infected"
 
 # descompacta amostra 2
-powershell -c "Expand-Archive -Path 0f20b0c9.zip -DestinationPath . -Password infected"
+powershell -c "Expand-Archive -Path 0f20b0c906f3ad95dbf75ed526b2fe4341fdf62ab8c971fc10e340091af75b3b.zip -DestinationPath . -Password infected"
 ```
 
 Serão criados os executáveis:
 
-* `36685efc.exe`
-* `0f20b0c9.exe`
+* `36685efcf34c7a7a6f6dd2e48199e4700b5ab8fe3945a50297703dd8daced74f.exe`
+* `0f20b0c906f3ad95dbf75ed526b2fe4341fdf62ab8c971fc10e340091af75b3b.exe`
 
 ### Execução exemplo — módulos leves
 
@@ -172,7 +172,7 @@ Intercepta APIs e grava o *trace* de chamadas externas na amostra 1:
 C:\Experimentos\pin\pin.exe `
   -t C:\Experimentos\ContradefDll\contradef.dll `
   -intercept_fcn -trace_exfcn -- `
-  C:\Experimentos\Amostras\36685efc.exe
+  C:\Experimentos\Amostras\36685efcf34c7a7a6f6dd2e48199e4700b5ab8fe3945a50297703dd8daced74f.exe
 ```
 
 ### Execução completa — todos os módulos
@@ -184,7 +184,7 @@ C:\Experimentos\pin\pin.exe `
   -t C:\Experimentos\ContradefDll\contradef.dll `
   -intercept_fcn -trace_exfcn -trace_mem `
   -trace_instr -trace_dasm -- `
-  C:\Experimentos\Amostras\0f20b0c9.exe
+  C:\Experimentos\Amostras\0f20b0c906f3ad95dbf75ed526b2fe4341fdf62ab8c971fc10e340091af75b3b.exe
 ```
 
 > **Nota:** os arquivos de saída são criados no diretório corrente.
