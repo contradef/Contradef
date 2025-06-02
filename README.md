@@ -113,6 +113,7 @@ Deseja usar outra pasta? Forneça caminhos absolutos tanto para `pin.exe` quanto
   -intercept_fcn -trace_exfcn -trace_mem -trace_instr -trace_dasm ^
   -yara "C:\Regras\malware.yar" ^
   -- "C:\Samples\alvo.exe"
+```
 ---
 
 ## 8. Parâmetros mais comuns
