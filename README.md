@@ -207,7 +207,7 @@ Seguindo estes passos é possível replicar, com pequenas variações, os experi
 
 ---
 
-## 9. Observações finais
+## 10. Observações finais
 
 * Os módulos são **complementares**: dados de memória podem ser correlacionados com a linha temporal de chamadas e com o fluxo exato de instruções.
 * O desempenho depende do perfil do alvo; use apenas os traços necessários ou condicione a ativação via detector de sequência.
