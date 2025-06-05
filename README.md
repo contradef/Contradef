@@ -40,7 +40,7 @@ A natureza modular da Contradef permite ativar apenas os blocos necessários sem
 
 ## Compilação
 
-> ⚠️ **Observação:** não é necessário compilar para reproduzir os experimentos; um binário pronto encontra-se em `Contradef-main\Experimentos\ContradefDll`.  
+> ⚠️ **Observação:** não é necessário compilar para reproduzir os experimentos; um binário pronto encontra-se em `Contradef-main\Ambiente_Experimentacao\ContradefDll`.  
 > Caso você queira compilar a ferramenta a partir do código-fonte, siga as instruções abaixo.
 
 Contradef exige C++11 (compatível com a STLport incluída no Pin).
@@ -138,7 +138,7 @@ Para instrumentar binários grandes e gerar *traces* volumosos com estabilidade,
 1. **Máquina → Novo** → selecione *Windows 10/11 x64*.  
 2. Aloque **4 – 8 GB de RAM**, **4 – 6 vCPUs** e **80 – 200 GB** de disco (VDI).  
 
-Passo a passo completo: [Configurar VM no VirtualBox](./Experimentos/Configuracao_ambiente_analise/1_VirtualBox/)
+Passo a passo completo: [Configurar VM no VirtualBox](./docs/Configuracao_ambiente_analise/1_VirtualBox/)
 
 ---
 
@@ -147,7 +147,7 @@ Passo a passo completo: [Configurar VM no VirtualBox](./Experimentos/Configuraca
 1. Selecione a ISO como mídia de boot.  
 2. Siga o assistente de instalação normalmente (idioma, partição, usuário).  
 
-Passo a passo: [Instalação do Windows](./Experimentos/Configuracao_ambiente_analise/2_Instalacao_Windows/)
+Passo a passo: [Instalação do Windows](./docs/Configuracao_ambiente_analise/2_Instalacao_Windows/)
 
 ---
 
@@ -155,50 +155,61 @@ Passo a passo: [Instalação do Windows](./Experimentos/Configuracao_ambiente_an
 
 * No VirtualBox, abra a guia **Snapshots** → **Criar** → nomeie como **Ambiente Limpo**.
 
-Tutorial: [Criar um snapshot limpo](./Experimentos/Configuracao_ambiente_analise/3_VBox_snapshot_limpo/)
+Tutorial: [Criar um snapshot limpo](./docs/Configuracao_ambiente_analise/3_VBox_snapshot_limpo/)
 
 ---
 
 ## 7. Ajustes no Windows convidado (VM)
 
 1. **Instalar Guest Additions** (opcional para compartilhamento de pastas).  
-2. **Baixar e extrair o Contradef** (ZIP do GitHub ou `git clone`).  
+2. **Baixar e descompactar o Contradef** (ZIP do GitHub).  
+   * *Depois de descompactar, o nome padrão da pasta do repositório será `Contradef-main`*
 3. **Desativar “Proteção contra Violações”**:  
    * *Configurações → Atualização e Segurança → Segurança do Windows → Proteção contra vírus e ameaças → Gerenciar configurações → Proteção contra violações* → **Desativar**.  
-4. **Executar o script de desativação de Defender e UAC**:  
+4. **Acessar a pasta principal do repositório**:
+
+   Exemplo — supondo que o arquivo ZIP foi baixado em  `C:\Users\analista\Downloads\Contradef-main.zip` e descompactado no mesmo local:
+
+    ```powershell
+    cd "C:\Users\analista\Downloads\Contradef-main\Contradef-main"
+    ```
+
+5. **Executar o script de desativação de Defender e UAC**:  
    ```text
-    Contradef-main\Scripts\desativar_defender_uac.bat  (executar como Administrador)
+    .\Scripts\desativar_defender_uac.bat  (executar como Administrador)
     ````
 
 Reinicie a VM quando solicitado.
 
 5. **Criar snapshot “Base-Tools”** para preservar esse estado antes de iniciar testes reais.
 
-Passo a passo detalhado: [Configuração do Windows convidado](./Experimentos/Configuracao_ambiente_analise/4_Configuração_Windows/)
+Passo a passo detalhado: [Configuração do Windows convidado](./docs/Configuracao_ambiente_analise/4_Configuração_Windows/)
 
 ---
 
 # Reproduzindo os Experimentos
 
 A seguir apresentamos um roteiro mínimo para repetir os experimentos descritos no artigo.  
-Todos os caminhos partem do diretório **`Contradef-main\Experimentos`** do repositório.
 
-> ⚠️ **Importante:** execute cada passo **somente dentro da VM de análise** para evitar comprometimento do host.
+>## ⚠️ **Importante:** 
+>    - Execute cada passo a seguir **somente dentro da VM de análise** para evitar comprometimento do host.
+>    - Todos os comandos partem do diretório **`Ambiente_Experimentacao`** do repositório, ex.: `C:\Users\analista\Downloads\Contradef-main\Contradef-main\Ambiente_Experimentacao`.
 
 ---
 
 ## 1. Preparação
 
-1. **Instale o 7-Zip** (ou outro utilitário compatível).  
-2. Extraia os arquivos em `Contradef-main\Experimentos\Amostras\*.zip` na **mesma pasta** usando a senha `infected`.  
+1. **Instale o 7-Zip**  
+   <https://www.7-zip.org/a/7z2409-x64.exe>
+2. Extraia os arquivos `Ambiente_Experimentacao\Amostras\*.zip` na **mesma pasta** usando a senha `infected`.  
 3. **Desative a rede da VM** antes de executar qualquer amostra com a Contradef.
 
 ### Estrutura de pastas esperada
 
 ```text
-Contradef-main
+Contradef-main                 → diretório principal do repositório
 ├── pin\                       → binários originais do Pin 3.28
-└── Experimentos\
+└── Ambiente_Experimentacao\
     ├── ContradefDll\          → contradef.dll já compilado
     └── Amostras\              → amostras compactadas
         ├── 36685efcf34c7a7a6f6dd2e48199e4700b5ab8fe3945a50297703dd8daced74f.zip     → amostra 1 (VMProtect)
@@ -208,34 +219,38 @@ Contradef-main
 Após descompactar:
 
 ```text
-Contradef-main\Experimentos\Amostras\
+Contradef-main\Ambiente_Experimentacao\Amostras\
 ├── 36685efcf34c7a7a6f6dd2e48199e4700b5ab8fe3945a50297703dd8daced74f.exe         → amostra 1 (VMProtect)
 └── 0f20b0c906f3ad95dbf75ed526b2fe4341fdf62ab8c971fc10e340091af75b3b.exe         → amostra 2 (Comportamento evasivo)
 ```
 
 ---
-
 ## 2. Terminal de execução
 
-Abra o **PowerShell** como Administrador e navegue até o diretório de trabalho:
+**Abra o PowerShell como Administrador** (`Iniciar → digite “powershell” → clique com o botão direito → Executar como administrador`).
+
+Exemplo — supondo que o arquivo ZIP foi baixado em
+`C:\Users\analista\Downloads\Contradef-main.zip` e descompactado no mesmo local:
 
 ```powershell
-cd C:\Path\to\Contradef-main\Experimentos
+cd "C:\Users\analista\Downloads\Contradef-main\Contradef-main\Ambiente_Experimentacao"
 ```
 
-> Os *logs* serão criados no diretório atual. Para manter resultados separados, crie uma pasta por execução ou use caminhos absolutos para `pin.exe`, `contradef.dll` e o executável-alvo.
+> *Dica:* use aspas se o caminho contiver espaços.
 
-> ⚠️ Após cada análise, **restaure o snapshot** para evitar contaminação cruzada entre amostras.
+* Todos os **logs** serão salvos no diretório atual. Se quiser separar execuções, crie uma subpasta antes de rodar os comandos **ou** forneça caminhos absolutos para `pin.exe`, `contradef.dll` e para a amostra.
+* ⚠️ **Restabeleça o snapshot limpo** após cada análise para evitar contaminação cruzada entre amostras.
 
 ---
 
 ## 3. Medição de tempo (opcional)
 
-Use `Measure-Command` para cronometrar a execução do Pin/Contradef:
+Use `Measure-Command` para cronometrar a execução do Pin/Contradef, Ex.:
 
 ```powershell
+# Execmplo de medição de tempo com Measure-Command
 Measure-Command {
-    ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -intercept_fcn -trace_exfcn -trace_mem -trace_instr -trace_dasm -- .\Amostras\36685efcf34c7a7a6f6dd2e48199e4700b5ab8fe3945a50297703dd8daced74f.exe
+    ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -trace_exfcn -- .\Amostras\36685efcf34c7a7a6f6dd2e48199e4700b5ab8fe3945a50297703dd8daced74f.exe
 }
 ```
 
