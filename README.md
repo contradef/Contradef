@@ -94,7 +94,7 @@ Para outra pasta, forneça caminhos absolutos para `pin.exe` e `contradef.dll`.*
 ### Exemplo completo
 
 ```powershell
-"C:\pin-3.28\intel64\bin\pin.exe" -t "C:\Contradef\x64\Release\contradef.dll" -intercept_fcn -trace_exfcn -trace_mem -trace_instr -trace_dasm -- "C:\Samples\alvo.exe"
+"C:\pin-3.28\intel64\bin\pin.exe" -t "C:\Contradef\x64\Debug\contradef.dll" -intercept_fcn -trace_exfcn -trace_mem -trace_instr -trace_dasm -- "C:\Samples\alvo.exe"
 ```
 
 ---
