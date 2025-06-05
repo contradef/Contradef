@@ -202,7 +202,7 @@ Contradef-main
     ├── ContradefDll\          → contradef.dll já compilado
     └── Amostras\              → amostras compactadas
         ├── 36685efcf34c7a7a6f6dd2e48199e4700b5ab8fe3945a50297703dd8daced74f.zip     → amostra 1 (VMProtect)
-        └── 0f20b0c906f3ad95dbf75ed526b2fe4341fdf62ab8c971fc10e340091af75b3b.zip     → amostra 2 (Themida)
+        └── 0f20b0c906f3ad95dbf75ed526b2fe4341fdf62ab8c971fc10e340091af75b3b.zip     → amostra 2 (Comportamento evasivo)
 ````
 
 Após descompactar:
@@ -210,7 +210,7 @@ Após descompactar:
 ```text
 Contradef-main\Experimentos\Amostras\
 ├── 36685efcf34c7a7a6f6dd2e48199e4700b5ab8fe3945a50297703dd8daced74f.exe         → amostra 1 (VMProtect)
-└── 0f20b0c906f3ad95dbf75ed526b2fe4341fdf62ab8c971fc10e340091af75b3b.exe         → amostra 2 (Themida)
+└── 0f20b0c906f3ad95dbf75ed526b2fe4341fdf62ab8c971fc10e340091af75b3b.exe         → amostra 2 (Comportamento evasivo)
 ```
 
 ---
@@ -243,7 +243,7 @@ Measure-Command {
 
 ## 4. Execução da Amostra 1 (VMProtect)
 
-### 4.1 Módulos leves
+### 4.1 Módulos isolados
 
 ```powershell
 # FunctionInterceptor
@@ -270,9 +270,9 @@ Measure-Command {
 
 ---
 
-## 5. Execução da Amostra 2 (Themida)
+## 5. Execução da Amostra 2 (Comportamento evasivo)
 
-### 5.1 Módulos leves
+### 5.1 Módulos isolados
 
 ```powershell
 # FunctionInterceptor
