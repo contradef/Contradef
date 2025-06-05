@@ -11,7 +11,7 @@ Siga os passos a seguir:
 * Clique no ícone **Criar** (ou use *Snapshot → Criar*).
 
 <p align="center">
-  <img src="snapshots/01.png" alt="Botão Criar snapshot no VirtualBox" width="75%">
+  <img src="01.png" alt="Botão Criar snapshot no VirtualBox" width="75%">
 </p>
 
 ---
@@ -23,7 +23,7 @@ Siga os passos a seguir:
 * Clique em **OK**.
 
 <p align="center">
-  <img src="snapshots/02.png" alt="Janela Criar Snapshot" width="75%">
+  <img src="02.png" alt="Janela Criar Snapshot" width="75%">
 </p>
 
 ---
@@ -34,7 +34,7 @@ Siga os passos a seguir:
 * Aguarde até chegar a 100 %.
 
 <p align="center">
-  <img src="snapshots/03.png" alt="Progresso de criação do snapshot" width="75%">
+  <img src="03.png" alt="Progresso de criação do snapshot" width="75%">
 </p>
 
 ---
