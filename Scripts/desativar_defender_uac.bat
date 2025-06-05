@@ -9,6 +9,9 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableAntiSpywar
 echo [*] Desativando Proteção em tempo real (se aplicável)...
 PowerShell -Command "Set-MpPreference -DisableRealtimeMonitoring $true"
 
+echo [*] Habilitando a execução de scripts ps1...
+PowerShell -Command "Set-ExecutionPolicy -Scope LocalMachine -ExecutionPolicy RemoteSigned"
+
 echo.
 echo [!] Reinicie o sistema para que o UAC seja completamente desativado.
 pause
