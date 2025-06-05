@@ -55,15 +55,15 @@ Requisitos
 ```console
 # Clonar o repositório
 git clone https://github.com/contradef/Contradef.git
-cd Contradef
+cd Contradef-main
 ```
 
 > Ao abrir a solução no VS 2022, **não atualize** o “Conjunto de Ferramentas da Plataforma”; mantenha **Visual Studio 2019 (v142)** para garantir compatibilidade com o Pin.
 
 1. Abra `Contradef.sln`.
-2. Selecione **x64 / Debug** (ou **Release** para menor overhead).
+2. Selecione **x64 / Debug**.
 3. Compile (`Ctrl + Shift + B`).
-4. O binário `contradef.dll` será gerado em `bin\x64\Debug\` (ou `Release\`).
+4. O binário `contradef.dll` será gerado em `x64\Debug\`.
 
 ---
 
