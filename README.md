@@ -111,7 +111,7 @@ Para instrumentar binários grandes e gerar *traces* volumosos com estabilidade,
 | **Hypervisor**      | Oracle **VirtualBox 7.0** (ou superior) |
 | **Máquina virtual** | • **SO convidado:** Windows 10/11 Pro x64<br>• **vCPU:** ≥ 4 núcleos dedicados<br>• **RAM:** 6 – 8 GB<br>• **Disco:** 80 – 200 GB (VDI, tamanho fixo recomendado)<br>• **Snapshots:** estado base + checkpoints incrementais |
 
-> **Por quê VirtualBox?** Suporte robusto a snapshots e VT-x/AMD-V, além de integração simples com Intel Pin.
+> **Por quê VirtualBox?** Suporte robusto a snapshots e VT-x/AMD-V, além de compatibilidade com Intel Pin.
 
 ---
 
@@ -138,7 +138,7 @@ Para instrumentar binários grandes e gerar *traces* volumosos com estabilidade,
 1. **Máquina → Novo** → selecione *Windows 10/11 x64*.  
 2. Aloque **4 – 8 GB de RAM**, **4 – 6 vCPUs** e **80 – 200 GB** de disco (VDI).  
 
-Passo a passo completo: [Configurar VM no VirtualBox](./Experimentos/1_VirtualBox/)
+Passo a passo completo: [Configurar VM no VirtualBox](./Experimentos/Configuracao_ambiente_analise/1_VirtualBox/)
 
 ---
 
@@ -147,7 +147,7 @@ Passo a passo completo: [Configurar VM no VirtualBox](./Experimentos/1_VirtualBo
 1. Selecione a ISO como mídia de boot.  
 2. Siga o assistente de instalação normalmente (idioma, partição, usuário).  
 
-Passo a passo: [Instalação do Windows](./Experimentos/2_Instalacao_Windows/)
+Passo a passo: [Instalação do Windows](./Experimentos/Configuracao_ambiente_analise/2_Instalacao_Windows/)
 
 ---
 
@@ -155,7 +155,7 @@ Passo a passo: [Instalação do Windows](./Experimentos/2_Instalacao_Windows/)
 
 * No VirtualBox, abra a guia **Snapshots** → **Criar** → nomeie como **Ambiente Limpo**.
 
-Tutorial: [Criar um snapshot limpo](./Experimentos/3_VBox_snapshot_limpo/)
+Tutorial: [Criar um snapshot limpo](./Experimentos/Configuracao_ambiente_analise/3_VBox_snapshot_limpo/)
 
 ---
 
@@ -174,7 +174,7 @@ Reinicie a VM quando solicitado.
 
 5. **Criar snapshot “Base-Tools”** para preservar esse estado antes de iniciar testes reais.
 
-Passo a passo detalhado: [Configuração do Windows convidado](./Experimentos/4_Configuração_Windows/)
+Passo a passo detalhado: [Configuração do Windows convidado](./Experimentos/Configuracao_ambiente_analise/4_Configuração_Windows/)
 
 ---
 
