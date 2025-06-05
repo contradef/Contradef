@@ -104,14 +104,14 @@ _Recomendado: usar o disco virtual inteiro criado na etapa de hardware (ex.: 200
 
 ### 10 Usar conta local
 
-* Digite um endereço fictício qualquer como **user@user.com** e clique em **Avançar**;  
-  o instalador mostrará o link **Configure o Windows com uma conta local**.  
+* Digite um endereço fictício qualquer como **user@user.com** e clique em **Avançar**.
 
 <p align="center">
   <img src="10.png" alt="Tela de login ou criação de conta Microsoft" width="75%">
 </p>
 
-* Clique nesse link para prosseguir sem conta Microsoft.
+* O instalador mostrará o link **Configure o Windows com uma conta local**;
+  Clique nesse link para prosseguir sem conta Microsoft.
 
 <p align="center">
   <img src="11.png" alt="Opção para configurar conta local" width="75%">
