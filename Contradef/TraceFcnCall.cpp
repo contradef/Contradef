@@ -340,10 +340,10 @@ namespace TraceFcnCall {
 
         if (KnobTraceExternalCallTrace)
         {
-            std::string logfilename = filename + "." + pid + ".externalcalltraceM1.cdf";
+            std::string logfilename = filename + "." + pid + ".TraceFcnCall.M1.cdf";
             ExternalCallTraceOutFile.open(logfilename.c_str(), std::ios::binary);
 
-            std::string logfilenameM2 = filename + "." + pid + ".externalcalltraceM2.cdf";
+            std::string logfilenameM2 = filename + "." + pid + ".TraceFcnCall.M2.cdf";
             ExternalCallTraceOutFileM2.open(logfilenameM2.c_str(), std::ios::binary);
         }
 

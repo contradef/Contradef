@@ -146,7 +146,7 @@ VOID TraceMemory::InstTraceMemory(INS ins, VOID* v)
 
 int TraceMemory::InitMemoryTrace(std::string pid, std::string filename)
 {
-    filename += "." + pid + ".memtrace.cdf";
+    filename += "." + pid + ".TraceMemory.cdf";
     memTraceOut.open(filename.c_str());
     memTraceOut << std::hex << std::right;
     memTraceOut.setf(std::ios_base::showbase);

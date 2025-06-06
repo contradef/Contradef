@@ -127,7 +127,7 @@ int InitInstrumentation() {
     SectionTracker::Init(&globalNotifier);
     
     if (KnobFunctionInterceptor) {
-        string logfilename = logsName + "." + pid + ".log.cdf";
+        string logfilename = logsName + "." + pid + ".FunctionInterceptor.cdf";
         MainOutFile.open(logfilename.c_str(), std::ios::binary);
         IMG_AddInstrumentFunction(InstrumentFunctionInterceptor, 0);
     }

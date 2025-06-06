@@ -32,7 +32,7 @@ namespace TraceDisassembly {
     int InitTraceDisassembly(std::string pid, std::string filename)
     {
         if (KnobTraceDisassembly) {
-            filename += "." + pid + ".disassembly.cdf";
+            filename += "." + pid + ".TraceDisassembly.cdf";
             disassemblyTraceOut.open(filename.c_str());
             disassemblyTraceOut << std::hex << std::right;
             disassemblyTraceOut.setf(std::ios::showbase);

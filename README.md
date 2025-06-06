@@ -163,25 +163,24 @@ Tutorial: [Criar um snapshot limpo](./docs/Configuracao_ambiente_analise/3_VBox_
 
 1. **Instalar Guest Additions** (opcional para compartilhamento de pastas).  
 2. **Baixar e descompactar o Contradef** (ZIP do GitHub).  
+   Descompactar o arquivo no diretório `C:\Users\analista\Experimento`, assim, o diretório principal do repositório será `C:\Users\analista\Experimento\Contradef-main`.
    * *Depois de descompactar, o nome padrão da pasta do repositório será `Contradef-main`*
 3. **Desativar “Proteção contra Violações”**:  
    * *Configurações → Atualização e Segurança → Segurança do Windows → Proteção contra vírus e ameaças → Gerenciar configurações → Proteção contra violações* → **Desativar**.  
 4. **Acessar a pasta principal do repositório**:
 
-   Exemplo — supondo que o arquivo ZIP foi baixado em  `C:\Users\analista\Downloads\Contradef-main.zip` e descompactado no mesmo local:
-
     ```powershell
-    cd "C:\Users\analista\Downloads\Contradef-main\Contradef-main"
+    cd "C:\Users\analista\Experimento\Contradef-main"
     ```
 
 5. **Executar o script de desativação de Defender e UAC**:  
-   ```text
+    ```text
     .\Scripts\desativar_defender_uac.bat  (executar como Administrador)
-    ````
+    ```
 
-Reinicie a VM quando solicitado.
+    Após a execução do script, **Reinicie a VM** quando solicitado.
 
-5. **Criar snapshot “Base-Tools”** para preservar esse estado antes de iniciar testes reais.
+6. **Criar snapshot “Base-Tools”** para preservar esse estado antes de iniciar testes reais.
 
 Passo a passo detalhado: [Configuração do Windows convidado](./docs/Configuracao_ambiente_analise/4_Configuração_Windows/)
 
@@ -193,7 +192,7 @@ A seguir apresentamos um roteiro mínimo para repetir os experimentos descritos 
 
 >## ⚠️ **Importante:** 
 >    - Execute cada passo a seguir **somente dentro da VM de análise** para evitar comprometimento do host.
->    - Todos os comandos partem do diretório **`Ambiente_Experimentacao`** do repositório, ex.: `C:\Users\analista\Downloads\Contradef-main\Contradef-main\Ambiente_Experimentacao`.
+>    - Todos os comandos partem do diretório **`Ambiente_Experimentacao`** do repositório, ex.: `C:\Users\analista\Experimento\Contradef-main\Ambiente_Experimentacao`.
 
 ---
 
@@ -229,16 +228,13 @@ Contradef-main\Ambiente_Experimentacao\Amostras\
 
 **Abra o PowerShell como Administrador** (`Iniciar → digite “powershell” → clique com o botão direito → Executar como administrador`).
 
-Exemplo — supondo que o arquivo ZIP foi baixado em
-`C:\Users\analista\Downloads\Contradef-main.zip` e descompactado no mesmo local:
-
 ```powershell
-cd "C:\Users\analista\Downloads\Contradef-main\Contradef-main\Ambiente_Experimentacao"
+cd "C:\Users\analista\Experimento\Contradef-main\Ambiente_Experimentacao"
 ```
 
 > *Dica:* use aspas se o caminho contiver espaços.
 
-* Todos os **logs** serão salvos no diretório atual. Se quiser separar execuções, crie uma subpasta antes de rodar os comandos **ou** forneça caminhos absolutos para `pin.exe`, `contradef.dll` e para a amostra.
+* Todos os **logs** serão salvos no diretório atual. Se quiser separar execuções, crie uma subpasta antes de rodar os comandos, mude para a pasta e forneça caminhos absolutos para `pin.exe`, `contradef.dll` e para a amostra.
 * ⚠️ **Restabeleça o snapshot limpo** após cada análise para evitar contaminação cruzada entre amostras.
 
 ---
@@ -260,20 +256,28 @@ Measure-Command {
 
 ### 4.1 Módulos isolados
 
+#### FunctionInterceptor:
 ```powershell
-# FunctionInterceptor
 ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -intercept_fcn -- .\Amostras\36685efcf34c7a7a6f6dd2e48199e4700b5ab8fe3945a50297703dd8daced74f.exe
+```
 
-# TraceFcnCall
+#### TraceFcnCall:
+```powershell
 ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -trace_exfcn -- .\Amostras\36685efcf34c7a7a6f6dd2e48199e4700b5ab8fe3945a50297703dd8daced74f.exe
+```
 
-# TraceMemory
+#### TraceMemory:
+```powershell
 ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -trace_mem -- .\Amostras\36685efcf34c7a7a6f6dd2e48199e4700b5ab8fe3945a50297703dd8daced74f.exe
+```
 
-# TraceInstructions
+#### TraceInstructions:
+```powershell
 ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -trace_instr -- .\Amostras\36685efcf34c7a7a6f6dd2e48199e4700b5ab8fe3945a50297703dd8daced74f.exe
+```
 
-# TraceDisassembly
+#### TraceDisassembly:
+```powershell
 ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -trace_dasm -- .\Amostras\36685efcf34c7a7a6f6dd2e48199e4700b5ab8fe3945a50297703dd8daced74f.exe
 ```
 
@@ -289,20 +293,28 @@ Measure-Command {
 
 ### 5.1 Módulos isolados
 
+#### FunctionInterceptor:
 ```powershell
-# FunctionInterceptor
 ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -intercept_fcn -- .\Amostras\0f20b0c906f3ad95dbf75ed526b2fe4341fdf62ab8c971fc10e340091af75b3b.exe
+```
 
-# TraceFcnCall
+#### TraceFcnCall:
+```powershell
 ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -trace_exfcn -- .\Amostras\0f20b0c906f3ad95dbf75ed526b2fe4341fdf62ab8c971fc10e340091af75b3b.exe
+```
 
-# TraceMemory
+#### TraceMemory:
+```powershell
 ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -trace_mem -- .\Amostras\0f20b0c906f3ad95dbf75ed526b2fe4341fdf62ab8c971fc10e340091af75b3b.exe
+```
 
-# TraceInstructions
+#### TraceInstructions:
+```powershell
 ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -trace_instr -- .\Amostras\0f20b0c906f3ad95dbf75ed526b2fe4341fdf62ab8c971fc10e340091af75b3b.exe
+```
 
-# TraceDisassembly
+#### TraceDisassembly
+```powershell
 ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -trace_dasm -- .\Amostras\0f20b0c906f3ad95dbf75ed526b2fe4341fdf62ab8c971fc10e340091af75b3b.exe
 ```
 

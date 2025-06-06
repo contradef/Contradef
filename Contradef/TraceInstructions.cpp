@@ -863,7 +863,7 @@ void TraceInstructions::disable() {
 
 int TraceInstructions::InitTrace(string pid, std::string filename)
 {
-    filename += "." + pid + ".trace.cdf";
+    filename += "." + pid + ".TraceInstructions.cdf";
     out.open(filename.c_str());
     out << hex << right;
     out.setf(ios::showbase);
