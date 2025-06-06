@@ -224,3 +224,5 @@ Após essas etapas de conta e privacidade, o Windows concluirá a configuração
 </p>
 
 Faça um snapshot neste ponto para preservar um estado limpo antes de instalar ferramentas e amostras.
+
+[Voltar para a documentação principal](https://github.com/contradef/Contradef?tab=readme-ov-file#5-instalar-o-windows-na-vm-ver-detalhes)

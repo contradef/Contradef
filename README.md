@@ -133,33 +133,27 @@ Para instrumentar binários grandes e gerar *traces* volumosos com estabilidade,
 
 ---
 
-## 4. Criar a VM no VirtualBox
+## 4. Criar a VM no VirtualBox \[[Ver detalhes](./docs/Configuracao_ambiente_analise/1_VirtualBox/)\]
 
 1. **Máquina → Novo** → selecione *Windows 10/11 x64*.  
 2. Aloque **4 – 8 GB de RAM**, **4 – 6 vCPUs** e **80 – 200 GB** de disco (VDI).  
 
-Passo a passo completo: [Configurar VM no VirtualBox](./docs/Configuracao_ambiente_analise/1_VirtualBox/)
-
 ---
 
-## 5. Instalar o Windows na VM
+## 5. Instalar o Windows na VM \[[Ver detalhes](./docs/Configuracao_ambiente_analise/2_Instalacao_Windows/)\]
 
 1. Selecione a ISO como mídia de boot.  
 2. Siga o assistente de instalação normalmente (idioma, partição, usuário).  
 
-Passo a passo: [Instalação do Windows](./docs/Configuracao_ambiente_analise/2_Instalacao_Windows/)
-
 ---
 
-## 6. Criar snapshot da VM “limpa”
+## 6. Criar snapshot da VM “limpa” \[[Ver detalhes](./docs/Configuracao_ambiente_analise/3_VBox_snapshot_limpo/)\]
 
 * No VirtualBox, abra a guia **Snapshots** → **Criar** → nomeie como **Ambiente Limpo**.
 
-Tutorial: [Criar um snapshot limpo](./docs/Configuracao_ambiente_analise/3_VBox_snapshot_limpo/)
-
 ---
 
-## 7. Ajustes no Windows convidado (VM)
+## 7. Ajustes no Windows convidado (VM) \[[Ver detalhes](./docs/Configuracao_ambiente_analise/4_Configuração_Windows/)\]
 
 1. **Instalar Guest Additions** (opcional para compartilhamento de pastas).  
 2. **Baixar e descompactar o Contradef** (ZIP do GitHub).  
@@ -182,11 +176,9 @@ Tutorial: [Criar um snapshot limpo](./docs/Configuracao_ambiente_analise/3_VBox_
 
 6. **Criar snapshot “Base-Tools”** para preservar esse estado antes de iniciar testes reais.
 
-Passo a passo detalhado: [Configuração do Windows convidado](./docs/Configuracao_ambiente_analise/4_Configuração_Windows/)
-
 ---
 
-# Reproduzindo os Experimentos \[[Ver detalhes](./docs/Configuracao_ambiente_analise/5_Execuçãoexperimentos/)\]
+# Reproduzindo os Experimentos \[[Ver detalhes](./docs/Configuracao_ambiente_analise/5_Execução_experimentos/)\]
 
 A seguir apresentamos um roteiro mínimo para repetir os experimentos descritos no artigo.  
 

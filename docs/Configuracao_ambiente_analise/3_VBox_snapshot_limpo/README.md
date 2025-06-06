@@ -40,3 +40,5 @@ Siga os passos a seguir:
 ---
 
 > 💡 **Dica:** crie snapshots incrementais antes de cada lote de testes — a restauração é quase instantânea e evita contaminação cruzada entre amostras.
+
+[Voltar para a documentação principal](https://github.com/contradef/Contradef?tab=readme-ov-file#6-criar-snapshot-da-vm-limpa-ver-detalhes)

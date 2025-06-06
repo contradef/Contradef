@@ -166,4 +166,4 @@ Em seguida, mova os `.cdf` para uma pasta dedicada, como
 
 Seguindo estes passos você reproduz os experimentos descritos no artigo.
 
-[Voltar para a documentação principal](https://github.com/contradef/Contradef/tree/main?tab=readme-ov-file#reproduzindo-os-experimentos)
+[Voltar para a documentação principal](https://github.com/contradef/Contradef?tab=readme-ov-file#reproduzindo-os-experimentos-ver-detalhes)

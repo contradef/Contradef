@@ -109,3 +109,5 @@
 > ✅ A VM agora está pronta para instrumentação com o Intel Pin e execução de amostras, sem interferência do Defender ou do UAC.
   
 Crie um novo snapshot (por exemplo, **Base-Tools**) para preservar esse estado antes de iniciar os testes com amostras reais.
+
+[Voltar para a documentação principal](https://github.com/contradef/Contradef?tab=readme-ov-file#7-ajustes-no-windows-convidado-vm-ver-detalhes)
