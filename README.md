@@ -133,7 +133,7 @@ Para instrumentar binários grandes e gerar *traces* volumosos com estabilidade,
 
 ---
 
-## 4. Criar a VM no VirtualBox \[[Ver detalhes](./docs/Configuracao_ambiente_analise/1_VirtualBox/?tab=readme-ov-file#4-criar-a-vm-no-virtualbox)\]
+## 4. Criar a VM no VirtualBox \[[Ver detalhes](./docs/Configuracao_ambiente_analise/1_VirtualBox/README.md?tab=readme-ov-file#4-criar-a-vm-no-virtualbox)\]
 
 1. **Máquina → Novo** → selecione *Windows 10/11 x64*.  
 2. Aloque **4 – 8 GB de RAM**, **4 – 6 vCPUs** e **80 – 200 GB** de disco (VDI).  
