@@ -144,12 +144,12 @@ Para instrumentar binários grandes e gerar *traces* volumosos com estabilidade,
 
 1. Selecione a ISO como mídia de boot.  
 2. Siga o assistente de instalação normalmente e configure idioma e partição.
-3. Na criação de usuário, digite um endereço fictício qualquer como **user@user.com** e clique em **Avançar**.
-* O instalador mostrará o link **Configure o Windows com uma conta local**;
-  Clique nesse link para prosseguir sem conta Microsoft.
-4. Informe o nome de usuário local **analista** e clique em **Avançar**.
-5. Deixe em branco a senha para o usuário local e clique em **Avançar**.
-6. Complete o assistente de instalação.
+4. Aguarde a etapa de Instalando o Windows ser concluída; a VM reiniciará automaticamente. Caso não aconteça, reinicie manualmente.
+3. Após a instalação, na tela "Entrar com a conta da Microsoft", digite um endereço fictício qualquer como **user@user.com** e clique em **Avançar**.
+4. O instalador mostrará o link **Configure o Windows com uma conta local**; Clique nesse link para prosseguir sem conta Microsoft.
+5. Informe o nome de usuário local **analista** e clique em **Avançar**.
+6. Deixe em branco a senha para o usuário local e clique em **Avançar**.
+7. Complete o assistente de instalação.
 
 ---
 
@@ -184,7 +184,7 @@ Para instrumentar binários grandes e gerar *traces* volumosos com estabilidade,
 
 ---
 
-# Reproduzindo os Experimentos \[[Ver detalhes](./docs/Configuracao_ambiente_analise/5_Execução_experimentos/README.md)\]
+# Reproduzindo os Experimentos \[[Ver detalhes](./docs/Configuracao_ambiente_analise/5_Execucao_experimentos/README.md)\]
 
 A seguir apresentamos um roteiro mínimo para repetir os experimentos descritos no artigo.  
 
