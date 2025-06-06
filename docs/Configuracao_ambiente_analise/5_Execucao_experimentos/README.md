@@ -37,9 +37,10 @@ O 7-Zip será integrado ao menu de contexto do Explorador.
 
 ### 3 Descompactar as amostras
 
+Em cada amostra compactada, repetir o seguinte procedimento:
+
 1. Navegue até **`Contradef-main\Ambiente_Experimentacao\Amostras`**.  
-2. Clique com o botão direito no ZIP da amostra  
-   → **7-Zip → Extrair aqui**.
+2. Clique com o botão direito no ZIP da amostra → **7-Zip → Extrair aqui**.
 
 <p align="center"><img src="03.png" alt="7-Zip: Extrair aqui" width="75%"></p>
 
@@ -61,12 +62,12 @@ descompactadas.
 
 ### 4 Abrir o terminal no diretório de trabalho
 
-1. Clique com o botão direito no **Explorador** sobre a pasta  
-   `Ambiente_Experimentacao`.
-2. Selecione **Abrir no Windows PowerShell** (ou Terminal Windows)  
-   **→ Executar como administrador**.
+1. Abra o PowerShell como Administrador
+2. Ir para o diretório `Ambiente_Experimentacao` do repositório. Ex.:
 
-<p align="center"><img src="06.png" alt="PowerShell no diretório de trabalho" width="75%"></p>
+```powershell
+cd "C:\Users\analista\Experimento\Contradef-main\Ambiente_Experimentacao"
+```
 
 ---
 
@@ -76,16 +77,28 @@ Para cada flag execute o Pin + Contradef, por exemplo:
 
 ```powershell
 ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -intercept_fcn -- .\Amostras\36685efcf34c7a7a6f6dd2e48199e4700b5ab8fe3945a50297703dd8daced74f.exe
+
+```
+```powershell
 ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -trace_exfcn -- .\Amostras\36685efcf34c7a7a6f6dd2e48199e4700b5ab8fe3945a50297703dd8daced74f.exe
+
+```
+```powershell
 ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -trace_mem -- .\Amostras\36685efcf34c7a7a6f6dd2e48199e4700b5ab8fe3945a50297703dd8daced74f.exe
+
+```
+```powershell
 ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -trace_instr -- .\Amostras\36685efcf34c7a7a6f6dd2e48199e4700b5ab8fe3945a50297703dd8daced74f.exe
+
+```
+```powershell
 ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -trace_dasm -- .\Amostras\36685efcf34c7a7a6f6dd2e48199e4700b5ab8fe3945a50297703dd8daced74f.exe
 
 ```
 
 Cada execução cria um arquivo `contradef.<PID>.<Modulo>.cdf`.
 
-*(Veja a linha de comando em destaque na captura acima.)*
+<p align="center"><img src="06.png" alt="PowerShell no diretório de trabalho" width="75%"></p>
 
 ---
 
@@ -152,3 +165,5 @@ Em seguida, mova os `.cdf` para uma pasta dedicada, como
 * **Desempenho** – SSD/NVMe melhora muito a gravação dos *logs*; em HDDs o tempo de execução pode aumentar drasticamente.
 
 Seguindo estes passos você reproduz os experimentos descritos no artigo.
+
+[Voltar para a documentação principal](https://github.com/contradef/Contradef/tree/main?tab=readme-ov-file#reproduzindo-os-experimentos)

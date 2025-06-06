@@ -186,7 +186,7 @@ Passo a passo detalhado: [Configuração do Windows convidado](./docs/Configurac
 
 ---
 
-# Reproduzindo os Experimentos
+# Reproduzindo os Experimentos \[[Ver detalhes](./docs/Configuracao_ambiente_analise/5_Execuçãoexperimentos/)\]
 
 A seguir apresentamos um roteiro mínimo para repetir os experimentos descritos no artigo.  
 
@@ -234,7 +234,7 @@ cd "C:\Users\analista\Experimento\Contradef-main\Ambiente_Experimentacao"
 
 > *Dica:* use aspas se o caminho contiver espaços.
 
-* Todos os **logs** serão salvos no diretório atual. Se quiser separar execuções, crie uma subpasta antes de rodar os comandos, mude para a pasta e forneça caminhos absolutos para `pin.exe`, `contradef.dll` e para a amostra.
+* Todos os **logs** serão salvos no diretório de trabalho atual (`Ambiente_Experimentacao`). Se quiser separar execuções, crie uma subpasta antes de rodar os comandos, mude para a pasta e forneça caminhos absolutos para `pin.exe`, `contradef.dll` e para a amostra.
 * ⚠️ **Restabeleça o snapshot limpo** após cada análise para evitar contaminação cruzada entre amostras.
 
 ---
