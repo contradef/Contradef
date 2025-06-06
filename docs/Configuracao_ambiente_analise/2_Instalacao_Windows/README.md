@@ -132,7 +132,7 @@ _Recomendado: usar o disco virtual inteiro criado na etapa de hardware (ex.: 200
 
 ### 12 Definir senha
 
-* Crie uma senha para o usuário local ou deixe em branco se preferir.  
+* Deixe em branco a senha para o usuário local.  
 * Clique em **Avançar**.
 
 <p align="center">

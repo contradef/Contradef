@@ -133,27 +133,33 @@ Para instrumentar binários grandes e gerar *traces* volumosos com estabilidade,
 
 ---
 
-## 4. Criar a VM no VirtualBox \[[Ver detalhes](./docs/Configuracao_ambiente_analise/1_VirtualBox/README.md?tab=readme-ov-file#4-criar-a-vm-no-virtualbox)\]
+## 4. Criar a VM no VirtualBox \[[Ver detalhes](./docs/Configuracao_ambiente_analise/1_VirtualBox/README.md)\]
 
 1. **Máquina → Novo** → selecione *Windows 10/11 x64*.  
 2. Aloque **4 – 8 GB de RAM**, **4 – 6 vCPUs** e **80 – 200 GB** de disco (VDI).  
 
 ---
 
-## 5. Instalar o Windows na VM \[[Ver detalhes](./docs/Configuracao_ambiente_analise/2_Instalacao_Windows/)\]
+## 5. Instalar o Windows na VM \[[Ver detalhes](./docs/Configuracao_ambiente_analise/2_Instalacao_Windows/README.md)\]
 
 1. Selecione a ISO como mídia de boot.  
-2. Siga o assistente de instalação normalmente (idioma, partição, usuário).  
+2. Siga o assistente de instalação normalmente e configure idioma e partição.
+3. Na criação de usuário, digite um endereço fictício qualquer como **user@user.com** e clique em **Avançar**.
+* O instalador mostrará o link **Configure o Windows com uma conta local**;
+  Clique nesse link para prosseguir sem conta Microsoft.
+4. Informe o nome de usuário local **analista** e clique em **Avançar**.
+5. Deixe em branco a senha para o usuário local e clique em **Avançar**.
+6. Complete o assistente de instalação.
 
 ---
 
-## 6. Criar snapshot da VM “limpa” \[[Ver detalhes](./docs/Configuracao_ambiente_analise/3_VBox_snapshot_limpo/)\]
+## 6. Criar snapshot da VM “limpa” \[[Ver detalhes](./docs/Configuracao_ambiente_analise/3_VBox_snapshot_limpo/README.md)\]
 
 * No VirtualBox, abra a guia **Snapshots** → **Criar** → nomeie como **Ambiente Limpo**.
 
 ---
 
-## 7. Ajustes no Windows convidado (VM) \[[Ver detalhes](./docs/Configuracao_ambiente_analise/4_Configuração_Windows/)\]
+## 7. Ajustes no Windows convidado (VM) \[[Ver detalhes](./docs/Configuracao_ambiente_analise/4_Configuração_Windows/README.md)\]
 
 1. **Instalar Guest Additions** (opcional para compartilhamento de pastas).  
 2. **Baixar e descompactar o Contradef** (ZIP do GitHub).  
@@ -178,7 +184,7 @@ Para instrumentar binários grandes e gerar *traces* volumosos com estabilidade,
 
 ---
 
-# Reproduzindo os Experimentos \[[Ver detalhes](./docs/Configuracao_ambiente_analise/5_Execução_experimentos/)\]
+# Reproduzindo os Experimentos \[[Ver detalhes](./docs/Configuracao_ambiente_analise/5_Execução_experimentos/README.md)\]
 
 A seguir apresentamos um roteiro mínimo para repetir os experimentos descritos no artigo.  
 
