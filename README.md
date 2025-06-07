@@ -5,7 +5,7 @@ Embora possua contramedidas específicas para algumas técnicas de _anti-analysi
 
 ---
 
-## Características principais
+## 1. Características principais
 * **FunctionInterceptor** — *hooking* seletivo de mais de 100 APIs sensíveis (p. ex. `GetProcAddress`, `VirtualProtect`, `NtQueryInformationProcess`), registrando parâmetros e valor de retorno.  
 * **TraceFcnCall** — dois métodos complementares para registrar chamadas:  
   1. instruções `call` convencionais;  
@@ -18,7 +18,7 @@ Embora possua contramedidas específicas para algumas técnicas de _anti-analysi
 
 ---
 
-## Arquitetura da ferramenta
+## 2. Arquitetura da ferramenta
 
 <p align="center">
   <img src="docs/Contradef-Arquitetura.png" alt="Arquitetura da Contradef" width="75%">
@@ -38,7 +38,7 @@ A natureza modular da Contradef permite ativar apenas os blocos necessários sem
 
 ---
 
-## Compilação
+## 3. Compilação
 
 > ⚠️ **Observação:** não é necessário compilar para reproduzir os experimentos; um binário pronto encontra-se em `Contradef-main\Ambiente_Experimentacao\ContradefDll`.  
 > Caso você queira compilar a ferramenta a partir do código-fonte, siga as instruções abaixo.
@@ -67,9 +67,9 @@ cd Contradef-main
 
 ---
 
-## Execução
+## 4. Execução
 
-### Parâmetros comuns
+### 4.1. Parâmetros comuns
 
 | Parâmetro         | Descrição                                             |
 | ----------------- | ----------------------------------------------------- |
@@ -80,9 +80,8 @@ cd Contradef-main
 | `-trace_dasm`     | Ativa o **TraceDisassembly**                          |
 | `-yara <arquivo>` | Aplica regras YARA antes da instrumentação (opcional) |
 
----
 
-### Sintaxe básica
+### 4.2. Sintaxe básica
 
 ```powershell
 <PATH_PIN_x64>\pin.exe -t <PATH_CONTRADEF>\contradef.dll -intercept_fcn -trace_exfcn -trace_mem -trace_instr -trace_dasm -- C:\Samples\alvo.exe
@@ -91,7 +90,7 @@ cd Contradef-main
 *Os arquivos de log são gravados no diretório atual do terminal.
 Para outra pasta, forneça caminhos absolutos para `pin.exe` e `contradef.dll`.*
 
-### Exemplo completo
+### 4.3. Exemplo completo
 
 ```powershell
 "C:\pin-3.28\intel64\bin\pin.exe" -t "C:\Contradef\x64\Debug\contradef.dll" -intercept_fcn -trace_exfcn -trace_mem -trace_instr -trace_dasm -- "C:\Samples\alvo.exe"
@@ -99,9 +98,9 @@ Para outra pasta, forneça caminhos absolutos para `pin.exe` e `contradef.dll`.*
 
 ---
 
-# ⚙️ Preparando o Ambiente de Experimentação
+## 5. Preparando o Ambiente de Experimentação
 
-## 1. Ambiente de Execução Recomendado
+### 5.1. Ambiente de Execução Recomendado
 
 Para instrumentar binários grandes e gerar *traces* volumosos com estabilidade, sugerimos a configuração abaixo (reduza proporcionalmente se o hardware for mais modesto):
 
@@ -113,17 +112,13 @@ Para instrumentar binários grandes e gerar *traces* volumosos com estabilidade,
 
 > **Por quê VirtualBox?** Suporte robusto a snapshots e VT-x/AMD-V, além de compatibilidade com Intel Pin.
 
----
-
-## 2. Instalar o VirtualBox
+### 5.2. Instalar o VirtualBox
 
 1. Acesse <https://www.virtualbox.org/>  
 2. Clique em **Download VirtualBox** para seu sistema operacional.  
 3. Execute o instalador com as opções padrão.
 
----
-
-## 3. Baixar a imagem ISO do Windows
+### 5.3. Baixar a imagem ISO do Windows
 
 * ISO de avaliação do **Windows 10 Enterprise x64**  
   <https://go.microsoft.com/fwlink/p/?LinkID=2208844&clcid=0x416&culture=pt-br&country=BR>
@@ -131,16 +126,12 @@ Para instrumentar binários grandes e gerar *traces* volumosos com estabilidade,
 * Outras opções (inclui Windows 11):  
   <https://www.microsoft.com/en-us/evalcenter/download-windows-10-enterprise>
 
----
-
-## 4. Criar a VM no VirtualBox \[[Ver detalhes](./docs/Configuracao_ambiente_analise/1_VirtualBox/README.md)\]
+### 5.4. Criar a VM no VirtualBox \[[Ver detalhes](./docs/Configuracao_ambiente_analise/1_VirtualBox/README.md)\]
 
 1. **Máquina → Novo** → selecione *Windows 10/11 x64*.  
 2. Aloque **4 – 8 GB de RAM**, **4 – 6 vCPUs** e **80 – 200 GB** de disco (VDI).  
 
----
-
-## 5. Instalar o Windows na VM \[[Ver detalhes](./docs/Configuracao_ambiente_analise/2_Instalacao_Windows/README.md)\]
+### 5.5. Instalar o Windows na VM \[[Ver detalhes](./docs/Configuracao_ambiente_analise/2_Instalacao_Windows/README.md)\]
 
 1. Selecione a ISO como mídia de boot.  
 2. Siga o assistente de instalação normalmente e configure idioma e partição.
@@ -151,22 +142,18 @@ Para instrumentar binários grandes e gerar *traces* volumosos com estabilidade,
 6. Deixe em branco a senha para o usuário local e clique em **Avançar**.
 7. Complete o assistente de instalação.
 
----
-
-## 6. Criar snapshot da VM “limpa” \[[Ver detalhes](./docs/Configuracao_ambiente_analise/3_VBox_snapshot_limpo/README.md)\]
+### 5.6. Criar snapshot da VM “limpa” \[[Ver detalhes](./docs/Configuracao_ambiente_analise/3_VBox_snapshot_limpo/README.md)\]
 
 * No VirtualBox, abra a guia **Snapshots** → **Criar** → nomeie como **Ambiente Limpo**.
 
----
-
-## 7. Ajustes no Windows convidado (VM) \[[Ver detalhes](./docs/Configuracao_ambiente_analise/4_Configuração_Windows/README.md)\]
+### 5.7. Ajustes no Windows convidado (VM) \[[Ver detalhes](./docs/Configuracao_ambiente_analise/4_Configuração_Windows/README.md)\]
 
 1. **Instalar Guest Additions** (opcional para compartilhamento de pastas).  
 2. **Baixar e descompactar o Contradef** (ZIP do GitHub).  
-   Descompactar o arquivo no diretório `C:\Users\analista\Experimento`, assim, o diretório principal do repositório será `C:\Users\analista\Experimento\Contradef-main`.
-   * *Depois de descompactar, o nome padrão da pasta do repositório será `Contradef-main`*
+Descompactar o arquivo no diretório `C:\Users\analista\Experimento`, assim, o diretório principal do repositório será `C:\Users\analista\Experimento\Contradef-main`.
+* *Depois de descompactar, o nome padrão da pasta do repositório será `Contradef-main`*
 3. **Desativar “Proteção contra Violações”**:  
-   * *Configurações → Atualização e Segurança → Segurança do Windows → Proteção contra vírus e ameaças → Gerenciar configurações → Proteção contra violações* → **Desativar**.  
+* *Configurações → Atualização e Segurança → Segurança do Windows → Proteção contra vírus e ameaças → Gerenciar configurações → Proteção contra violações* → **Desativar**.  
 4. **Acessar a pasta principal do repositório**:
 
     ```powershell
@@ -184,7 +171,7 @@ Para instrumentar binários grandes e gerar *traces* volumosos com estabilidade,
 
 ---
 
-# 🧪 Reproduzindo os Experimentos \[[Ver detalhes](./docs/Configuracao_ambiente_analise/5_Execucao_experimentos/README.md)\]
+## 6. Reproduzindo os Experimentos \[[Ver detalhes](./docs/Configuracao_ambiente_analise/5_Execucao_experimentos/README.md)\]
 
 A seguir apresentamos um roteiro mínimo para repetir os experimentos descritos no artigo.  
 
@@ -192,16 +179,14 @@ A seguir apresentamos um roteiro mínimo para repetir os experimentos descritos 
 >    - Execute cada passo a seguir **somente dentro da VM de análise** para evitar comprometimento do host.
 >    - Todos os comandos partem do diretório **`Ambiente_Experimentacao`** do repositório, ex.: `C:\Users\analista\Experimento\Contradef-main\Ambiente_Experimentacao`.
 
----
-
-## 1. Preparação
+### 6.1. Preparação
 
 1. **Instale o 7-Zip**  
    <https://www.7-zip.org/a/7z2409-x64.exe>
 2. Extraia os arquivos `Ambiente_Experimentacao\Amostras\*.zip` na **mesma pasta** usando a senha `infected`.  
 3. **Desative a rede da VM** antes de executar qualquer amostra com a Contradef.
 
-### Estrutura de pastas esperada
+#### Estrutura de pastas esperada
 
 ```text
 Contradef-main                 → diretório principal do repositório
@@ -221,8 +206,7 @@ Contradef-main\Ambiente_Experimentacao\Amostras\
 └── 0f20b0c906f3ad95dbf75ed526b2fe4341fdf62ab8c971fc10e340091af75b3b.exe         → amostra 2 (Comportamento evasivo)
 ```
 
----
-## 2. Terminal de execução
+### 6.2. Terminal de execução
 
 **Abra o PowerShell como Administrador** (`Iniciar → digite “powershell” → clique com o botão direito → Executar como administrador`).
 
@@ -235,9 +219,7 @@ cd "C:\Users\analista\Experimento\Contradef-main\Ambiente_Experimentacao"
 * Todos os **logs** serão salvos no diretório de trabalho atual (`Ambiente_Experimentacao`). Se quiser separar execuções, crie uma subpasta antes de rodar os comandos, mude para a pasta e forneça caminhos absolutos para `pin.exe`, `contradef.dll` e para a amostra.
 * ⚠️ **Restabeleça o snapshot limpo** após cada análise para evitar contaminação cruzada entre amostras.
 
----
-
-## 3. Medição de tempo (opcional)
+### 6.3. Medição de tempo (opcional)
 
 Use `Measure-Command` para cronometrar a execução do Pin/Contradef, Ex.:
 
@@ -248,106 +230,114 @@ Measure-Command {
 }
 ```
 
----
+### 6.4. Execução da Amostra 1 (VMProtect)
 
-## 4. Execução da Amostra 1 (VMProtect)
+#### 6.4.1 Módulos isolados
 
-### 4.1 Módulos isolados
-
-#### FunctionInterceptor:
+  - FunctionInterceptor:
 ```powershell
 ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -intercept_fcn -- .\Amostras\36685efcf34c7a7a6f6dd2e48199e4700b5ab8fe3945a50297703dd8daced74f.exe
 ```
 
-#### TraceFcnCall:
+  - TraceFcnCall:
 ```powershell
 ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -trace_exfcn -- .\Amostras\36685efcf34c7a7a6f6dd2e48199e4700b5ab8fe3945a50297703dd8daced74f.exe
 ```
 
-#### TraceMemory:
+  - TraceMemory:
 ```powershell
 ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -trace_mem -- .\Amostras\36685efcf34c7a7a6f6dd2e48199e4700b5ab8fe3945a50297703dd8daced74f.exe
 ```
 
-#### TraceInstructions:
+  - TraceInstructions:
 ```powershell
 ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -trace_instr -- .\Amostras\36685efcf34c7a7a6f6dd2e48199e4700b5ab8fe3945a50297703dd8daced74f.exe
 ```
 
-#### TraceDisassembly:
+  - TraceDisassembly:
 ```powershell
 ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -trace_dasm -- .\Amostras\36685efcf34c7a7a6f6dd2e48199e4700b5ab8fe3945a50297703dd8daced74f.exe
 ```
 
-### 4.2 Execução completa
+#### 6.4.2 Guardar os resultados da amostra (Ex. amostra 1)
+
+1. Crie uma pasta, por ex. **Resultados-Amostra-1** dentro de
+   `Ambiente_Experimentacao`.
+2. Mova todos os `.cdf` recém-gerados para essa pasta.
+
+#### 6.4.3 Execução completa
 
 ```powershell
 ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -intercept_fcn -trace_exfcn -trace_mem -trace_instr -trace_dasm -- .\Amostras\36685efcf34c7a7a6f6dd2e48199e4700b5ab8fe3945a50297703dd8daced74f.exe
 ```
 
----
+Em seguida, mova os `.cdf` para uma pasta dedicada, como
+**Resultados-Execucao-Completa-Amostra-1**.
 
-## 5. Execução da Amostra 2 (Comportamento evasivo)
+### 6.5. Execução da Amostra 2 (Comportamento evasivo)
 
-### 5.1 Módulos isolados
+#### 6.5.1 Módulos isolados
 
-#### FunctionInterceptor:
+  - FunctionInterceptor:
 ```powershell
 ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -intercept_fcn -- .\Amostras\0f20b0c906f3ad95dbf75ed526b2fe4341fdf62ab8c971fc10e340091af75b3b.exe
 ```
 
-#### TraceFcnCall:
+  - TraceFcnCall:
 ```powershell
 ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -trace_exfcn -- .\Amostras\0f20b0c906f3ad95dbf75ed526b2fe4341fdf62ab8c971fc10e340091af75b3b.exe
 ```
 
-#### TraceMemory:
+  - TraceMemory:
 ```powershell
 ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -trace_mem -- .\Amostras\0f20b0c906f3ad95dbf75ed526b2fe4341fdf62ab8c971fc10e340091af75b3b.exe
 ```
 
-#### TraceInstructions:
+  - TraceInstructions:
 ```powershell
 ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -trace_instr -- .\Amostras\0f20b0c906f3ad95dbf75ed526b2fe4341fdf62ab8c971fc10e340091af75b3b.exe
 ```
 
-#### TraceDisassembly
+  - TraceDisassembly
 ```powershell
 ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -trace_dasm -- .\Amostras\0f20b0c906f3ad95dbf75ed526b2fe4341fdf62ab8c971fc10e340091af75b3b.exe
 ```
 
-### 5.2 Execução completa
+#### 6.5.2 Guardar os resultados da amostra (Ex. amostra 1)
+
+1. Crie uma pasta, por ex. **Resultados-Amostra-2** dentro de
+   `Ambiente_Experimentacao`.
+2. Mova todos os `.cdf` recém-gerados para essa pasta.
+
+#### 6.5.3 Execução completa
 
 ```powershell
 ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -intercept_fcn -trace_exfcn -trace_mem -trace_instr -trace_dasm -- .\Amostras\0f20b0c906f3ad95dbf75ed526b2fe4341fdf62ab8c971fc10e340091af75b3b.exe
 ```
 
----
+Em seguida, mova os `.cdf` para uma pasta dedicada, como
+**Resultados-Execucao-Completa-Amostra-2**.
 
-## 6. Observações de desempenho
+### 6.6. Observações de desempenho
 
 * Em hardware **bare-metal** com SSD/NVMe a geração de *logs* é significativamente mais rápida (I/O é o principal gargalo).
 * Arquivos de até **2 GB** podem ser abertos no **VS Code**; para tamanhos maiores, utilize o **EmEditor** ([https://www.emeditor.com/](https://www.emeditor.com/)).
 
 ---
 
-## 📂 Inspeção de Resultados
+## 7. Inspeção de Resultados
 
 Esta seção mostra como abrir os arquivos `.cdf` (gerados pela instrumentação) e inspecionar os logs diretamente na VM. Caso prefira, também é possível transferi-los para o sistema host.
 
----
+### 7.1. Acessar os logs de execução
 
-### 🗂️ Acessar os logs de execução
-
-Após concluir os experimentos, os arquivos `.cdf` estarão localizados na mesma pasta onde o Contradef foi executado. Você pode inspecioná-los diretamente na VM, ou transferi-los para o sistema host, se preferir uma análise externa.
+Após concluir os experimentos, os arquivos `.cdf` podem ser inspecionados diretamente na VM, ou transferidos para o sistema host, se preferir uma análise externa.
 
 > ✅ **Opção recomendada:** Visualizar diretamente na VM usando o EmEditor.
 
-> ⚙️ **Opcional:** Para transferir para o host, configure **Pastas Compartilhadas** no VirtualBox (ver seção anterior).
+> ⚙️ **Opcional:** Para transferir para o host, configure **Pastas Compartilhadas** no VirtualBox.
 
----
-
-### 9️⃣ Instalar o EmEditor para arquivos grandes
+### 7.2. Instalar o EmEditor para arquivos grandes
 
 1. Acesse: [https://www.emeditor.com/#download](https://www.emeditor.com/#download)
 2. Clique em **Download Now**, execute o instalador e clique em **Install**
@@ -357,9 +347,7 @@ Após concluir os experimentos, os arquivos `.cdf` estarão localizados na mesma
   <br><img src=".\docs\Configuracao_ambiente_analise\5_Execucao_experimentos\11.png" alt="Instalador EmEditor" width="60%">
 </p>
 
----
-
-### 🔍 Abrir e inspecionar os logs
+### 7.3. Abrir e inspecionar os logs
 
 1. Clique com o botão direito no arquivo `.cdf`
    → **Abrir com → EmEditor**
@@ -368,20 +356,22 @@ Após concluir os experimentos, os arquivos `.cdf` estarão localizados na mesma
 
 2. Utilize os recursos do EmEditor:
 
-   * Busca por palavras-chave (ex: rndereços, nomes de APIs, valores, threads)
-   * Filtro de linhas por coluna
+   * Busca por palavras-chave, ex: endereços, nomes de APIs, valores, threads, assinaturas específicas (texto)
+   * Busca por expressões regulares
+   * Marcadores
 
 <p align="center"><img src=".\docs\Configuracao_ambiente_analise\5_Execucao_experimentos\13.png" alt="Trace exibido no EmEditor" width="80%"></p>
 
 ---
-# Observações finais
+
+## 8. Observações finais
 
 * Os módulos da Contradef são **complementares**: dados de memória podem ser correlacionados com a linha temporal de chamadas e o fluxo exato de instruções.
 * Atualmente a ferramenta suporta **apenas executáveis PE 64-bit nativos**; não há suporte direto a .NET, Java ou scripts. Contribuições são bem-vindas!
 
 ---
 
-## 📄 Licença
+## 9. Licença
 
 Este projeto está licenciado sob os termos da [Licença MIT](./LICENSE).
 
