@@ -1,7 +1,7 @@
 # Contradef – pintool para investigação de executáveis Windows (x64)
 
 **Contradef** é uma *pintool* construída sobre o Intel Pin cujo objetivo principal é analisar _malware_ evasivo em ambiente Windows 64 bits.  
-Embora possua contramedidas específicas para técnicas de _anti-analysis_ (anti-debug, anti-VM, anti-instrumentation), **também pode ser empregada na análise de executáveis legítimos** sempre que se deseje observar (ou manipular) o comportamento em tempo de execução com alta granularidade.
+Embora possua contramedidas específicas para algumas técnicas de _anti-analysis_ (anti-debug, anti-VM, anti-instrumentation), **também pode ser empregada na análise de executáveis legítimos** sempre que se deseje observar (ou manipular) o comportamento em tempo de execução com alta granularidade.
 
 ---
 
@@ -99,7 +99,7 @@ Para outra pasta, forneça caminhos absolutos para `pin.exe` e `contradef.dll`.*
 
 ---
 
-# Preparando o Ambiente de Experimentação
+# ⚙️ Preparando o Ambiente de Experimentação
 
 ## 1. Ambiente de Execução Recomendado
 
@@ -145,7 +145,7 @@ Para instrumentar binários grandes e gerar *traces* volumosos com estabilidade,
 1. Selecione a ISO como mídia de boot.  
 2. Siga o assistente de instalação normalmente e configure idioma e partição.
 4. Aguarde a etapa de Instalando o Windows ser concluída; a VM reiniciará automaticamente. Caso não aconteça, reinicie manualmente.
-3. Após a instalação, na tela "Entrar com a conta da Microsoft", digite um endereço fictício qualquer como **user@user.com** e clique em **Avançar**.
+3. Após a instalação, siga com o assistente até a tela "Entrar com a conta da Microsoft", digite um endereço fictício qualquer como **user@user.com** e clique em **Avançar**.
 4. O instalador mostrará o link **Configure o Windows com uma conta local**; Clique nesse link para prosseguir sem conta Microsoft.
 5. Informe o nome de usuário local **analista** e clique em **Avançar**.
 6. Deixe em branco a senha para o usuário local e clique em **Avançar**.
@@ -184,7 +184,7 @@ Para instrumentar binários grandes e gerar *traces* volumosos com estabilidade,
 
 ---
 
-# Reproduzindo os Experimentos \[[Ver detalhes](./docs/Configuracao_ambiente_analise/5_Execucao_experimentos/README.md)\]
+# 🧪 Reproduzindo os Experimentos \[[Ver detalhes](./docs/Configuracao_ambiente_analise/5_Execucao_experimentos/README.md)\]
 
 A seguir apresentamos um roteiro mínimo para repetir os experimentos descritos no artigo.  
 
@@ -331,8 +331,61 @@ Measure-Command {
 
 ---
 
+## 📂 Inspeção de Resultados
+
+Esta seção mostra como abrir os arquivos `.cdf` (gerados pela instrumentação) e inspecionar os logs diretamente na VM. Caso prefira, também é possível transferi-los para o sistema host.
+
+---
+
+### 🗂️ Acessar os logs de execução
+
+Após concluir os experimentos, os arquivos `.cdf` estarão localizados na mesma pasta onde o Contradef foi executado. Você pode inspecioná-los diretamente na VM, ou transferi-los para o sistema host, se preferir uma análise externa.
+
+> ✅ **Opção recomendada:** Visualizar diretamente na VM usando o EmEditor.
+
+> ⚙️ **Opcional:** Para transferir para o host, configure **Pastas Compartilhadas** no VirtualBox (ver seção anterior).
+
+---
+
+### 9️⃣ Instalar o EmEditor para arquivos grandes
+
+1. Acesse: [https://www.emeditor.com/#download](https://www.emeditor.com/#download)
+2. Clique em **Download Now**, execute o instalador e clique em **Install**
+
+<p align="center">
+  <img src="10.png" alt="Site EmEditor download" width="60%">
+  <br><img src=".\docs\Configuracao_ambiente_analise\5_Execucao_experimentos\11.png" alt="Instalador EmEditor" width="60%">
+</p>
+
+---
+
+### 🔍 Abrir e inspecionar os logs
+
+1. Clique com o botão direito no arquivo `.cdf`
+   → **Abrir com → EmEditor**
+
+<p align="center"><img src=".\docs\Configuracao_ambiente_analise\5_Execucao_experimentos\12.png" alt="Abrir log no EmEditor" width="60%"></p>
+
+2. Utilize os recursos do EmEditor:
+
+   * Busca por palavras-chave (ex: rndereços, nomes de APIs, valores, threads)
+   * Filtro de linhas por coluna
+
+<p align="center"><img src=".\docs\Configuracao_ambiente_analise\5_Execucao_experimentos\13.png" alt="Trace exibido no EmEditor" width="80%"></p>
+
+---
 # Observações finais
 
 * Os módulos da Contradef são **complementares**: dados de memória podem ser correlacionados com a linha temporal de chamadas e o fluxo exato de instruções.
 * Atualmente a ferramenta suporta **apenas executáveis PE 64-bit nativos**; não há suporte direto a .NET, Java ou scripts. Contribuições são bem-vindas!
 
+---
+
+## 📄 Licença
+
+Este projeto está licenciado sob os termos da [Licença MIT](./LICENSE).
+
+> ⚠️ **Aviso Legal:** Este projeto foi desenvolvido exclusivamente para fins educacionais e de pesquisa em segurança da informação. O uso indevido, malicioso ou em ambientes de produção é de responsabilidade exclusiva do usuário.  
+> A execução dos experimentos envolve a interação com amostras de software malicioso — utilize sempre em ambientes isolados e controlados.
+
+> 📌 O projeto pode depender de ferramentas de terceiros com licenças próprias, como [Intel PIN](https://www.intel.com/content/www/us/en/developer/articles/tool/pin-a-dynamic-binary-instrumentation-tool.html) e [YARA](https://virustotal.github.io/yara/). Verifique e respeite os termos de uso dessas ferramentas.

@@ -133,31 +133,6 @@ Em seguida, mova os `.cdf` para uma pasta dedicada, como
 
 ---
 
-### 9 Instalar o EmEditor para arquivos grandes
-
-1. Acesse [https://www.emeditor.com/#download](https://www.emeditor.com/#download).
-2. Clique **Download Now** → execute o instalador → **Install**.
-
-<p align="center">
-  <img src="10.png" alt="Site EmEditor download" width="60%">
-  <br><img src="11.png" alt="Instalador EmEditor" width="60%">
-</p>
-
----
-
-### 10 Abrir e inspecionar os logs
-
-1. Clique com o botão direito no `.cdf`
-   **→ Abrir com → EmEditor**.
-
-<p align="center"><img src="12.png" alt="Abrir log no EmEditor" width="60%"></p>
-
-2. Use busca, filtros ou colunas CSV do EmEditor para navegar no trace.
-
-<p align="center"><img src="13.png" alt="Trace exibido no EmEditor" width="80%"></p>
-
----
-
 ### Boas-práticas
 
 * **Isolamento** – restaure o snapshot limpo após cada amostra para evitar contaminação cruzada.
