@@ -5,7 +5,7 @@ Siga os passos a seguir:
 
 ---
 
-#### 1 ▪ Abrir a guia *Snapshots*
+#### 1. Abrir a guia *Snapshots*
 
 * Selecione a VM desejada.  
 * Clique no ícone **Criar** (ou use *Snapshot → Criar*).
@@ -16,7 +16,7 @@ Siga os passos a seguir:
 
 ---
 
-#### 2 ▪ Definir nome e (opcional) descrição
+#### 2. Definir nome e (opcional) descrição
 
 * No campo **Nome do Snapshot**, digite algo como **Ambiente Limpo**.  
 * (Opcional) Adicione uma descrição — ex.: “Windows recém-instalado, sem amostras”.  
@@ -28,7 +28,7 @@ Siga os passos a seguir:
 
 ---
 
-#### 3 ▪ Aguardar a conclusão
+#### 3. Aguardar a conclusão
 
 * O VirtualBox exibirá a barra de progresso em “Criando snapshot…”.  
 * Aguarde até chegar a 100 %.
@@ -41,4 +41,4 @@ Siga os passos a seguir:
 
 > 💡 **Dica:** crie snapshots incrementais antes de cada lote de testes — a restauração é quase instantânea e evita contaminação cruzada entre amostras.
 
-[Voltar para a documentação principal](https://github.com/contradef/Contradef?tab=readme-ov-file#6-criar-snapshot-da-vm-limpa-ver-detalhes)
+[Voltar para a documentação principal](https://github.com/contradef/Contradef?tab=readme-ov-file#815-criar-snapshot-da-vm-limpa-ver-detalhes)

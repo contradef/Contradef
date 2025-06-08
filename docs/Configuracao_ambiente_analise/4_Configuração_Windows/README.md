@@ -6,7 +6,7 @@
 
 ---
 
-### 1 Instalar o VirtualBox Guest Additions (opcional)
+### 1. Instalar o VirtualBox Guest Additions (opcional)
 
 > Habilita drivers de vídeo, sincronização de ponteiros e
 > permite o compartilhamento de arquivos entre o sistema host (máquina física) e a máquina virtual (guest), 
@@ -37,7 +37,7 @@
 
 ---
 
-### 2 Baixar o Contradef do repositório
+### 2. Baixar o Contradef do repositório
 
 1. Abra o repositório no GitHub e clique em **Code → Download ZIP**.  
    <p align="center"><img src="07.png" alt="GitHub — Download ZIP" width="75%"></p>
@@ -53,7 +53,7 @@
 
 ---
 
-### 3 Ajustar “Proteção contra Violações”
+### 3. Ajustar “Proteção contra Violações”
 
 1. Abra **Configurações → Atualização & Segurança → Segurança do Windows → Proteção contra vírus e ameaças**.  
 2. Ir até **Proteção contra Violações** e desative o controle.  
@@ -65,14 +65,14 @@
 
 ---
 
-### 4 Desativar Defender, UAC e reiniciar (modo laboratório)
+### 4. Desativar Defender, UAC e reiniciar (modo laboratório)
 
 > **Somente** use estas configurações em VMs isoladas para pesquisa de malware.  
 > Fora desse contexto, mantenha o antivírus e o UAC ativados.
 
 ---
 
-#### 4.1 Executar o script de desativação do UAC e Windows Defender
+#### 4.1. Executar o script de desativação do UAC e Windows Defender
 
 1. Navegue até `Contradef-main\Scripts`.  
 2. Clique com o botão direito em **desativar_defender_uac.bat** → **Executar como administrador**.  
@@ -91,7 +91,7 @@
 
 ---
 
-#### 4.2 Verificar se o Defender foi desativado
+#### 4.2. Verificar se o Defender foi desativado
 
 1. Após o reboot, abra **Segurança do Windows → Proteção contra vírus e ameaças**.  
 2. A mensagem **Nenhum provedor de antivírus ativo** deve aparecer.  
@@ -110,4 +110,4 @@
   
 Crie um novo snapshot (por exemplo, **Base-Tools**) para preservar esse estado antes de iniciar os testes com amostras reais.
 
-[Voltar para a documentação principal](https://github.com/contradef/Contradef?tab=readme-ov-file#7-ajustes-no-windows-convidado-vm-ver-detalhes)
+[Voltar para a documentação principal](https://github.com/contradef/Contradef?tab=readme-ov-file#816-ajustes-no-windows-convidado-vm-ver-detalhes)

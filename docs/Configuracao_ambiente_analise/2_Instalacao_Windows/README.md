@@ -5,7 +5,7 @@
 
 ---
 
-### 1 Selecionar idioma e formato
+### 1. Selecionar idioma e formato
 
 * Escolha **Idioma a instalar**, **Formato de hora e moeda** e **Teclado**.  
 * Clique em **Avançar**.
@@ -16,7 +16,7 @@
 
 ---
 
-### 2 Iniciar a instalação
+### 2. Iniciar a instalação
 
 * Clique em **Instalar agora**.
 
@@ -26,7 +26,7 @@
 
 ---
 
-### 3 Aceitar o contrato de licença
+### 3. Aceitar o contrato de licença
 
 * Marque **Aceito os termos de licença**.  
 * Clique em **Avançar**.
@@ -37,7 +37,7 @@
 
 ---
 
-### 4 Tipo de instalação
+### 4. Tipo de instalação
 
 * Selecione **Personalizada: instalar apenas o Windows (avançado)**.
 
@@ -47,7 +47,7 @@
 
 ---
 
-### 5 Selecionar partição
+### 5. Selecionar partição
 
 * Escolha o espaço não alocado (ou a partição desejada).  
 * Clique em **Avançar**.
@@ -60,7 +60,7 @@ _Recomendado: usar o disco virtual inteiro criado na etapa de hardware (ex.: 200
 
 ---
 
-### 6 Cópia e preparação dos arquivos
+### 6. Cópia e preparação dos arquivos
 
 * Aguarde a etapa de **Instalando o Windows** ser concluída; a VM reiniciará automaticamente. Caso não aconteça, reinicie manualmente.
 
@@ -70,7 +70,7 @@ _Recomendado: usar o disco virtual inteiro criado na etapa de hardware (ex.: 200
 
 ---
 
-### 7 Configurar região
+### 7. Configurar região
 
 * Selecione o país/região (ex.: **Brasil**).  
 * Clique em **Sim**.
@@ -81,7 +81,7 @@ _Recomendado: usar o disco virtual inteiro criado na etapa de hardware (ex.: 200
 
 ---
 
-### 8 Layout do teclado
+### 8. Layout do teclado
 
 * Escolha o layout principal (ex.: **Português (Brasil ABNT)**).  
 * Clique em **Sim**.
@@ -92,7 +92,7 @@ _Recomendado: usar o disco virtual inteiro criado na etapa de hardware (ex.: 200
 
 ---
 
-### 9 Adicionar segundo layout
+### 9. Adicionar segundo layout
 
 * Clique em **Pular** para manter apenas um layout (ou **Adicionar layout** se desejar outro).
 
@@ -102,7 +102,7 @@ _Recomendado: usar o disco virtual inteiro criado na etapa de hardware (ex.: 200
 
 ---
 
-### 10 Usar conta local
+### 10. Usar conta local
 
 * Digite um endereço fictício qualquer como **user@user.com** e clique em **Avançar**.
 
@@ -119,7 +119,7 @@ _Recomendado: usar o disco virtual inteiro criado na etapa de hardware (ex.: 200
 
 ---
 
-### 11 Nome do usuário
+### 11. Nome do usuário
 
 * Informe o nome de usuário local (ex.: **analista**).  
 * Clique em **Avançar**.
@@ -130,7 +130,7 @@ _Recomendado: usar o disco virtual inteiro criado na etapa de hardware (ex.: 200
 
 ---
 
-### 12 Definir senha
+### 12. Definir senha
 
 * Deixe em branco a senha para o usuário local.  
 * Clique em **Avançar**.
@@ -141,7 +141,7 @@ _Recomendado: usar o disco virtual inteiro criado na etapa de hardware (ex.: 200
 
 ---
 
-### 13 Privacidade — Localização
+### 13. Privacidade — Localização
 
 * Selecione **Não** para negar acesso à sua localização.  
 * Clique em **Aceitar**.
@@ -152,7 +152,7 @@ _Recomendado: usar o disco virtual inteiro criado na etapa de hardware (ex.: 200
 
 ---
 
-### 14 Privacidade — Localizar meu dispositivo
+### 14. Privacidade — Localizar meu dispositivo
 
 * Selecione **Não**.  
 * Clique em **Aceitar**.
@@ -163,7 +163,7 @@ _Recomendado: usar o disco virtual inteiro criado na etapa de hardware (ex.: 200
 
 ---
 
-### 15 Privacidade — Dados de diagnóstico
+### 15. Privacidade — Dados de diagnóstico
 
 * Marque **Enviar dados de diagnóstico necessários** (mínimo).  
 * Clique em **Aceitar**.
@@ -174,7 +174,7 @@ _Recomendado: usar o disco virtual inteiro criado na etapa de hardware (ex.: 200
 
 ---
 
-### 16 Privacidade — Escrita à tinta e digitação
+### 16. Privacidade — Escrita à tinta e digitação
 
 * Selecione **Não** para não enviar dados de digitação.  
 * Clique em **Aceitar**.
@@ -185,7 +185,7 @@ _Recomendado: usar o disco virtual inteiro criado na etapa de hardware (ex.: 200
 
 ---
 
-### 17 Privacidade — Experiências personalizadas
+### 17. Privacidade — Experiências personalizadas
 
 * Selecione **Não** para desativar recomendações personalizadas.  
 * Clique em **Aceitar**.
@@ -196,7 +196,7 @@ _Recomendado: usar o disco virtual inteiro criado na etapa de hardware (ex.: 200
 
 ---
 
-### 18 Privacidade — ID de anúncio
+### 18. Privacidade — ID de anúncio
 
 * Selecione **Não** para impedir que apps usem um ID de anúncio.  
 * Clique em **Aceitar**.
@@ -207,7 +207,7 @@ _Recomendado: usar o disco virtual inteiro criado na etapa de hardware (ex.: 200
 
 ---
 
-### 19 Cortana
+### 19. Cortana
 
 * Na tela **Deixe a Cortana ajudar você em suas tarefas**, clique em **Agora não**.
 
@@ -225,4 +225,4 @@ Após essas etapas de conta e privacidade, o Windows concluirá a configuração
 
 Faça um snapshot neste ponto para preservar um estado limpo antes de instalar ferramentas e amostras.
 
-[Voltar para a documentação principal](https://github.com/contradef/Contradef?tab=readme-ov-file#5-instalar-o-windows-na-vm-ver-detalhes)
+[Voltar para a documentação principal](https://github.com/contradef/Contradef?tab=readme-ov-file#814-instalar-o-windows-na-vm-ver-detalhes)

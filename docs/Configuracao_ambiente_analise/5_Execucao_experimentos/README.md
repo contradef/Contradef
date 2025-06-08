@@ -11,7 +11,7 @@
 
 ---
 
-### 1 Desconectar a rede da VM
+### 1. Desconectar a rede da VM
 
 1. **Desligue** a máquina virtual se estiver ligada.  
 2. No VirtualBox, abra **Configurações → Rede → Adaptador 1**.  
@@ -23,7 +23,7 @@ Assim a amostra não terá acesso externo durante a análise.
 
 ---
 
-### 2 Instalar o 7-Zip
+### 2. Instalar o 7-Zip
 
 1. Baixe o instalador `7z24xx-x64.exe` (ou versão mais recente).  
 2. Execute o arquivo e clique em **Install** para aceitar o caminho
@@ -35,7 +35,7 @@ O 7-Zip será integrado ao menu de contexto do Explorador.
 
 ---
 
-### 3 Descompactar as amostras
+### 3. Descompactar as amostras
 
 Em cada amostra compactada, repetir o seguinte procedimento:
 
@@ -60,7 +60,7 @@ descompactadas.
 
 ---
 
-### 4 Abrir o terminal no diretório de trabalho
+### 4. Abrir o terminal no diretório de trabalho
 
 1. Abra o PowerShell como Administrador
 2. Ir para o diretório `Ambiente_Experimentacao` do repositório. Ex.:
@@ -71,7 +71,7 @@ cd "C:\Users\analista\Experimento\Contradef-main\Ambiente_Experimentacao"
 
 ---
 
-### 5 Gerar traces módulo a módulo (Ex. amostra 1)
+### 5. Gerar traces módulo a módulo (Ex. amostra 1)
 
 Para cada flag execute o Pin + Contradef, por exemplo:
 
@@ -107,7 +107,7 @@ Cada execução cria um arquivo `contradef.<PID>.<Modulo>.cdf`.
 
 ---
 
-### 6 Guardar os resultados da amostra (Ex. amostra 1)
+### 6. Guardar os resultados da amostra (Ex. amostra 1)
 
 1. Crie uma pasta, por ex. **Resultados-Amostra-1** dentro de
    `Ambiente_Experimentacao`.
@@ -117,7 +117,7 @@ Cada execução cria um arquivo `contradef.<PID>.<Modulo>.cdf`.
 
 ---
 
-### 7 Captura “completa” (todos os módulos) (Ex. amostra 1)
+### 7. Captura “completa” (todos os módulos) (Ex. amostra 1)
 
 Quando precisar de todos os traces de uma só vez:
 
@@ -136,7 +136,7 @@ Em seguida, mova os `.cdf` para uma pasta dedicada, como
 
 ---
 
-### 8 Repetir os passos 5, 6 e 7 com a amostra 2
+### 8. Repetir os passos 5, 6 e 7 com a amostra 2
 
 ---
 
@@ -148,4 +148,4 @@ Em seguida, mova os `.cdf` para uma pasta dedicada, como
 
 Seguindo estes passos você reproduz os experimentos descritos no artigo.
 
-[Voltar para a documentação principal](https://github.com/contradef/Contradef?tab=readme-ov-file#reproduzindo-os-experimentos-ver-detalhes)
+[Voltar para a documentação principal](https://github.com/contradef/Contradef?tab=readme-ov-file#82-reproduzindo-os-experimentos-ver-detalhes)

@@ -56,4 +56,4 @@ _Recomendado: 80 – 200 GB (VDI de tamanho fixo)._
   <img src="05.png" alt="Iniciando a VM" width="75%">
 </p>
 
-[Voltar para a documentação principal](https://github.com/contradef/Contradef?tab=readme-ov-file#4-criar-a-vm-no-virtualbox-ver-detalhes)
+[Voltar para a documentação principal](https://github.com/contradef/Contradef?tab=readme-ov-file#813-criar-a-vm-no-virtualbox-ver-detalhes)
