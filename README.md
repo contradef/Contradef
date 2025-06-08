@@ -752,4 +752,4 @@ Este projeto está licenciado sob os termos da [Licença MIT](./LICENSE).
 > ⚠️ **Aviso Legal:** Este projeto foi desenvolvido exclusivamente para fins educacionais e de pesquisa em segurança da informação. O uso indevido, malicioso ou em ambientes de produção é de responsabilidade exclusiva do usuário.  
 > A execução dos experimentos envolve a interação com amostras de software malicioso — utilize sempre em ambientes isolados e controlados.
 
-> 📌 O projeto pode depender de ferramentas de terceiros com licenças próprias, como [Intel PIN](https://www.intel.com/content/www/us/en/developer/articles/tool/pin-a-dynamic-binary-instrumentation-tool.html) e [YARA](https://virustotal.github.io/yara/). Verifique e respeite os termos de uso dessas ferramentas.
+> 📌 O projeto depende de ferramentas de terceiros com licenças próprias, como [Intel PIN](https://www.intel.com/content/www/us/en/developer/articles/tool/pin-a-dynamic-binary-instrumentation-tool.html) e [YARA](https://virustotal.github.io/yara/). Verifique e respeite os termos de uso dessas ferramentas.
