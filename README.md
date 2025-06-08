@@ -19,8 +19,8 @@ Desta forma, a análise desses registros permite revelar técnicas de ofuscaçã
   - [3.1 Introdução à execução](#31-introdução-à-execução-da-ferramenta-e-aos-experimentos)
   - [3.2 Características principais](#32-características-principais-da-contradef)
   - [3.3 Arquitetura](#33-arquitetura-da-ferramenta)
-  - [3.4 Ambiente recomendado](#34-ambiente-de-execução-recomendado)
-  - [3.5 Como a execução é estruturada](#35-como-a-execução-é-estruturada)
+  - [3.4 Como a execução é estruturada](#35-como-a-execução-é-estruturada)
+  - [3.5 Ambiente recomendado](#34-ambiente-de-execução-recomendado)
 - [4. Dependências](#4-dependências)
   - [4.1 Compilação (host)](#41-dependências-para-compilação-host-windows)
   - [4.2 Criação da VM](#42-dependências-na-criação-da-vm)
@@ -123,19 +123,36 @@ Os selos considerados são: Disponíveis, Funcionais, Sustentáveis e Reprodutí
 
 # 3. Informações básicas
 
-## 3.1. Introdução à execução da ferramenta e aos experimentos
+## 3.1 Introdução à execução da ferramenta e aos experimentos
 
-A **Contradef** é uma *pintool* baseada no Intel Pin que adiciona,
-em tempo de execução, ganchos (hooks) e pontos de coleta capazes de
-registrar instruções, acessos à memória e chamadas de API em binários Windows x64.  
-Os experimentos descritos neste repositório têm dois objetivos:
+**Contradef** é uma *pintool* construída sobre o Intel Pin que injeta
+ganchos (*hooks*) em tempo de execução para registrar instruções,
+acessos à memória e chamadas de API em executáveis Windows x64.
 
-1. **Validar funcionalidades** – Demonstrar que cada módulo (Intercept,
-   TraceFcn, TraceMem, TraceInstr, TraceDasm) funciona isoladamente e
-   em conjunto, gerando *logs* coerentes.
-2. **Avaliar impacto** – Medir tempo de execução e tamanho dos *traces*
-   em cenários com amostras reais de malware. Utilizamos duas amostras:
-   *Amostra 1* protegida com **VMProtect** e *Amostra 2* que implementa métodos anti-análise.
+Os experimentos deste repositório têm dois propósitos principais:
+
+1. **Validar funcionalidades** – comprovar que cada módulo  
+   (`InterceptFunctions`, `TraceFcn`, `TraceMem`, `TraceInstr`,
+   `TraceDasm`) opera isoladamente **e** em conjunto, gerando *logs*
+   coerentes.
+2. **Avaliar impacto** – medir tempo de execução e volume de *traces*
+   ao instrumentar **amostras reais de malware**  
+   (Amostra 1 protegida por **VMProtect** e Amostra 2 que adota técnicas
+   anti-análise).
+
+Nos experimentos, a Contradef é executada dentro de uma máquina virtual Windows x64 sem acesso à rede, partindo sempre de um snapshot limpo. Inicialmente cada módulo da ferramenta é ativado isoladamente sobre dois executáveis de referência: um protegido pelo empacotador VMProtect e outro que utiliza múltiplas técnicas anti-análise. Em seguida a pintool é aplicada com todos os módulos simultâneos para produzir um *trace* completo, enquanto o tempo de execução e o tamanho dos arquivos de log são coletados para avaliar overhead. Ao final, os registros gerados são inspecionados em um editor capaz de lidar com grandes volumes de texto (EmEditor), permitindo confirmar a captura de instruções, parâmetros de APIs e acessos de memória, bem como observar como as proteções dos binários se manifestam em cada estágio da análise.
+
+> ⚠️ **Ambiente isolado e controlado**  
+> Todos os testes são executados **dentro de uma VM**, restaurada de
+> snapshot limpo após cada amostra, evitando contaminação do host e
+> garantindo reprodutibilidade.
+
+> 💡 **Uso em binários benignos**  
+> Para depuração, engenharia reversa ou estudo de empacotadores em
+> executáveis legítimos, a Contradef pode rodar diretamente no host sem
+> VM nem desativar antivírus — basta chamar Pin + Contradef via PowerShell
+> e apontar para o binário benigno (por exemplo, `helloworld.exe`).
+
 
 ## 3.2. Características principais da Contradef
 
@@ -171,23 +188,7 @@ Os experimentos descritos neste repositório têm dois objetivos:
 
 > *A natureza modular da Contradef permite ativar apenas os blocos necessários sem recompilar o restante da ferramenta.*
 
-## 3.4. Ambiente de Execução Recomendado
-
-Para executar os experimentos, sugerimos a configuração abaixo:
-
-| Camada              | Especificação recomendada |
-|---------------------|---------------------------|
-| **Máquina hospedeira** | • CPU multi-core com VT-x/AMD-V habilitado<br>• **RAM:** ≥ 16 GB<br>• **Armazenamento:** SSD NVMe ≥ 500 GB |
-| **Hypervisor**      | Oracle **VirtualBox 7.0** (ou superior) |
-| **Máquina virtual** | • **SO convidado:** Windows 10/11 x64<br>• **vCPU:** ≥ 4 núcleos dedicados<br>• **RAM:** 6 – 8 GB<br>• **Disco:** 80 – 200 GB<br> |
-
-> **Por quê VirtualBox?** Suporte robusto a snapshots e VT-x/AMD-V, além de compatibilidade com Intel Pin.
-
-> ⚠️ **Importante:** se você só quer executar os experimentos, a DLL precompilada da **Contradef**  
-> está em **`Ambiente_Experimentacao\ContradefDll\contradef.dll`**.  
-> Compile apenas se desejar alterar o código-fonte.
-
-## 3.5. Como a execução é estruturada
+## 3.4. Como a execução é estruturada
 
 1. **Ambiente isolado** – Todos os testes acontecem dentro de uma VM
    Windows 10/11 **sem rede** e partindo de um snapshot limpo. 
@@ -209,6 +210,22 @@ Ao completar o roteiro de experimentação o avaliador terá:
 * Métricas de tempo via `Measure-Command`.
 
 A execução detalhada dos passos será explicada em detalhes mais adiante.
+
+## 3.5. Ambiente de Execução Recomendado
+
+Para executar os experimentos, sugerimos a configuração abaixo:
+
+| Camada              | Especificação recomendada |
+|---------------------|---------------------------|
+| **Máquina hospedeira** | • CPU multi-core com VT-x/AMD-V habilitado<br>• **RAM:** ≥ 16 GB<br>• **Armazenamento:** SSD NVMe ≥ 500 GB |
+| **Hypervisor**      | Oracle **VirtualBox 7.0** (ou superior) |
+| **Máquina virtual** | • **SO convidado:** Windows 10/11 x64<br>• **vCPU:** ≥ 4 núcleos dedicados<br>• **RAM:** 6 – 8 GB<br>• **Disco:** 80 – 200 GB<br> |
+
+> **Por quê VirtualBox?** Suporte robusto a snapshots e VT-x/AMD-V, além de compatibilidade com Intel Pin.
+
+> ⚠️ **Importante:** se você só quer executar os experimentos, a DLL precompilada da **Contradef**  
+> está em **`Ambiente_Experimentacao\ContradefDll\contradef.dll`**.  
+> Compile apenas se desejar alterar o código-fonte.
 
 ---
 
@@ -688,10 +705,11 @@ Measure-Command {
 Em seguida, mova os `.cdf` para uma pasta dedicada, como
 **Resultados-Execucao-Completa-Amostra-2**.
 
-### 8.2.6. Observações de desempenho
+### 8.2.6 Observações de desempenho
 
-* Em hardware **bare-metal** com SSD/NVMe a geração de *logs* é significativamente mais rápida (I/O é o principal gargalo).
-* Arquivos de até **2 GB** podem ser abertos no **VS Code**; para tamanhos maiores, utilize o **EmEditor** ([https://www.emeditor.com/](https://www.emeditor.com/)).
+* Os tempos obtidos podem variar conforme o hardware do host (hospedeiro); resultados diferentes dos apresentados no artigo são esperados em máquinas com diferentes caracteristicas de processamento ou disco.
+* Em hosts **bare-metal** equipados com SSD ou NVMe, a geração dos arquivos de log é muito mais ágil, já que o gargalo principal do Pin + Contradef é a gravação em disco.
+* Logs com até **2 GB** abrem sem problemas no **VS Code**; acima desse limite recomenda-se o **EmEditor** ([https://www.emeditor.com/](https://www.emeditor.com/)) ou outra ferramenta voltada a arquivos de grande porte.
 
 ---
 
@@ -699,33 +717,31 @@ Em seguida, mova os `.cdf` para uma pasta dedicada, como
 
 Esta seção mostra como abrir os arquivos `.cdf` (gerados pela instrumentação) e inspecionar os logs diretamente na VM. Caso prefira, também é possível transferi-los para o sistema host.
 
-### 8.3.1. Acessar os logs de execução
+### 8.3.1 Acessar os logs de execução
 
-Após concluir os experimentos, os arquivos `.cdf` podem ser inspecionados diretamente na VM, ou transferidos para o sistema host, se preferir uma análise externa.
+Concluídos os experimentos, os arquivos `.cdf` podem ser inspecionados diretamente na VM ou transferidos para o host para análise externa.
 
-> ✅ **Opção recomendada:** Visualizar diretamente na VM usando o EmEditor.
+> ⚙️ **Opcional** — se preferir analisar no host, ative **Pastas Compartilhadas** no VirtualBox e compartilhe apenas os arquivos `.cdf`.
 
-> ⚙️ **Opcional:** Para transferir para o host, configure **Pastas Compartilhadas** no VirtualBox.
+> ⚠️ **Importante** – os resultados podem variar de uma execução para outra, mesmo usando a mesma amostra:  
+> • Fluxos internos diferentes (threads, caminhos de código) geram ordem e quantidade de eventos distintos.  
+> • Durante desempacotamento ou realocação de código, endereços de memória mudam, refletindo-se nos *logs*.  
+> Essas diferenças são esperadas e não indicam falha da ferramenta nem inconsistência nos resultados.
 
-### 8.3.2. Instalar o EmEditor para arquivos grandes
+### 8.3.2 Instalar o EmEditor para arquivos grandes
 
-1. Acesse: [https://www.emeditor.com/#download](https://www.emeditor.com/#download)
-2. Clique em **Download Now**, execute o instalador e clique em **Install**
+1. Acesse <https://www.emeditor.com/#download>.  
+2. Clique em **Download Now**, execute o instalador e confirme em **Install**.
 
-### 8.3.3. Abrir e inspecionar os logs
+### 8.3.3 Abrir e inspecionar os logs
 
-1. Clique com o botão direito no arquivo `.cdf`
-   → **Abrir com → EmEditor**
+1. Clique com o botão direito no arquivo `.cdf` → **Abrir com → EmEditor**.  
+   <p align="center"><img src="docs/Configuracao_ambiente_analise/5_Execucao_experimentos/12.png" alt="Abrir log no EmEditor" width="60%"></p>
 
-<p align="center"><img src=".\docs\Configuracao_ambiente_analise\5_Execucao_experimentos\12.png" alt="Abrir log no EmEditor" width="60%"></p>
+2. Use os recursos do EmEditor para explorar o traço: busca por palavras-chave (endereços, APIs, strings), expressões regulares, marcadores, filtragem por coluna etc.  
+   <p align="center"><img src="docs/Configuracao_ambiente_analise/5_Execucao_experimentos/13.png" alt="Trace exibido no EmEditor" width="80%"></p>
 
-2. Utilize os recursos do EmEditor:
-
-   * Busca por palavras-chave, ex: endereços, nomes de APIs, valores, threads, assinaturas específicas (texto)
-   * Busca por expressões regulares
-   * Marcadores
-
-<p align="center"><img src=".\docs\Configuracao_ambiente_analise\5_Execucao_experimentos\13.png" alt="Trace exibido no EmEditor" width="80%"></p>
+Mesmo que dois *logs* de uma mesma amostra apresentem diferenças pontuais, os eventos essenciais — chamadas de API críticas, regiões de memória executável e sequências de instruções-chave — permanecem consistentes e suficientes para replicar as conclusões do artigo.
 
 ---
 
