@@ -45,3 +45,6 @@ Generated\ Files/
 
 yaracontradef/libyara/Debug
 yaracontradef/yaraCdef/Debug
+
+pin/
+!pin/README.md
