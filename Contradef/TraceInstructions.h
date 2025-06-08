@@ -20,15 +20,11 @@
 #include "utils.h"
 #include <unistd.h>
 #include "pin.H"
-#include "instlib.H"
-#include "control_manager.H"
 #include "regvalue_utils.h"
 #include "Instrumentation.h"
 #include "InitParams.h"
 
 namespace TraceInstructions {
-	using namespace CONTROLLER;
-	using namespace INSTLIB;
 
 	/* ===================================================================== */
 	/* Global Variables */
@@ -39,8 +35,6 @@ namespace TraceInstructions {
 	extern std::vector<char> buffer;
 	extern std::ofstream out;
 	extern INT32 enabled;
-	extern FILTER filter;
-	extern ICOUNT icount;
 	extern const UINT32 MaxEmitArgs;
 	extern AFUNPTR emitFuns[];
 	extern std::stack<ADDRINT> callStack;
@@ -51,7 +45,6 @@ namespace TraceInstructions {
 
 	BOOL Emit(THREADID threadid);
 	VOID Flush();
-	VOID Handler(EVENT_TYPE ev, VOID*, CONTEXT* ctxt, VOID*, THREADID, bool bcast);
 	VOID EmitNoValues(THREADID threadid, std::string* str);
 	VOID Emit1Values(THREADID threadid, std::string* str, std::string* reg1str, ADDRINT reg1val);
 	VOID Emit2Values(THREADID threadid, std::string* str, std::string* reg1str, ADDRINT reg1val, std::string* reg2str, ADDRINT reg2val);
@@ -69,7 +62,6 @@ namespace TraceInstructions {
 	VOID EmitWrite(ADDRINT addr, THREADID threadid, std::string* str, UINT32 size);
 	VOID EmitRead(ADDRINT addr, THREADID threadid, std::string* str, VOID* ea, UINT32 size);
 	VOID Indent();
-	VOID EmitICount();
 	VOID EmitDirectCall(THREADID threadid, ADDRINT instAddress, std::string* str, INT32 tailCall, ADDRINT arg0, ADDRINT arg1, ADDRINT arg2, ADDRINT arg3, ADDRINT arg4, ADDRINT arg5, ADDRINT arg6);
 	VOID EmitIndirectCall(THREADID threadid, ADDRINT instAddress, std::string* str, ADDRINT target, ADDRINT arg0, ADDRINT arg1, ADDRINT arg2, ADDRINT arg3, ADDRINT arg4, ADDRINT arg5, ADDRINT arg6);
 	VOID EmitReturn(THREADID threadid, ADDRINT instAddress, string* str, ADDRINT retAddr, ADDRINT ret0);

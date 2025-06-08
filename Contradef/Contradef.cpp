@@ -10,10 +10,10 @@
 
 INT32 Usage()
 {
-    cerr << "Esta ferramenta PIN fornece informação sobre possíveis comportamentos evasivos (antianálise) presentes em executáveis\n"
+    std::cerr << "Esta ferramenta PIN fornece informação sobre possíveis comportamentos evasivos (antianálise) presentes em executáveis\n"
         "\n";
-    cerr << KNOB_BASE::StringKnobSummary();
-    cerr << endl;
+    std::cerr << KNOB_BASE::StringKnobSummary();
+    std::cerr << std::endl;
     return -1;
 }
 

@@ -3,9 +3,6 @@
 #include "TraceInstructions.h"
 #include "InstrumentationUtils.h"
 
-using namespace CONTROLLER;
-using namespace INSTLIB;
-
 /* ===================================================================== */
 /* Global Variables */
 /* ===================================================================== */
@@ -18,8 +15,6 @@ const std::size_t TraceInstructions::bufferSize = 512 * 1024;
 std::vector<char> TraceInstructions::buffer(bufferSize);  // o buffer precisa durar enquanto o ofstream estiver aberto
 
 INT32 TraceInstructions::enabled = 0;
-FILTER TraceInstructions::filter;
-ICOUNT TraceInstructions::icount;
 const UINT32 TraceInstructions::MaxEmitArgs = 4;
 AFUNPTR TraceInstructions::emitFuns[] = { AFUNPTR(TraceInstructions::EmitNoValues), AFUNPTR(TraceInstructions::Emit1Values), AFUNPTR(TraceInstructions::Emit2Values), AFUNPTR(TraceInstructions::Emit3Values), AFUNPTR(TraceInstructions::Emit4Values) };
 std::stack<ADDRINT> TraceInstructions::callStack;
@@ -35,31 +30,6 @@ BOOL TraceInstructions::Emit(THREADID threadid) {
 
 VOID TraceInstructions::Flush() {
     if (KnobFlush) out << std::flush;
-}
-
-VOID TraceInstructions::Handler(EVENT_TYPE ev, VOID*, CONTEXT* ctxt, VOID*, THREADID, bool bcast) {
-    switch (ev) {
-    case EVENT_START:
-        enabled = 1;
-        PIN_RemoveInstrumentation();
-#if defined(TARGET_IA32) || defined(TARGET_IA32E)
-        if (ctxt) PIN_ExecuteAt(ctxt);
-#endif
-        break;
-    case EVENT_STOP:
-        enabled = 0;
-        PIN_RemoveInstrumentation();
-        if (KnobEarlyOut) {
-            std::cerr << "Exiting due to -early_out" << std::endl;
-            exit(0);
-        }
-#if defined(TARGET_IA32) || defined(TARGET_IA32E)
-        if (ctxt) PIN_ExecuteAt(ctxt);
-#endif
-        break;
-    default:
-        ASSERTX(false);
-    }
 }
 
 VOID TraceInstructions::EmitNoValues(THREADID threadid, std::string* str) {
@@ -408,7 +378,7 @@ VOID TraceInstructions::CaptureWriteEa(THREADID threadid, VOID* addr) {
 
 VOID TraceInstructions::ShowN(UINT32 n, VOID* ea)
 {
-    out.unsetf(ios::showbase);
+    out.unsetf(std::ios::showbase);
     // Print out the bytes in "big endian even though they are in memory little endian.
     // This is most natural for 8B and 16B quantities that show up most frequently.
     // The address pointed to
@@ -426,7 +396,7 @@ VOID TraceInstructions::ShowN(UINT32 n, VOID* ea)
         if (((reinterpret_cast<ADDRINT>(ea) + n - i - 1) & 0x3) == 0 && i < n - 1) out << "_";
     }
     out << std::setfill(' ');
-    out.setf(ios::showbase);
+    out.setf(std::ios::showbase);
     if (n > 512) delete[] x;
 }
 
@@ -448,14 +418,14 @@ VOID TraceInstructions::EmitWrite(ADDRINT addr, THREADID threadid, std::string *
     switch (size)
     {
     case 0:
-        out << "0 repeat count" << endl;
+        out << "0 repeat count" << std::endl;
         break;
 
     case 1:
     {
         UINT8 x;
         PIN_SafeCopy(&x, static_cast<UINT8*>(ea), 1);
-        out << "*(UINT8*)" << ea << " = " << static_cast<UINT32>(x) << endl;
+        out << "*(UINT8*)" << ea << " = " << static_cast<UINT32>(x) << std::endl;
     }
     break;
 
@@ -463,7 +433,7 @@ VOID TraceInstructions::EmitWrite(ADDRINT addr, THREADID threadid, std::string *
     {
         UINT16 x;
         PIN_SafeCopy(&x, static_cast<UINT16*>(ea), 2);
-        out << "*(UINT16*)" << ea << " = " << x << endl;
+        out << "*(UINT16*)" << ea << " = " << x << std::endl;
     }
     break;
 
@@ -471,7 +441,7 @@ VOID TraceInstructions::EmitWrite(ADDRINT addr, THREADID threadid, std::string *
     {
         UINT32 x;
         PIN_SafeCopy(&x, static_cast<UINT32*>(ea), 4);
-        out << "*(UINT32*)" << ea << " = " << x << endl;
+        out << "*(UINT32*)" << ea << " = " << x << std::endl;
     }
     break;
 
@@ -479,14 +449,14 @@ VOID TraceInstructions::EmitWrite(ADDRINT addr, THREADID threadid, std::string *
     {
         UINT64 x;
         PIN_SafeCopy(&x, static_cast<UINT64*>(ea), 8);
-        out << "*(UINT64*)" << ea << " = " << x << endl;
+        out << "*(UINT64*)" << ea << " = " << x << std::endl;
     }
     break;
 
     default:
-        out << "*(UINT" << dec << size * 8 << hex << ")" << ea << " = ";
+        out << "*(UINT" << std::dec << size * 8 << std::hex << ")" << ea << " = ";
         ShowN(size, ea);
-        out << endl;
+        out << std::endl;
         break;
     }
 
@@ -507,14 +477,14 @@ VOID TraceInstructions::EmitRead(ADDRINT addr, THREADID threadid, std::string* s
     switch (size)
     {
     case 0:
-        out << "0 repeat count" << endl;
+        out << "0 repeat count" << std::endl;
         break;
 
     case 1:
     {
         UINT8 x;
         PIN_SafeCopy(&x, static_cast<UINT8*>(ea), 1);
-        out << static_cast<UINT32>(x) << " = *(UINT8*)" << ea << endl;
+        out << static_cast<UINT32>(x) << " = *(UINT8*)" << ea << std::endl;
     }
     break;
 
@@ -522,7 +492,7 @@ VOID TraceInstructions::EmitRead(ADDRINT addr, THREADID threadid, std::string* s
     {
         UINT16 x;
         PIN_SafeCopy(&x, static_cast<UINT16*>(ea), 2);
-        out << x << " = *(UINT16*)" << ea << endl;
+        out << x << " = *(UINT16*)" << ea << std::endl;
     }
     break;
 
@@ -530,7 +500,7 @@ VOID TraceInstructions::EmitRead(ADDRINT addr, THREADID threadid, std::string* s
     {
         UINT32 x;
         PIN_SafeCopy(&x, static_cast<UINT32*>(ea), 4);
-        out << x << " = *(UINT32*)" << ea << endl;
+        out << x << " = *(UINT32*)" << ea << std::endl;
     }
     break;
 
@@ -538,13 +508,13 @@ VOID TraceInstructions::EmitRead(ADDRINT addr, THREADID threadid, std::string* s
     {
         UINT64 x;
         PIN_SafeCopy(&x, static_cast<UINT64*>(ea), 8);
-        out << x << " = *(UINT64*)" << ea << endl;
+        out << x << " = *(UINT64*)" << ea << std::endl;
     }
     break;
 
     default:
         ShowN(size, ea);
-        out << " = *(UINT" << dec << size * 8 << hex << ")" << ea << endl;
+        out << " = *(UINT" << std::dec << size * 8 << std::hex << ")" << ea << std::endl;
         break;
     }
 
@@ -563,16 +533,9 @@ VOID TraceInstructions::Indent()
     }
 }
 
-VOID TraceInstructions::EmitICount()
-{ 
-    out << setw(10) << dec << icount.Count() << hex << " "; 
-}
-
 VOID TraceInstructions::EmitDirectCall(THREADID threadid, ADDRINT instAddress, string* str, INT32 tailCall, ADDRINT arg0, ADDRINT arg1, ADDRINT arg2, ADDRINT arg3, ADDRINT arg4, ADDRINT arg5, ADDRINT arg6)
 {
     if (!Emit(threadid)) return;
-
-    EmitICount();
 
     if (tailCall)
     {
@@ -587,7 +550,7 @@ VOID TraceInstructions::EmitDirectCall(THREADID threadid, ADDRINT instAddress, s
     PIN_MutexLock(&fileOutMutex);
     Indent();
 
-    out << *str << " [T" << threadid << "] (" << arg0 << ", " << arg1 << ", " << arg2 << ", " << arg3 << ", " << arg4 << ", " << arg5 << ", " << arg6 << ", ...)" << endl;
+    out << *str << " [T" << threadid << "] (" << arg0 << ", " << arg1 << ", " << arg2 << ", " << arg3 << ", " << arg4 << ", " << arg5 << ", " << arg6 << ", ...)" << std::endl;
 
     indent++;
 
@@ -605,7 +568,7 @@ VOID TraceInstructions::EmitIndirectCall(THREADID threadid, ADDRINT instAddress,
     callStack.push(instAddress);
 
     PIN_MutexLock(&fileOutMutex);
-    EmitICount();
+
     Indent();
     out << *str;
 
@@ -615,7 +578,7 @@ VOID TraceInstructions::EmitIndirectCall(THREADID threadid, ADDRINT instAddress,
 
     PIN_UnlockClient();
     
-    out << s << " [T" << threadid << "] (" << arg0 << ", " << arg1 << ", " << arg2 << ", " << arg3 << ", " << arg4 << ", " << arg5 << ", " << arg6 << ", ...)" << endl;
+    out << s << " [T" << threadid << "] (" << arg0 << ", " << arg1 << ", " << arg2 << ", " << arg3 << ", " << arg4 << ", " << arg5 << ", " << arg6 << ", ...)" << std::endl;
     indent++;
 
     Flush();
@@ -630,7 +593,6 @@ VOID TraceInstructions::EmitReturn(THREADID threadid, ADDRINT instAddress, strin
 
     PIN_MutexLock(&fileOutMutex);
 
-    EmitICount();
     indent--;
     if (indent < 0)
     {
@@ -646,7 +608,7 @@ VOID TraceInstructions::EmitReturn(THREADID threadid, ADDRINT instAddress, strin
         callStack.pop(); 
     }
 
-    out << *str << " [T" << threadid << "] returns: " << ret0 << ", ret addr: " << retAddr << ", call addr: " << callAddr << endl;
+    out << *str << " [T" << threadid << "] returns: " << ret0 << ", ret addr: " << retAddr << ", call addr: " << callAddr << std::endl;
 
     Flush();
     PIN_MutexUnlock(&fileOutMutex);
@@ -790,8 +752,6 @@ VOID TraceInstructions::InstructionTrace(TRACE trace, INS ins)
 
 VOID TraceInstructions::Trace(TRACE trace, VOID* v)
 {
-    if (!filter.SelectTrace(trace)) return;
-
     if (enabled)
     {
         for (BBL bbl = TRACE_BblHead(trace); BBL_Valid(bbl); bbl = BBL_Next(bbl))
@@ -816,7 +776,7 @@ static void TraceInstructions::OnSig(THREADID threadIndex, CONTEXT_CHANGE_REASON
     if (ctxtFrom != 0)
     {
         ADDRINT address = PIN_GetContextReg(ctxtFrom, REG_INST_PTR);
-        out << "SIG signal=" << sig << " on thread " << threadIndex << " at address " << hex << address << dec << " ";
+        out << "SIG signal=" << sig << " on thread " << threadIndex << " at address " << std::hex << address << std::dec << " ";
     }
 
     switch (reason)
@@ -851,9 +811,6 @@ static void TraceInstructions::OnSig(THREADID threadIndex, CONTEXT_CHANGE_REASON
 
 }
 
-static CONTROL_MANAGER control;
-static SKIPPER skipper;
-
 void TraceInstructions::enable() {
     TraceInstructions::enabled = 1;
 }
@@ -865,20 +822,14 @@ int TraceInstructions::InitTrace(string pid, std::string filename)
 {
     filename += "." + pid + ".TraceInstructions.cdf";
     out.open(filename.c_str());
-    out << hex << right;
-    out.setf(ios::showbase);
+    out << std::hex << std::right;
+    out.setf(std::ios::showbase);
     out.rdbuf()->pubsetbuf(&buffer[0], bufferSize);
-
-    control.RegisterHandler(Handler, 0, FALSE);
-    control.Activate();
-    skipper.CheckKnobs(0);
 
     TRACE_AddInstrumentFunction(Trace, 0);
     PIN_AddContextChangeFunction(OnSig, 0);
 
-
-    filter.Activate();
-    icount.Activate();
+    enabled = 1;
 
     return 0;
 }
