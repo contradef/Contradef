@@ -74,7 +74,7 @@ Desta forma, a análise desses registros permite revelar técnicas de ofuscaçã
 4. **Dependências** – requisitos de hardware / software para compilar, criar a VM e executar a ferramenta.
 5. **Preocupações com segurança** – boas-práticas e checklist para garantir isolamento e evitar contaminação.
 6. **Instalação** – procedimentos de compilação (opcional) e execução básica da pintool.
-7. **Teste mínimo** – passo a passo rápido usando o executável benigno *helloworld.exe* para validar a instalação.
+7. **Teste mínimo** – passo a passo rápido usando o executável benigno (7Zip) para validar a instalação.
 8. **Experimentos** – preparação detalhada do ambiente, execução das amostras, coleta e análise de logs.
 9. **Licença** – termos de uso e distribuição do código-fonte e dos artefatos.
 
@@ -151,7 +151,7 @@ Nos experimentos, a Contradef é executada dentro de uma máquina virtual Window
 > Para depuração, engenharia reversa ou estudo de empacotadores em
 > executáveis legítimos, a Contradef pode rodar diretamente no host sem
 > VM nem desativar antivírus — basta chamar Pin + Contradef via PowerShell
-> e apontar para o binário benigno (por exemplo, `helloworld.exe`).
+> e apontar para o binário benigno (por exemplo, `7za.exe`).
 
 
 ## 3.2. Características principais da Contradef
@@ -244,7 +244,7 @@ execução dos testes na VM — indicando versões mínimas e links oficiais.
 |------------|---------------|-------------|
 | **Visual Studio 2019** (ou 2022) | Community/Pro | Instale o *Desktop C++ Workload*. No VS 2022 marque o **toolset v142** para manter compatibilidade com o Pin. |
 | **Windows 10 SDK** | 10.0.19041 | Vem com o instalador do VS. |
-| **Intel Pin** | 3.28 (x64, MSVC) | Baixe em <https://software.intel.com/sites/landingpage/pintool/> e extraia em `pin\` (não altere a árvore de diretórios). |
+| **Intel Pin** | 3.28 (x64, MSVC) | Baixe em <https://software.intel.com/sites/landingpage/pintool/downloads/pin-3.28-98749-g6643ecee5-msvc-windows.zip> e extraia em `pin\` (não altere a árvore de diretórios). |
 | **YARA** *(já incluído)* | 4.5.2 | Já fornecido em `yara\` deste repositório (sob licença BSD 3-Clause). |
 
 ## 4.2. Dependências na criação da VM
@@ -393,10 +393,6 @@ Copie-o para a VM ou substitua a DLL existente em `Ambiente_Experimentacao\Contr
 ```
 
 *Os arquivos de log são gravados no diretório atual do terminal.
-
----
-
-Claro! Abaixo está a versão atualizada do trecho, substituindo o uso do `helloworld.exe` pelo **executável standalone do 7-Zip (7zFM.exe)** — uma ferramenta legítima, portátil e ideal para um **teste seguro de instrumentação no host**.
 
 ---
 
