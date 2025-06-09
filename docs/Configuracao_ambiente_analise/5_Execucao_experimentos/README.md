@@ -25,7 +25,7 @@ Assim a amostra não terá acesso externo durante a análise.
 
 ### 2. Instalar o 7-Zip
 
-1. Baixe o instalador `7z24xx-x64.exe` (ou versão mais recente).  
+1. Baixe o instalador `7z24xx-x64.exe` (ou versão mais recente) <https://www.7-zip.org/download.html>.  
 2. Execute o arquivo e clique em **Install** para aceitar o caminho
    padrão `C:\Program Files\7-Zip`.
 

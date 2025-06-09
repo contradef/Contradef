@@ -151,7 +151,7 @@ Nos experimentos, a Contradef é executada dentro de uma máquina virtual Window
 > Para depuração, engenharia reversa ou estudo de empacotadores em
 > executáveis legítimos, a Contradef pode rodar diretamente no host sem
 > VM nem desativar antivírus — basta chamar Pin + Contradef via PowerShell
-> e apontar para o binário benigno (por exemplo, `7za.exe`).
+> e apontar para o binário benigno.
 
 
 ## 3.2. Características principais da Contradef
@@ -265,7 +265,7 @@ Ferramentas auxiliares (dentro da VM):
 
 | Ferramenta | Finalidade | Link |
 |------------|------------|------|
-| **7-Zip** | Descompactar amostras protegidas com a senha. | <https://www.7-zip.org/> |
+| **7-Zip** | Descompactar amostras protegidas com a senha. | <https://www.7-zip.org/download.html> |
 | **EmEditor** | Abrir *logs* `.cdf` maiores que 2 GB sem travar. | <https://www.emeditor.com/> |
 | **VirtualBox Guest Additions** | Habilitar pastas compartilhadas (opcional). | Incluído na ISO do VirtualBox |
 
