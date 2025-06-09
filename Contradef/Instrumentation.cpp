@@ -23,7 +23,6 @@ VOID PauseAtEntryPoint(ADDRINT entryAddress) {
 }
 
 
-// TODO: Transferir para o detector de seq de inst
 VOID InstrumentInstructionSeq(INS ins, VOID* v)
 {
     seq_detector.InstructionTrace(ins, &seq_detector, onCall);

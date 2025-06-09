@@ -38,7 +38,6 @@
 BOOL IsMainExecutable(ADDRINT address);
 ADDRINT GetRtnAddr(ADDRINT instAddress);
 std::string getFileName(const std::string& filePath);
-VOID GetSectionInfo(IMG img, std::ofstream& OutFile);
 VOID PauseAtEntryPoint(ADDRINT entryAddress);
 VOID PauseAtAddress(ADDRINT address);
 VOID InstrumentInstructionSeq(INS ins, VOID* v);
