@@ -244,7 +244,7 @@ execução dos testes na VM — indicando versões mínimas e links oficiais.
 |------------|---------------|-------------|
 | **Visual Studio 2019** (ou 2022) | Community/Pro | Instale o *Desktop C++ Workload*. No VS 2022 marque o **toolset v142** para manter compatibilidade com o Pin. |
 | **Windows 10 SDK** | 10.0.19041 | Vem com o instalador do VS. |
-| **Intel Pin** | 3.28 (x64, MSVC) | Baixe em <https://software.intel.com/sites/landingpage/pintool/downloads/pin-3.28-98749-g6643ecee5-msvc-windows.zip> e extraia em `pin\` (não altere a árvore de diretórios). |
+| **Intel Pin** | 3.28 (x64, MSVC) | Baixe em <https://software.intel.com/sites/landingpage/pintool/downloads/pin-3.28-98749-g6643ecee5-msvc-windows.zip> e extraia em `pin\` (mova **somente** o conteúdo evitando manter a subpasta gerada pela extração). |
 | **YARA** *(já incluído)* | 4.5.2 | Já fornecido em `yara\` deste repositório (sob licença BSD 3-Clause). |
 
 ## 4.2. Dependências na criação da VM
@@ -343,6 +343,9 @@ cd Contradef
 2. **Windows 10 SDK ≥ 10.0.19041**
 3. **Intel Pin 3.28 (x64)**
    *Baixe e descompacte; copie a pasta para `pin\` no repositório.*
+
+    > ⚠️ **Atenção:** Use exclusivamente a versão **MSVC** do Intel Pin; a Contradef não é compatível com o build baseado em **Clang**.
+    > Após baixar o Pin 3.28, extraia o pacote e mova **somente** o conteúdo (diretórios *ia32*, *intel64*, *extras*, *doc*, o executável `pin.exe` etc.) para a pasta `pin\` do repositório, evitando manter a subpasta gerada pela extração.
 
     ```
     pin/
@@ -513,22 +516,38 @@ Com isso, é possível confirmar que a pintool está operando corretamente antes
 2. **Baixar e descompactar o Contradef** (ZIP do GitHub).  
 Descompactar o arquivo no diretório `C:\Users\analista\Experimento`, assim, o diretório principal do repositório será `C:\Users\analista\Experimento\Contradef-main`.
 * *Depois de descompactar, o nome padrão da pasta do repositório será `Contradef-main`*
-3. **Desativar “Proteção contra Violações”**:  
+3. Baixar e descompactar o Pin. Baixe em <https://software.intel.com/sites/landingpage/pintool/downloads/pin-3.28-98749-g6643ecee5-msvc-windows.zip>
+4. Copie o conteúdo descompactado para a pasta `pin\` no repositório. 
+
+    > ⚠️ **Atenção:** Use exclusivamente a versão **MSVC** do Intel Pin; a Contradef não é compatível com o build baseado em **Clang**.
+    > Após baixar o Pin 3.28, extraia o pacote e mova **somente** o conteúdo (diretórios *ia32*, *intel64*, *extras*, *doc*, o executável `pin.exe` etc.) para a pasta `pin\` do repositório, evitando manter a subpasta gerada pela extração.
+
+    ```
+    pin/
+    ├── doc/
+    ├── extras/
+    ├── ia32/
+    ├── intel64/
+    ├── pin.exe
+    └── … (demais diretórios)
+    ```
+
+5. **Desativar “Proteção contra Violações”**:  
 * *Configurações → Atualização e Segurança → Segurança do Windows → Proteção contra vírus e ameaças → Gerenciar configurações → Proteção contra violações* → **Desativar**.  
-4. **Acessar a pasta principal do repositório**:
+6. **Acessar a pasta principal do repositório**:
 
     ```powershell
     cd "C:\Users\analista\Experimento\Contradef-main"
     ```
 
-5. **Executar o script de desativação de Defender e UAC**:  
+7. **Executar o script de desativação de Defender e UAC**:  
     ```text
     .\Scripts\desativar_defender_uac.bat  (executar como Administrador)
     ```
 
     Após a execução do script, **Reinicie a VM** quando solicitado.
 
-6. **Criar snapshot “Base-Tools”** para preservar esse estado antes de iniciar testes reais.
+8. **Criar snapshot “Base-Tools”** para preservar esse estado antes de iniciar testes reais.
 
 ## 8.2. Reproduzindo os Experimentos \[[Ver detalhes](./docs/Configuracao_ambiente_analise/5_Execucao_experimentos/README.md)\]
 

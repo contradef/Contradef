@@ -51,6 +51,16 @@
 4. Na janela “Extrair Pastas Compactadas”, mantenha o destino padrão e clique em **Extrair**.  
    <p align="center"><img src="10.png" alt="Extrair pasta Contradef-main" width="75%"></p>
 
+### 3. Baixar e descompactar o Pin
+
+1. Baixar e descompactar o Pin. Baixe em <https://software.intel.com/sites/landingpage/pintool/downloads/pin-3.28-98749-g6643ecee5-msvc-windows.zip>
+2. Copie o conteúdo descompactado para a pasta `pin\` no repositório. 
+
+    > ⚠️ **Atenção:** Use exclusivamente a versão **MSVC** do Intel Pin; a Contradef não é compatível com o build baseado em **Clang**.
+    > Após baixar o Pin 3.28, extraia o pacote e mova **somente** o conteúdo (diretórios *ia32*, *intel64*, *extras*, *doc*, o executável `pin.exe` etc.) para a pasta `pin\` do repositório, evitando manter a subpasta gerada pela extração.
+
+   <p align="center"><img src="10_1.png" alt="Mover Para a Pasta Pin" width="75%"></p>
+
 ---
 
 ### 3. Ajustar “Proteção contra Violações”
