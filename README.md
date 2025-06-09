@@ -22,7 +22,7 @@ Desta forma, a análise desses registros permite revelar técnicas de ofuscaçã
   - [3.4 Como a execução é estruturada](#35-como-a-execução-é-estruturada)
   - [3.5 Ambiente recomendado](#34-ambiente-de-execução-recomendado)
 - [4. Dependências](#4-dependências)
-  - [4.1 Compilação (host)](#41-dependência-para-execução)
+  - [4.1 Execução (host)](#41-dependência-para-execução)
   - [4.2 Compilação (host)](#42-dependências-para-compilação-host-windows)
   - [4.3 Criação da VM](#43-dependências-na-criação-da-vm)
   - [4.4 Execução (guest)](#44-dependências-para-execução-na-vm-windows)
