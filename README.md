@@ -22,9 +22,10 @@ Desta forma, a análise desses registros permite revelar técnicas de ofuscaçã
   - [3.4 Como a execução é estruturada](#35-como-a-execução-é-estruturada)
   - [3.5 Ambiente recomendado](#34-ambiente-de-execução-recomendado)
 - [4. Dependências](#4-dependências)
-  - [4.1 Compilação (host)](#41-dependências-para-compilação-host-windows)
-  - [4.2 Criação da VM](#42-dependências-na-criação-da-vm)
-  - [4.3 Execução (guest)](#43-dependências-para-execução-na-vm-windows)
+  - [4.1 Compilação (host)](#41-dependência-para-execução)
+  - [4.2 Compilação (host)](#42-dependências-para-compilação-host-windows)
+  - [4.3 Criação da VM](#43-dependências-na-criação-da-vm)
+  - [4.4 Execução (guest)](#44-dependências-para-execução-na-vm-windows)
 - [5. Preocupações com segurança](#5-preocupações-com-segurança)
   - [5.1 Principais vetores de risco](#51-principais-vetores-de-risco)
   - [5.2 Medidas obrigatórias](#52-medidas-obrigatórias)
@@ -234,7 +235,12 @@ Para executar os experimentos, sugerimos a configuração abaixo:
 A relação abaixo cobre **todo o ciclo** — da compilação no host até a
 execução dos testes na VM — indicando versões mínimas e links oficiais.
 
-## 4.1. Dependências para compilação (host Windows)
+## 4.1. Dependência para execução
+
+- **Intel Pin** 3.28 (x64, MSVC), disponível em <https://software.intel.com/sites/landingpage/pintool/downloads/pin-3.28-98749-g6643ecee5-msvc-windows.zip>.
+
+
+## 4.2. Dependências para compilação (host Windows)
 
 > ⚠️ **A compilação não é obrigatória** para repetir os experimentos:  
 > o binário pronto está em **`Ambiente_Experimentacao\ContradefDll`** do repositório.  
@@ -247,13 +253,13 @@ execução dos testes na VM — indicando versões mínimas e links oficiais.
 | **Intel Pin** | 3.28 (x64, MSVC) | Baixe em <https://software.intel.com/sites/landingpage/pintool/downloads/pin-3.28-98749-g6643ecee5-msvc-windows.zip> e extraia em `pin\` (mova **somente** o conteúdo evitando manter a subpasta gerada pela extração). |
 | **YARA** *(já incluído)* | 4.5.2 | Já fornecido em `yara\` deste repositório (sob licença BSD 3-Clause). |
 
-## 4.2. Dependências na criação da VM
+## 4.3. Dependências na criação da VM
 
 | Ferramenta | Função | Link |
 |------------|--------|------|
 | **Oracle VirtualBox 7.x** | Hypervisor utilizado nos tutoriais, facilita snapshots e Guest Additions. | <https://www.virtualbox.org/> |
 
-## 4.3. Dependências para execução na VM Windows
+## 4.4. Dependências para execução na VM Windows
 
 | Requisito | Motivo / Observação |
 |-----------|---------------------|
