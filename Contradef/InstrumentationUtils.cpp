@@ -15,15 +15,12 @@ BOOL IsMainExecutable(ADDRINT address) {
     PIN_UnlockClient();
 
     if (HeapTracker::IsInTrackedHeap(address)) {
-        std::cout << "Endereco " << std::hex << address << std::dec << " Esta no heap\n";
         return TRUE;
     }
 
     if (SectionTracker::IsInKnownSection(address)) {
-        std::cout << "Endereco " << std::hex << address << std::dec << " Esta na seção\n";
         return TRUE;
     }
-    std::cout << "Endereco " << std::hex << address << std::dec << " Não é do principal\n";
 
     return FALSE;
 }
@@ -42,11 +39,11 @@ ADDRINT GetRtnAddr(ADDRINT instAddress) {
 
 VOID PauseAtAddress(ADDRINT address) {
     PIN_LockClient();
-    std::cout << "[CONTRADEF] O Contradef pausou no endereço " << std::hex << address << std::endl;
+    std::cout << "[CONTRADEF] O Contradef pausou no endereÃ§o " << std::hex << address << std::endl;
     std::cout << "[CONTRADEF] Anexe o depurador ao processo agora." << std::endl;
     std::cout << "[CONTRADEF] Pressione Enter para continuar a execucao..." << std::endl;
 
-    std::cin.get(); // Aguarda entrada do usuário para continuar
+    std::cin.get(); // Aguarda entrada do usuÃ¡rio para continuar
     PIN_UnlockClient();
     PIN_Detach();
 }
