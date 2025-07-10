@@ -157,14 +157,15 @@ Nos experimentos, a Contradef é executada dentro de uma máquina virtual Window
 
 ## 3.2. Características principais da Contradef
 
-* **FunctionInterceptor** — *hooking* seletivo de mais de 100 APIs sensíveis (p. ex. `GetProcAddress`, `VirtualProtect`, `NtQueryInformationProcess`), registrando parâmetros e valor de retorno.  
-* **TraceFcnCall** — dois métodos complementares para registrar chamadas:  
+* **FunctionInterceptor** (Contradef/FunctionInterceptor.cpp) — *hooking* seletivo de mais de 100 APIs sensíveis (p. ex. `GetProcAddress`, `VirtualProtect`, `NtQueryInformationProcess`), registrando parâmetros e valor de retorno.  
+* **TraceFcnCall** (Contradef/TraceFcnCall.cpp) — dois métodos complementares para registrar chamadas:  
   1. instruções `call` convencionais;  
   2. saltos indiretos obtidos em tempo de execução (`GetProcAddress`, `LoadLibrary`, etc.).  
   A combinação é necessária porque _malwares_ protegidos alternam entre os dois esquemas para mascarar APIs críticas.
-* **TraceMemory** — log de leituras/escritas (até 16 bytes) com auto-detecção de _strings_ ASCII/Unicode, alerta de transição RW → RX (indício de desempacotamento) e exibição de dados decifrados (URLs C2, chaves, nomes de janela…).
-* **TraceInstructions / TraceDisassembly** — registro sequencial de cada instrução executada, valores de registradores, *flags* e operandos imediatos; essencial para reconstituir o fluxo em binários ofuscados.
-* **Análise estática opcional com YARA** — o parâmetro `-yara <regras.yar>` aponta um arquivo de regras; detecções prévias podem **ajustar automaticamente o escopo** dos módulos (p. ex. ativar apenas *hooks* de interesse em binários UPX, VMProtect etc.).  
+* **TraceMemory** (Contradef/TraceMemory.cpp) — log de leituras/escritas (até 16 bytes) com auto-detecção de _strings_ ASCII/Unicode, alerta de transição RW → RX (indício de desempacotamento) e exibição de dados decifrados (URLs C2, chaves, nomes de janela…).
+* **TraceInstructions** (Contradef/TraceInstructions.cpp) — registro sequencial de cada instrução executada, valores de registradores, *flags* e operandos imediatos; essencial para reconstituir o fluxo em binários ofuscados.
+* **TraceDisassembly** (Contradef/TraceDisassembly.cpp) — gera um relatório contínuo das instruções do programa já traduzidas para assembly simbólico, com endereços e operandos resolvidos.
+* **Análise estática opcional com YARA** (Contradef/YaraContradef.cpp) — o parâmetro `-yara <regras.yar>` aponta um arquivo de regras; detecções prévias podem **ajustar automaticamente o escopo** dos módulos (p. ex. ativar apenas *hooks* de interesse em binários UPX, VMProtect etc.).  
   *Esta funcionalidade não foi necessária durante os experimentos.*
 
 > *Os módulos da Contradef são **complementares**: dados de memória podem ser correlacionados com a linha temporal de chamadas e o fluxo exato de instruções.*
