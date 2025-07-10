@@ -178,15 +178,15 @@ Nos experimentos, a Contradef é executada dentro de uma máquina virtual Window
   <img src="docs/Contradef-Arquitetura.png" alt="Arquitetura da Contradef" width="75%">
 </p>
 
-| Componente | Função resumida |
-|------------|-----------------|
-| **Instrumentation** | Núcleo que injeta *callbacks* em tempo de execução e despacha eventos para os módulos especializados. |
-| **TraceMemory / TraceInstructions / TraceFcnCall / TraceDisassembly** | Módulos de coleta responsáveis, respectivamente, por acessos à memória, instruções executadas, chamadas de função e trechos desassemblados. Todos gravam resultados em **arquivos de log** independentes. |
-| **FunctionInterceptor** | Implementa *hooking* seletivo de APIs sensíveis, redirecionando parâmetros e retornos ao respectivo arquivo de log. |
-| **Instrumentation Strategy + Strategies** | Conjunto de regras de instrumentação que pode ser ativado ou trocado em tempo de execução (p. ex. interceptar apenas `GetWindowTextA`, `GetWriteWatch` etc.). |
-| **Yara Lib** | Integração opcional para escanear o binário antes da execução; detecções podem definir quais estratégias ou módulos serão habilitados. |
-| **Notifier → Observer** | Implementa o padrão *publish/subscribe*, permitindo que estratégias gerem eventos que serão registrados nos logs. |
-| **Arquivos de log** | Ponto de convergência dos *traces*; cada módulo escreve no seu próprio arquivo, facilitando a correlação posterior. |
+| Componente | Função resumida | Arquivo de código ou pasta |
+|------------|-----------------|-------------------|
+| **Instrumentation** | Núcleo que injeta *callbacks* em tempo de execução e despacha eventos para os módulos especializados. | Contradef/TraceMemory.cpp |
+| **TraceMemory / TraceInstructions / TraceFcnCall / TraceDisassembly** | Módulos de coleta responsáveis, respectivamente, por acessos à memória, instruções executadas, chamadas de função e trechos desassemblados. Todos gravam resultados em **arquivos de log** independentes. | Contradef/TraceFcnCall.cpp, Contradef/TraceMemory.cpp, Contradef/TraceInstructions.cpp, Contradef/TraceDisassembly.cpp |
+| **FunctionInterceptor** | Implementa *hooking* seletivo de APIs sensíveis, redirecionando parâmetros e retornos ao respectivo arquivo de log. | Contradef/FunctionInterceptor.cpp |
+| **Instrumentation Strategy + Strategies** | Conjunto de regras de instrumentação que pode ser ativado ou trocado em tempo de execução (p. ex. interceptar apenas `GetWindowTextA`, `GetWriteWatch` etc.). | Contradef/FunctionInterceptor.cpp, Contradef/Inst*.cpp |
+| **Yara Lib** | Integração opcional para escanear o binário antes da execução; detecções podem definir quais estratégias ou módulos serão habilitados. | Contradef/YaraContradef.cpp, yara/*, yaracontradef/* |
+| **Notifier → Observer** | Implementa o padrão *publish/subscribe*, permitindo que estratégias gerem eventos que serão registrados nos logs. | Notifier.h, Observer.h |
+| **Arquivos de log** | Ponto de convergência dos *traces*; cada módulo escreve no seu próprio arquivo, facilitando a correlação posterior. | - |
 
 > *A natureza modular da Contradef permite ativar apenas os blocos necessários sem recompilar o restante da ferramenta.*
 
