@@ -250,7 +250,7 @@ execução dos testes na VM — indicando versões mínimas e links oficiais.
 | Ferramenta | Versão mínima | Observações |
 |------------|---------------|-------------|
 | **Visual Studio 2019** (ou 2022) | Community/Pro | Baixe em <https://visualstudio.microsoft.com/pt-br/vs/older-downloads/>. Instale o *Desktop C++ Workload*. No VS 2022 marque o **toolset v142** para manter compatibilidade com o Pin. |
-| **Windows 10 SDK** | 10.0.19041 | Vem com o instalador do VS. |
+| **Windows 10 SDK** | 10.0.19041.0 | Vem com o instalador do VS. |
 | **Intel Pin** | 3.28 (x64, MSVC) | Baixe em <https://software.intel.com/sites/landingpage/pintool/downloads/pin-3.28-98749-g6643ecee5-msvc-windows.zip> e extraia em `pin\` (mova **somente** o conteúdo evitando manter a subpasta gerada pela extração). |
 | **YARA** *(já incluído)* | 4.5.2 | Já fornecido em `yara\` deste repositório (sob licença BSD 3-Clause). |
 
@@ -347,7 +347,7 @@ cd Contradef
    *Workload → Desktop development with C++*
 
    * **toolset v142** (obrigatório mesmo no VS 2022).
-2. **Windows 10 SDK ≥ 10.0.19041**
+2. **Windows 10 SDK ≥ 10.0.19041.0**
 3. **Intel Pin 3.28 (x64)**
    *Baixe e descompacte; copie a pasta para `pin\` no repositório.*
 
