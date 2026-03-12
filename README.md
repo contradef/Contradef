@@ -1,751 +1,822 @@
-# **Contradef — Uma Ferramenta de Instrumentação Binária Dinâmica para Análise de Malware Evasivo**
+# **Contradef — A Dynamic Binary Instrumentation Tool for Evasive Malware Analysis**
 
-A **Contradef** é uma ferramenta de Instrumentação Binária Dinâmica (DBI) — implementada sobre o Intel Pin — dedicada à investigação de _malware_ evasivo em executáveis Windows x64.  
+**Contradef** is a Dynamic Binary Instrumentation (DBI) tool — implemented on top of Intel Pin — dedicated to the investigation of evasive malware in Windows x64 executables.
 
-## Resumo do artigo
-A Contradef é uma ferramenta DBI, desenvolvida sobre o Intel Pin, para a análise de software evasivo, por meio de técnicas de *tracing*. Ela registra, em arquivos, o fluxo de instruções, os acessos à memória, as chamadas de API e outros estados internos, permitindo que esses dados sejam investigados depois da execução.
-Desta forma, a análise desses registros permite revelar técnicas de ofuscação e evasão, empregadas por empacotadores de software, como o VMProtect. 
+## Abstract
 
----
-
-## Sumário
-
-- [1. Estrutura do README.md](#1-estrutura-do-readmemd)
-  - [1.1 Organização do README.md](#11-organização-do-readmemd)
-  - [1.2 Artefatos distribuídos](#12-artefatos-distribuídos-neste-repositório)
-  - [1.3 Estrutura do repositório](#13-estrutura-do-repositório)
-- [2. Selos Considerados](#2-selos-considerados)
-- [3. Informações básicas](#3-informações-básicas)
-  - [3.1 Introdução à execução](#31-introdução-à-execução-da-ferramenta-e-aos-experimentos)
-  - [3.2 Características principais](#32-características-principais-da-contradef)
-  - [3.3 Arquitetura](#33-arquitetura-da-ferramenta)
-  - [3.4 Como a execução é estruturada](#35-como-a-execução-é-estruturada)
-  - [3.5 Ambiente recomendado](#34-ambiente-de-execução-recomendado)
-- [4. Dependências](#4-dependências)
-  - [4.1 Execução (host)](#41-dependência-para-execução)
-  - [4.2 Compilação (host)](#42-dependências-para-compilação-host-windows)
-  - [4.3 Criação da VM](#43-dependências-na-criação-da-vm)
-  - [4.4 Execução (guest)](#44-dependências-para-execução-na-vm-windows)
-- [5. Preocupações com segurança](#5-preocupações-com-segurança)
-  - [5.1 Principais vetores de risco](#51-principais-vetores-de-risco)
-  - [5.2 Medidas obrigatórias](#52-medidas-obrigatórias)
-  - [5.3 Declaração de responsabilidade](#53-declaração-de-responsabilidade)
-- [6. Instalação](#6-instalação)
-  - [6.1 Procedimento de compilação](#61-procedimento-de-compilação-opcional)
-    - [6.1.1 Obter o código-fonte](#611-obter-o-código-fonte)
-    - [6.1.2 Instalar dependências](#612-instalar-dependências)
-    - [6.1.3 Compilar](#613-compilar)
-  - [6.2 Execução](#62-execução)
-    - [6.2.1 Parâmetros comuns](#621-parâmetros-comuns)
-    - [6.2.2 Sintaxe básica](#622-sintaxe-básica)
-- [7. Teste mínimo](#7-teste-mínimo)
-  - [7.1 Pré-requisitos](#71-pré-requisitos)
-  - [7.2 Passo a passo](#72-passo-a-passo)
-- [8. Experimentos](#8-experimentos)
-  - [8.1 Preparando o ambiente](#81-preparando-o-ambiente-de-experimentação)
-    - [8.1.1 Instalar o VirtualBox](#811-instalar-o-virtualbox)
-    - [8.1.2 Baixar a ISO do Windows](#812-baixar-a-imagem-iso-do-windows)
-    - [8.1.3 Criar a VM](#813-criar-a-vm-no-virtualbox-ver-detalhes)
-    - [8.1.4 Instalar o Windows](#814-instalar-o-windows-na-vm-ver-detalhes)
-    - [8.1.5 Snapshot “limpo”](#815-criar-snapshot-da-vm-limpa-ver-detalhes)
-    - [8.1.6 Ajustes no guest](#816-ajustes-no-windows-convidado-vm-ver-detalhes)
-  - [8.2 Reproduzindo os experimentos](#82-reproduzindo-os-experimentos-ver-detalhes)
-    - [8.2.1 Preparação](#821-preparação)
-    - [8.2.2 Terminal de execução](#822-terminal-de-execução)
-    - [8.2.3 Medição de tempo](#823-medição-de-tempo-opcional)
-    - [8.2.4 Execução da Amostra 1](#824-execução-da-amostra-1-vmprotect)
-    - [8.2.5 Execução da Amostra 2](#825-execução-da-amostra-2-comportamento-evasivo)
-    - [8.2.6 Observações de desempenho](#826-observações-de-desempenho)
-  - [8.3 Inspeção de resultados](#83-inspeção-de-resultados)
-    - [8.3.1 Acessar os logs](#831-acessar-os-logs-de-execução)
-    - [8.3.2 Abrir e inspecionar](#832-abrir-e-inspecionar-os-logs)
-- [9. Licença](#9-licença)
+Contradef is a DBI tool, developed on top of Intel Pin, for the analysis of evasive software through *tracing* techniques. It records, into files, the instruction flow, memory accesses, API calls, and other internal states, allowing these data to be investigated after execution.
+In this way, analyzing these records makes it possible to reveal obfuscation and evasion techniques employed by software packers such as VMProtect.
 
 ---
 
-# 1. Estrutura do README.md
+## Table of Contents
 
-## 1.1. Organização do README.md
+* [1. README.md Structure](#1-readmemd-structure)
 
-**Este README.md está organizado nas seguintes seções principais:**
+  * [1.1 README.md Organization](#11-readmemd-organization)
+  * [1.2 Distributed Artifacts](#12-distributed-artifacts)
+  * [1.3 Repository Structure](#13-repository-structure)
+* [2. Considered Badges](#2-considered-badges)
+* [3. Basic Information](#3-basic-information)
 
-1. **Estrutura do README.md** – visão geral de como o documento e o repositório estão organizados.
-2. **Selos Considerados** – selos e critérios de artefato que o projeto pretende atender.
-3. **Informações básicas** – introdução aos experimentos, características da Contradef, arquitetura e ambiente recomendado.
-4. **Dependências** – requisitos de hardware / software para compilar, criar a VM e executar a ferramenta.
-5. **Preocupações com segurança** – boas-práticas e checklist para garantir isolamento e evitar contaminação.
-6. **Instalação** – procedimentos de compilação (opcional) e execução básica da pintool.
-7. **Teste mínimo** – passo a passo rápido usando o executável benigno (7Zip) para validar a instalação.
-8. **Experimentos** – preparação detalhada do ambiente, execução das amostras, coleta e análise de logs.
-9. **Licença** – termos de uso e distribuição do código-fonte e dos artefatos.
+  * [3.1 Introduction to Tool Execution and Experiments](#31-introduction-to-tool-execution-and-experiments)
+  * [3.2 Main Features](#32-main-features-of-contradef)
+  * [3.3 Architecture](#33-tool-architecture)
+  * [3.4 How Execution Is Structured](#34-how-execution-is-structured)
+  * [3.5 Recommended Environment](#35-recommended-execution-environment)
+* [4. Dependencies](#4-dependencies)
 
-## 1.2. Artefatos distribuídos neste repositório:
+  * [4.1 Execution (host)](#41-execution-host)
+  * [4.2 Compilation (host)](#42-compilation-dependencies-host-windows)
+  * [4.3 VM Creation](#43-vm-creation-dependencies)
+  * [4.4 Execution (guest)](#44-execution-dependencies-inside-the-windows-vm)
+* [5. Security Concerns](#5-security-concerns)
 
-* Código fonte da **Contradef**.  
-* Uma versão da **Contradef (contradef.dll)** compilada e pronta para uso.  
-* Guias de configuração para o ambiente de experimentação, que garantem ambiente seguro e reprodutível.  
-* Scripts de automação para configuração do ambiente de expreimentação dentro do ambiente isolado (VM).  
-* Duas amostras de malware compactadas, para execução dos exeprimentos.
-* Código fonte da biblioteca **YARA** para integração com a **Contradef**.  
+  * [5.1 Main Risk Vectors](#51-main-risk-vectors)
+  * [5.2 Mandatory Measures](#52-mandatory-measures)
+  * [5.3 Disclaimer](#53-disclaimer)
+* [6. Installation](#6-installation)
 
+  * [6.1 Compilation Procedure](#61-compilation-procedure-optional)
 
-## 1.3. Estrutura do repositório
+    * [6.1.1 Obtain the Source Code](#611-obtain-the-source-code)
+    * [6.1.2 Install Dependencies](#612-install-dependencies)
+    * [6.1.3 Compile](#613-compile)
+  * [6.2 Execution](#62-execution)
+
+    * [6.2.1 Common Parameters](#621-common-parameters)
+    * [6.2.2 Basic Syntax](#622-basic-syntax)
+* [7. Minimal Test](#7-minimal-test)
+
+  * [7.1 Prerequisites](#71-prerequisites)
+  * [7.2 Step by Step](#72-step-by-step)
+* [8. Experiments](#8-experiments)
+
+  * [8.1 Preparing the Environment](#81-preparing-the-experiment-environment)
+
+    * [8.1.1 Install VirtualBox](#811-install-virtualbox)
+    * [8.1.2 Download the Windows ISO](#812-download-the-windows-iso-image)
+    * [8.1.3 Create the VM](#813-create-the-vm-in-virtualbox)
+    * [8.1.4 Install Windows](#814-install-windows-inside-the-vm)
+    * [8.1.5 Clean Snapshot](#815-create-a-clean-vm-snapshot)
+    * [8.1.6 Guest Adjustments](#816-adjustments-in-the-windows-guest-vm)
+  * [8.2 Reproducing the Experiments](#82-reproducing-the-experiments)
+
+    * [8.2.1 Preparation](#821-preparation)
+    * [8.2.2 Execution Terminal](#822-execution-terminal)
+    * [8.2.3 Time Measurement](#823-time-measurement-optional)
+    * [8.2.4 Running Sample 1](#824-running-sample-1-vmprotect)
+    * [8.2.5 Running Sample 2](#825-running-sample-2-evasive-behavior)
+    * [8.2.6 Running Sample 3](#826-running-sample-3)
+    * [8.2.7 Performance Notes](#827-performance-notes)
+  * [8.3 Inspecting Results](#83-inspecting-results)
+
+    * [8.3.1 Accessing Logs](#831-accessing-execution-logs)
+    * [8.3.2 Opening and Inspecting Logs](#832-opening-and-inspecting-the-logs)
+* [9. License](#9-license)
+
+---
+
+# 1. README.md Structure
+
+## 1.1. README.md Organization
+
+**This README.md is organized into the following main sections:**
+
+1. **README.md Structure** – overview of how the document and repository are organized.
+2. **Considered Badges** – artifact badges and criteria the project aims to satisfy.
+3. **Basic Information** – introduction to the experiments, Contradef features, architecture, and recommended environment.
+4. **Dependencies** – hardware/software requirements to compile, create the VM, and run the tool.
+5. **Security Concerns** – best practices and checklist to ensure isolation and avoid contamination.
+6. **Installation** – compilation procedures (optional) and basic pintool execution.
+7. **Minimal Test** – quick step-by-step using a benign executable (7-Zip) to validate the installation.
+8. **Experiments** – detailed environment preparation, sample execution, and log collection/analysis.
+9. **License** – terms of use and distribution for the source code and artifacts.
+
+## 1.2. Distributed artifacts in this repository
+
+* Source code of **Contradef**.
+* A compiled and ready-to-use version of **Contradef (`contradef.dll`)**.
+* Configuration guides for the experiment environment, ensuring a safe and reproducible setup.
+* Automation scripts for configuring the experiment environment inside the isolated environment (VM).
+* Three compressed malware samples for experiment execution.
+* Source code of the **YARA** library for integration with **Contradef**.
+
+## 1.3. Repository structure
 
 ```text
-Contradef/                            ← Diretório principal do repositório. Pode ser nomeado como *Contradef-main* quando baixado como .zip e descompactado com o mesmo nome
-├── Ambiente_Experimentacao           ← Ambiente preparado com artefatos para execução dos experimentos
-|   ├── Amostras/                     ← Contém amostra reais de malwares compactadas
-|   ├── ContradefDll/                 ← DLL Contradef já compilada (x64/Debug)
-├── Contradef/                        ← código-fonte (.cpp/.h)
-├── docs/                             ← Recursos para o README.md e tutoriais de configuração
-├── pin/                              ← Intel Pin 3.28 descompactado
-├── Resultados_Experimentos_Artigo/   ← Resultados dos experimentos do artigo
-├── Scripts/                          ← Scripts de configuração rápida para o ambiente de experimentação dentro da VM
-├── yara/                             ← YARA 4.5.2 (inclui a biblioteca)
-└── yaracontradef/                    ← Implementação para integração da lib YARA com a Contradef 
+Contradef/                              ← Main repository directory. It may be named *Contradef-main* when downloaded as a .zip and extracted with the same name
+├── Experiment_Environment              ← Prepared environment with artifacts to run the experiments
+|   ├── Samples/                        ← Contains real compressed malware samples
+|   ├── ContradefDll/                   ← Precompiled Contradef DLL (x64/Debug)
+├── Contradef/                          ← Source code (.cpp/.h)
+├── docs/                               ← Resources for README.md and configuration tutorials
+├── pin/                                ← Extracted Intel Pin 3.28
+├── Article_Experiment_Results/         ← Experiment results from the article
+├── Scripts/                            ← Quick configuration scripts for the experiment environment inside the VM
+├── yara/                               ← YARA 4.5.2 (includes the library)
+└── yaracontradef/                      ← Implementation for integrating the YARA library with Contradef
 ```
 
-> ⚠️ **Importante:** O nome do repositório pode ser *Contradef-main* no lugar de *Contradef* quando baixado como .zip e descompactado com o mesmo nome (Contradef-main).
+> ⚠️ **Important:** The repository name may be *Contradef-main* instead of *Contradef* when downloaded as a .zip and extracted with the same name (*Contradef-main*).
 
-A principal meta dos artefatos é permitir que avaliadores:
+The main goal of the artifacts is to allow evaluators to:
 
-1. Explorem o código da **Contradef**.
-1. Verifiquem a **funcionalidade** da **Contradef** (teste mínimo).  
-2. Reproduzam os **experimentos completos** descritos no artigo, observando a geração de *traces* de instrução, memória, chamadas de API e suas correlações.  
-3. Avaliem o **overhead** e a robustez da Contradef frente a *malware* evasivo.
-
----
-
-# 2. Selos Considerados
-
-Os selos considerados são: Disponíveis, Funcionais, Sustentáveis e Reprodutíveis.
+1. Explore the **Contradef** source code.
+2. Verify the **functionality** of **Contradef** (minimal test).
+3. Reproduce the **full experiments** described in the article, observing the generation of instruction, memory, and API call traces and their correlations.
+4. Evaluate the **overhead** and robustness of Contradef against evasive malware.
 
 ---
 
-# 3. Informações básicas
+# 2. Considered Badges
 
-## 3.1 Introdução à execução da ferramenta e aos experimentos
+The considered badges are: Available, Functional, Sustainable, and Reproducible.
 
-**Contradef** é uma *pintool* construída sobre o Intel Pin que injeta
-ganchos (*hooks*) em tempo de execução para registrar instruções,
-acessos à memória e chamadas de API em executáveis Windows x64.
+---
 
-Os experimentos deste repositório têm dois propósitos principais:
+# 3. Basic Information
 
-1. **Validar funcionalidades** – comprovar que cada módulo  
+## 3.1 Introduction to tool execution and experiments
+
+**Contradef** is a *pintool* built on top of Intel Pin that injects
+runtime hooks to record instructions, memory accesses, and API calls in
+Windows x64 executables.
+
+The experiments in this repository have two main purposes:
+
+1. **Validate functionalities** – demonstrate that each module
    (`InterceptFunctions`, `TraceFcn`, `TraceMem`, `TraceInstr`,
-   `TraceDasm`) opera isoladamente **e** em conjunto, gerando *logs*
-   coerentes.
-2. **Avaliar impacto** – medir tempo de execução e volume de *traces*
-   ao instrumentar **amostras reais de malware**  
-   (Amostra 1 protegida por **VMProtect** e Amostra 2 que adota técnicas
-   anti-análise).
+   `TraceDasm`) works both independently **and** together, generating
+   consistent *logs*.
+2. **Evaluate impact** – measure execution time and trace volume while
+   instrumenting **real malware samples**.
 
-Nos experimentos, a Contradef é executada dentro de uma máquina virtual Windows x64 sem acesso à rede, partindo sempre de um snapshot limpo. Inicialmente cada módulo da ferramenta é ativado isoladamente sobre dois executáveis de referência: um protegido pelo empacotador VMProtect e outro que utiliza múltiplas técnicas anti-análise. Em seguida a pintool é aplicada com todos os módulos simultâneos para produzir um *trace* completo, enquanto o tempo de execução e o tamanho dos arquivos de log são coletados para avaliar overhead. Ao final, os registros gerados são inspecionados em um editor capaz de lidar com grandes volumes de texto (EmEditor), permitindo confirmar a captura de instruções, parâmetros de APIs e acessos de memória, bem como observar como as proteções dos binários se manifestam em cada estágio da análise.
+In the experiments, Contradef is executed inside an offline Windows x64 virtual machine, always starting from a clean snapshot. Initially, each tool module is activated individually over reference executables, and then the pintool is applied with all modules simultaneously to produce a complete *trace*, while execution time and log file sizes are collected to evaluate overhead. At the end, the generated records are inspected in an editor capable of handling very large text files (EmEditor), allowing confirmation of the capture of instructions, API parameters, and memory accesses, as well as observation of how the binary protections manifest at each stage of the analysis.
 
-> ⚠️ **Ambiente isolado e controlado**  
-> Todos os testes são executados **dentro de uma VM**, restaurada de
-> snapshot limpo após cada amostra, evitando contaminação do host e
-> garantindo reprodutibilidade.
+> ⚠️ **Isolated and controlled environment**
+> All tests are executed **inside a VM**, restored from a clean snapshot after each sample, avoiding host contamination and ensuring reproducibility.
 
-> 💡 **Uso em binários benignos**  
-> Para depuração, engenharia reversa ou estudo de empacotadores em
-> executáveis legítimos, a Contradef pode rodar diretamente no host sem
-> VM nem desativar antivírus — basta chamar Pin + Contradef via PowerShell
-> e apontar para o binário benigno.
+> 💡 **Use with benign binaries**
+> For debugging, reverse engineering, or packer analysis on legitimate executables, Contradef can run directly on the host without a VM or antivirus deactivation — simply call Pin + Contradef through PowerShell and point to the benign binary.
 
+## 3.2. Main features of Contradef
 
-## 3.2. Características principais da Contradef
+* **FunctionInterceptor** (`Contradef/FunctionInterceptor.cpp`) — selective *hooking* of more than 100 sensitive APIs (e.g., `GetProcAddress`, `VirtualProtect`, `NtQueryInformationProcess`), recording parameters and return values.
+* **TraceFcnCall** (`Contradef/TraceFcnCall.cpp`) — two complementary methods to record calls:
 
-* **FunctionInterceptor** (Contradef/FunctionInterceptor.cpp) — *hooking* seletivo de mais de 100 APIs sensíveis (p. ex. `GetProcAddress`, `VirtualProtect`, `NtQueryInformationProcess`), registrando parâmetros e valor de retorno.  
-* **TraceFcnCall** (Contradef/TraceFcnCall.cpp) — dois métodos complementares para registrar chamadas:  
-  1. instruções `call` convencionais;  
-  2. saltos indiretos obtidos em tempo de execução (`GetProcAddress`, `LoadLibrary`, etc.).  
-  A combinação é necessária porque _malwares_ protegidos alternam entre os dois esquemas para mascarar APIs críticas.
-* **TraceMemory** (Contradef/TraceMemory.cpp) — log de leituras/escritas (até 16 bytes) com auto-detecção de _strings_ ASCII/Unicode, alerta de transição RW → RX (indício de desempacotamento) e exibição de dados decifrados (URLs C2, chaves, nomes de janela…).
-* **TraceInstructions** (Contradef/TraceInstructions.cpp) — registro sequencial de cada instrução executada, valores de registradores, *flags* e operandos imediatos; essencial para reconstituir o fluxo em binários ofuscados.
-* **TraceDisassembly** (Contradef/TraceDisassembly.cpp) — gera um relatório contínuo das instruções do programa já traduzidas para assembly simbólico, com endereços e operandos resolvidos.
-* **Análise estática opcional com YARA** (Contradef/YaraContradef.cpp) — o parâmetro `-yara <regras.yar>` aponta um arquivo de regras; detecções prévias podem **ajustar automaticamente o escopo** dos módulos (p. ex. ativar apenas *hooks* de interesse em binários UPX, VMProtect etc.).  
-  *Esta funcionalidade não foi necessária durante os experimentos.*
+  1. conventional `call` instructions;
+  2. indirect jumps resolved at runtime (`GetProcAddress`, `LoadLibrary`, etc.).
+     The combination is necessary because protected malware alternates between both schemes to hide critical APIs.
+* **TraceMemory** (`Contradef/TraceMemory.cpp`) — logging of reads/writes (up to 16 bytes) with automatic detection of ASCII/Unicode strings, RW → RX transition alerts (indicating unpacking), and display of decoded data (C2 URLs, keys, window names, etc.).
+* **TraceInstructions** (`Contradef/TraceInstructions.cpp`) — sequential record of each executed instruction, register values, flags, and immediate operands; essential to reconstruct the flow in obfuscated binaries.
+* **TraceDisassembly** (`Contradef/TraceDisassembly.cpp`) — generates a continuous report of the program instructions already translated into symbolic assembly, with resolved addresses and operands.
+* **Optional static analysis with YARA** (`Contradef/YaraContradef.cpp`) — the `-yara <rules.yar>` parameter points to a rules file; prior detections may **automatically adjust the scope** of the modules (e.g., enabling only hooks of interest in UPX, VMProtect, etc. binaries).
+  *This feature was not required during the experiments.*
 
-> *Os módulos da Contradef são **complementares**: dados de memória podem ser correlacionados com a linha temporal de chamadas e o fluxo exato de instruções.*
+> *Contradef modules are **complementary**: memory data can be correlated with the timeline of calls and the exact instruction flow.*
 
-> *Atualmente a ferramenta suporta **apenas executáveis PE 64-bit nativos**; não há suporte direto a .NET, Java ou scripts.*
+> *Currently, the tool supports **only native 64-bit PE executables**; there is no direct support for .NET, Java, or scripts.*
 
-## 3.3. Arquitetura da ferramenta
+## 3.3. Tool architecture
 
 <p align="center">
-  <img src="docs/Contradef-Arquitetura.png" alt="Arquitetura da Contradef" width="75%">
+  <img src="docs/Contradef-Arquitetura.jpeg" alt="Contradef Architecture" width="75%">
 </p>
 
-| Componente | Função resumida | Arquivo de código ou pasta |
-|------------|-----------------|-------------------|
-| **Instrumentation** | Núcleo que injeta *callbacks* em tempo de execução e despacha eventos para os módulos especializados. | Contradef/TraceMemory.cpp |
-| **TraceMemory / TraceInstructions / TraceFcnCall / TraceDisassembly** | Módulos de coleta responsáveis, respectivamente, por acessos à memória, instruções executadas, chamadas de função e trechos desassemblados. Todos gravam resultados em **arquivos de log** independentes. | Contradef/TraceFcnCall.cpp, Contradef/TraceMemory.cpp, Contradef/TraceInstructions.cpp, Contradef/TraceDisassembly.cpp |
-| **FunctionInterceptor** | Implementa *hooking* seletivo de APIs sensíveis, redirecionando parâmetros e retornos ao respectivo arquivo de log. | Contradef/FunctionInterceptor.cpp |
-| **Instrumentation Strategy + Strategies** | Conjunto de regras de instrumentação que pode ser ativado ou trocado em tempo de execução (p. ex. interceptar apenas `GetWindowTextA`, `GetWriteWatch` etc.). | Contradef/FunctionInterceptor.cpp, Contradef/Inst*.cpp |
-| **Yara Lib** | Integração opcional para escanear o binário antes da execução; detecções podem definir quais estratégias ou módulos serão habilitados. | Contradef/YaraContradef.cpp, yara/*, yaracontradef/* |
-| **Notifier → Observer** | Implementa o padrão *publish/subscribe*, permitindo que estratégias gerem eventos que serão registrados nos logs. | Notifier.h, Observer.h |
-| **Arquivos de log** | Ponto de convergência dos *traces*; cada módulo escreve no seu próprio arquivo, facilitando a correlação posterior. | - |
+| Component                                                             | Summary of function                                                                                                                                                                          | Source file or folder                                                                                                  |
+| --------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| **Instrumentation**                                                   | Core that injects runtime *callbacks* and dispatches events to specialized modules.                                                                                                          | Contradef/TraceMemory.cpp                                                                                              |
+| **TraceMemory / TraceInstructions / TraceFcnCall / TraceDisassembly** | Collection modules responsible, respectively, for memory accesses, executed instructions, function calls, and disassembled code fragments. All write results into independent **log files**. | Contradef/TraceFcnCall.cpp, Contradef/TraceMemory.cpp, Contradef/TraceInstructions.cpp, Contradef/TraceDisassembly.cpp |
+| **FunctionInterceptor**                                               | Implements selective *hooking* of sensitive APIs, redirecting parameters and return values to the corresponding log file.                                                                    | Contradef/FunctionInterceptor.cpp                                                                                      |
+| **Instrumentation Strategy + Strategies**                             | Set of instrumentation rules that can be enabled or swapped at runtime (e.g., intercept only `GetWindowTextA`, `GetWriteWatch`, etc.).                                                       | Contradef/FunctionInterceptor.cpp, Contradef/Inst*.cpp                                                                 |
+| **Yara Lib**                                                          | Optional integration to scan the binary before execution; detections may define which strategies or modules will be enabled.                                                                 | Contradef/YaraContradef.cpp, yara/*, yaracontradef/*                                                                   |
+| **Notifier → Observer**                                               | Implements the *publish/subscribe* pattern, allowing strategies to generate events that will be recorded in the logs.                                                                        | Notifier.h, Observer.h                                                                                                 |
+| **Log files**                                                         | Convergence point for traces; each module writes to its own file, facilitating later correlation.                                                                                            | -                                                                                                                      |
 
-> *A natureza modular da Contradef permite ativar apenas os blocos necessários sem recompilar o restante da ferramenta.*
+> *The modular nature of Contradef allows enabling only the necessary blocks without recompiling the rest of the tool.*
 
-## 3.4. Como a execução é estruturada
+## 3.4. How execution is structured
 
-1. **Ambiente isolado** – Todos os testes acontecem dentro de uma VM
-   Windows 10/11 **sem rede** e partindo de um snapshot limpo. 
-   Isso garante segurança e reprodutibilidade.
-2. **Fluxo de execução dentro da VM**  
-   1. Restaurar snapshot e desconectar rede.  
-   2. Extrair amostra (`*.zip`).  
-   3. Chamar o Pin + Contradef com os parâmetros desejados.  
-   4. Mover os logs para as respectivas pastas de resultados.  
-   4. Inspecionar os logs ou extrair as pastas de resultados da VM.  
-   5. Restaurar snapshot antes da próxima amostra.
-3. **Inspeção dos resultados** 
-    Arquivos `contradef.<PID>.*.cdf` são texto puro e podem ser inspecionados diretamente na VM ou extraídos para análise no hospedeiro (host). O **EmEditor** é recomendado para logs > 2 GB.
+1. **Isolated environment** – All tests take place inside an offline
+   Windows 10/11 VM starting from a clean snapshot.
+   This ensures security and reproducibility.
+2. **Execution flow inside the VM**
 
-Ao completar o roteiro de experimentação o avaliador terá:
+   1. Restore snapshot and disconnect the network.
+   2. Extract the sample (`*.zip`).
+   3. Run Pin + Contradef with the desired parameters.
+   4. Move the logs to the corresponding result folders.
+   5. Inspect the logs or extract the result folders from the VM.
+   6. Restore the snapshot before the next sample.
+3. **Result inspection**
+   Files named `contradef.<PID>.*.cdf` are plain text and can be inspected directly inside the VM or extracted for analysis on the host. **EmEditor** is recommended for logs larger than 2 GB.
 
-* Um **snapshot limpo** pré-instrumentação.  
-* Pastas **Resultados-Amostra-X** contendo os CDFs de cada flag.  
-* Métricas de tempo via `Measure-Command`.
+By completing the experimentation workflow, the evaluator will have:
 
-A execução detalhada dos passos será explicada em detalhes mais adiante.
+* A **clean snapshot** before instrumentation.
+* Folders such as **Sample-X-Results** containing the generated CDFs.
+* Time metrics via `Measure-Command`.
 
-## 3.5. Ambiente de Execução Recomendado
+The detailed execution steps are explained later.
 
-Para executar os experimentos, sugerimos a configuração abaixo:
+## 3.5. Recommended execution environment
 
-| Camada              | Especificação recomendada |
-|---------------------|---------------------------|
-| **Máquina hospedeira** | • CPU multi-core com VT-x/AMD-V habilitado<br>• **RAM:** ≥ 16 GB<br>• **Armazenamento:** SSD NVMe ≥ 500 GB |
-| **Hypervisor**      | Oracle **VirtualBox 7.0** (ou superior) |
-| **Máquina virtual** | • **SO convidado:** Windows 10/11 x64<br>• **vCPU:** ≥ 4 núcleos dedicados<br>• **RAM:** 6 – 8 GB<br>• **Disco:** 80 – 200 GB<br> |
+To run the experiments, we suggest the following configuration:
 
-> **Por quê VirtualBox?** Suporte robusto a snapshots e VT-x/AMD-V, além de compatibilidade com Intel Pin.
+| Layer               | Recommended specification                                                                                          |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| **Host machine**    | • Multi-core CPU with VT-x/AMD-V enabled<br>• **RAM:** ≥ 16 GB<br>• **Storage:** SSD NVMe ≥ 500 GB                 |
+| **Hypervisor**      | Oracle **VirtualBox 7.0** (or later)                                                                               |
+| **Virtual machine** | • **Guest OS:** Windows 10/11 x64<br>• **vCPU:** ≥ 4 dedicated cores<br>• **RAM:** 6–8 GB<br>• **Disk:** 80–200 GB |
 
-> ⚠️ **Importante:** se você só quer executar os experimentos, a DLL precompilada da **Contradef**  
-> está em **`Ambiente_Experimentacao\ContradefDll\contradef.dll`**.  
-> Compile apenas se desejar alterar o código-fonte.
+> **Why VirtualBox?** Robust support for snapshots and VT-x/AMD-V, plus compatibility with Intel Pin.
 
----
-
-# 4. Dependências
-
-A relação abaixo cobre **todo o ciclo** — da compilação no host até a
-execução dos testes na VM — indicando versões mínimas e links oficiais.
-
-## 4.1. Dependência para execução
-
-- **Intel Pin** 3.28 (x64, MSVC), disponível em <https://software.intel.com/sites/landingpage/pintool/downloads/pin-3.28-98749-g6643ecee5-msvc-windows.zip>.
-
-
-## 4.2. Dependências para compilação (host Windows)
-
-> ⚠️ **A compilação não é obrigatória** para repetir os experimentos:  
-> o binário pronto está em **`Ambiente_Experimentacao\ContradefDll`** do repositório.  
-> Compile apenas se quiser modificar o código-fonte.
-
-| Ferramenta | Versão mínima | Observações |
-|------------|---------------|-------------|
-| **Visual Studio 2019** (ou 2022) | Community/Pro | Baixe em <https://visualstudio.microsoft.com/pt-br/vs/older-downloads/>. Instale o *Desktop C++ Workload*. No VS 2022 marque o **toolset v142** para manter compatibilidade com o Pin. |
-| **Windows 10 SDK** | 10.0.19041.0 | Vem com o instalador do VS. |
-| **Intel Pin** | 3.28 (x64, MSVC) | Baixe em <https://software.intel.com/sites/landingpage/pintool/downloads/pin-3.28-98749-g6643ecee5-msvc-windows.zip> e extraia em `pin\` (mova **somente** o conteúdo evitando manter a subpasta gerada pela extração). |
-| **YARA** *(já incluído)* | 4.5.2 | Já fornecido em `yara\` deste repositório (sob licença BSD 3-Clause). |
-
-## 4.3. Dependências na criação da VM
-
-| Ferramenta | Função | Link |
-|------------|--------|------|
-| **Oracle VirtualBox 7.x** | Hypervisor utilizado nos tutoriais, facilita snapshots e Guest Additions. | <https://www.virtualbox.org/> |
-
-## 4.4. Dependências para execução na VM Windows
-
-| Requisito | Motivo / Observação |
-|-----------|---------------------|
-| **Windows 10/11 x64** | Sistema convidado isolado para análise. |
-| **Pin 3.28** | Necessário para execução dos experimentos. |
-| **`contradef.dll`** | Use a DLL compilada no host (necessário transferir) **ou** a versão pronta em `Ambiente_Experimentacao\ContradefDll\`. |
-
-Ferramentas auxiliares (dentro da VM):
-
-| Ferramenta | Finalidade | Link |
-|------------|------------|------|
-| **7-Zip** | Descompactar amostras protegidas com a senha. | <https://www.7-zip.org/download.html> |
-| **EmEditor** | Abrir *logs* `.cdf` maiores que 2 GB sem travar. | <https://www.emeditor.com/> |
-| **VirtualBox Guest Additions** | Habilitar pastas compartilhadas (opcional). | Incluído na ISO do VirtualBox |
+> ⚠️ **Important:** if you only want to run the experiments, the precompiled **Contradef** DLL
+> is located at **`Experiment_Environment\ContradefDll\contradef.dll`**.
+> Compile only if you wish to modify the source code.
 
 ---
 
-# 5. Preocupações com segurança
+# 4. Dependencies
 
-A ferramenta Contradef **não contém código malicioso** — trata-se de uma _pintool_
-em C/C++ que apenas coleta e grava *logs*.  
-**O risco real vem das amostras de _malware_ que serão executadas** para
-testar a ferramenta.  
+The list below covers the **entire cycle** — from host compilation to
+test execution inside the VM — indicating minimum versions and official links.
 
-## 5.1. Principais vetores de risco
+## 4.1. Dependency for execution
 
-| Vetor | Descrição |
-|-------|-----------|
-| **Execução da amostra** | Caso o *malware* consiga sair da VM, pode infectar o host. |
-| **Rede** | Muitos *malwares* tentam baixar payloads ou exfiltrar dados. |
-| **Pastas compartilhadas / Área de transferência** | Canal de escape para copiar arquivos maliciosos para o host. |
+* **Intel Pin** 3.28 (x64, MSVC), available at [https://software.intel.com/sites/landingpage/pintool/downloads/pin-3.28-98749-g6643ecee5-msvc-windows.zip](https://software.intel.com/sites/landingpage/pintool/downloads/pin-3.28-98749-g6643ecee5-msvc-windows.zip).
 
-Para proteger quem avalia o artefato (revisores ou leitores do
-repositório), siga as orientações abaixo.
+## 4.2. Compilation dependencies (Windows host)
 
-## 5.2. Medidas obrigatórias
+> ⚠️ **Compilation is not required** to reproduce the experiments:
+> the ready-to-use binary is in **`Experiment_Environment\ContradefDll`** in the repository.
+> Compile only if you want to modify the source code.
 
-1. **Não executar os experimentos no sistema hospedeiro**  
-   * Todo o experimento fica confinado à VM; nada é executado diretamente no
-     sistema físico.  
-2. **VM dedicada, sem acesso à rede durante a execução**  
-   * VirtualBox → **Configurações > Rede > Conectado a > Não conectado**.  
-3. **Snapshots**  
-   * Use um snapshot limpo.  
-   * Restaure-o **após cada execução de amostra**.  
-4. **Pastas compartilhadas e área de transferência da VM**  
-   * Desative enquanto o *malware* estiver rodando.  
-     Ative apenas para copiar *logs* **antes** de restaurar o snapshot.  
-5. **Amostras fornecidas para o experimento**  
-   * As amostras fornecidas estão na pasta `Ambiente_Experimentacao\Amostras` 
-     do repositório e estão compactadas com senha e nomeadas com os respectivos hashes.  
-6. **Logs somente texto**  
-   * Os arquivos `*.cdf` são texto puro — não contêm código executável.
+| Tool                             | Minimum version  | Notes                                                                                                                                                                                                                                                                                                                                   |
+| -------------------------------- | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Visual Studio 2019** (or 2022) | Community/Pro    | Download from [https://visualstudio.microsoft.com/pt-br/vs/older-downloads/](https://visualstudio.microsoft.com/pt-br/vs/older-downloads/). Install the *Desktop C++ Workload*. In VS 2022, also install **toolset v142** to maintain Pin compatibility.                                                                                |
+| **Windows 10 SDK**               | 10.0.19041.0     | Included in the VS installer.                                                                                                                                                                                                                                                                                                           |
+| **Intel Pin**                    | 3.28 (x64, MSVC) | Download from [https://software.intel.com/sites/landingpage/pintool/downloads/pin-3.28-98749-g6643ecee5-msvc-windows.zip](https://software.intel.com/sites/landingpage/pintool/downloads/pin-3.28-98749-g6643ecee5-msvc-windows.zip) and extract into `pin\` (move **only** the contents, avoiding the generated extraction subfolder). |
+| **YARA** *(already included)*    | 4.5.2            | Already provided in `yara\` in this repository (under BSD 3-Clause license).                                                                                                                                                                                                                                                            |
 
-## 5.3. Declaração de responsabilidade
+## 4.3. Dependencies for VM creation
 
-O projeto fornece amostras **exclusivamente para fins acadêmicos** e
-pressupõe que o avaliador esteja ciente das implicações legais e
-técnicas de executar software malicioso.  
-**Os autores não se responsabilizam** por danos resultantes do uso
-indevido ou fora do ambiente controlado.
+| Tool                      | Function                                                                     | Link                                                       |
+| ------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| **Oracle VirtualBox 7.x** | Hypervisor used in the tutorials, facilitates snapshots and Guest Additions. | [https://www.virtualbox.org/](https://www.virtualbox.org/) |
+
+## 4.4. Execution dependencies inside the Windows VM
+
+| Requirement           | Reason / Notes                                                                                                                    |
+| --------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| **Windows 10/11 x64** | Isolated guest system for analysis.                                                                                               |
+| **Pin 3.28**          | Required to run the experiments.                                                                                                  |
+| **`contradef.dll`**   | Use the DLL compiled on the host (must be transferred) **or** the ready-to-use version in `Experiment_Environment\ContradefDll\`. |
+
+Auxiliary tools (inside the VM):
+
+| Tool                           | Purpose                                               | Link                                                                       |
+| ------------------------------ | ----------------------------------------------------- | -------------------------------------------------------------------------- |
+| **7-Zip**                      | Extract samples protected with a password.            | [https://www.7-zip.org/download.html](https://www.7-zip.org/download.html) |
+| **EmEditor**                   | Open `.cdf` *logs* larger than 2 GB without freezing. | [https://www.emeditor.com/](https://www.emeditor.com/)                     |
+| **VirtualBox Guest Additions** | Enable shared folders (optional).                     | Included in the VirtualBox ISO                                             |
 
 ---
 
-# 6. Instalação
+# 5. Security Concerns
 
-## 6.1. Procedimento de compilação (opcional)
+The Contradef tool **does not contain malicious code** — it is a C/C++ *pintool*
+that only collects and writes *logs*.
+**The real risk comes from the malware samples that will be executed** to
+test the tool.
 
-> ⚠️ **Importante:** se você só quer executar os experimentos, a DLL pre-compilada  
-> está em **`Ambiente_Experimentacao\ContradefDll\contradef.dll`**.  
-> Compile apenas se desejar alterar o código-fonte.
+## 5.1. Main risk vectors
 
-### 6.1.1. Obter o código-fonte
+| Vector                         | Description                                                           |
+| ------------------------------ | --------------------------------------------------------------------- |
+| **Sample execution**           | If the malware escapes the VM, it may infect the host.                |
+| **Network**                    | Many malware samples attempt to download payloads or exfiltrate data. |
+| **Shared folders / Clipboard** | Escape channel to copy malicious files to the host.                   |
 
-Baixe o arquivo .zip do repositório e descompacte ou clone usando o Git:
+To protect artifact evaluators (reviewers or readers of the repository),
+follow the guidelines below.
+
+## 5.2. Mandatory measures
+
+1. **Do not run the experiments on the host system**
+
+   * The entire experiment must remain confined to the VM; nothing should be executed directly on the physical system.
+2. **Dedicated VM, no network access during execution**
+
+   * VirtualBox → **Settings > Network > Attached to > Not attached**.
+3. **Snapshots**
+
+   * Use a clean snapshot.
+   * Restore it **after each sample execution**.
+4. **Shared folders and VM clipboard**
+
+   * Disable them while the malware is running.
+   * Enable them only to copy *logs* **before** restoring the snapshot.
+5. **Samples provided for the experiment**
+
+   * The provided samples are located in the `Experiment_Environment\Samples` folder
+     of the repository and are password-protected and named with their respective hashes.
+6. **Text-only logs**
+
+   * The `*.cdf` files are plain text — they do not contain executable code.
+
+## 5.3. Disclaimer
+
+The project provides samples **exclusively for academic purposes** and
+assumes the evaluator is aware of the legal and technical implications of
+executing malicious software.
+**The authors are not responsible** for damages resulting from improper
+use or use outside a controlled environment.
+
+---
+
+# 6. Installation
+
+## 6.1. Compilation procedure (optional)
+
+> ⚠️ **Important:** if you only want to run the experiments, the precompiled DLL
+> is located at **`Experiment_Environment\ContradefDll\contradef.dll`**.
+> Compile only if you wish to modify the source code.
+
+### 6.1.1. Obtain the source code
+
+Download the repository .zip file and extract it, or clone it using Git:
+
 ```bash
 git clone https://github.com/contradef/Contradef.git
 cd Contradef
 ```
 
-### 6.1.2. Instalar dependências
+### 6.1.2. Install dependencies
 
-1. **Visual Studio 2019** (ou 2022)
+1. **Visual Studio 2019** (or 2022)
    *Workload → Desktop development with C++*
 
-   * **toolset v142** (obrigatório mesmo no VS 2022).
+   * **toolset v142** (mandatory even in VS 2022).
 2. **Windows 10 SDK ≥ 10.0.19041.0**
 3. **Intel Pin 3.28 (x64)**
-   *Baixe e descompacte; copie a pasta para `pin\` no repositório.*
+   *Download and extract it; copy the folder contents to `pin\` in the repository.*
 
-    > ⚠️ **Atenção:** Use exclusivamente a versão **MSVC** do Intel Pin; a Contradef não é compatível com o build baseado em **Clang**.
-    > Após baixar o Pin 3.28, extraia o pacote e mova **somente** o conteúdo (diretórios *ia32*, *intel64*, *extras*, *doc*, o executável `pin.exe` etc.) para a pasta `pin\` do repositório, evitando manter a subpasta gerada pela extração.
+> ⚠️ **Attention:** Use only the **MSVC** version of Intel Pin; Contradef is not compatible with the **Clang**-based build.
+> After downloading Pin 3.28, extract the package and move **only** the contents (directories such as *ia32*, *intel64*, *extras*, *doc*, the `pin.exe` executable, etc.) into the `pin\` folder in the repository, avoiding the generated extraction subfolder.
 
-    ```
-    pin/
-    ├── doc/
-    ├── extras/
-    ├── ia32/
-    ├── intel64/
-    ├── pin.exe
-    └── … (demais diretórios)
-    ```
-
-### 6.1.3. Compilar
-
-1. Abra **`Contradef.sln`** no Visual Studio.
-   *Quando o VS 2022 perguntar para “atualizar o toolset”, escolha **Não**. Mantenha **Visual Studio 2019 (v142)** para garantir compatibilidade com o Pin*
-2. Selecione **Configuration → Debug** e **Platform → x64**.
-3. Compile (**Ctrl + Shift + B**).
-
-O arquivo resultante será gerado em:
-
+```text
+pin/
+├── doc/
+├── extras/
+├── ia32/
+├── intel64/
+├── pin.exe
+└── … (other directories)
 ```
+
+### 6.1.3. Compile
+
+1. Open **`Contradef.sln`** in Visual Studio.
+   *When VS 2022 asks whether to “upgrade the toolset”, choose **No**. Keep **Visual Studio 2019 (v142)** to ensure compatibility with Pin.*
+2. Select **Configuration → Debug** and **Platform → x64**.
+3. Build (**Ctrl + Shift + B**).
+
+The resulting file will be generated at:
+
+```text
 x64\Debug\contradef.dll
 ```
 
-Copie-o para a VM ou substitua a DLL existente em `Ambiente_Experimentacao\ContradefDll\` na pasta do repositório antes de rodar os testes.
+Copy it to the VM or replace the existing DLL in `Experiment_Environment\ContradefDll\` in the repository folder before running the tests.
 
 ---
 
-## 6.2. Execução
+## 6.2. Execution
 
-### 6.2.1. Parâmetros comuns
+### 6.2.1. Common parameters
 
-| Parâmetro         | Descrição                                             |
-| ----------------- | ----------------------------------------------------- |
-| `-intercept_fcn`  | Ativa o **FunctionInterceptor**                       |
-| `-trace_exfcn`    | Ativa o **TraceFcnCall**                              |
-| `-trace_mem`      | Ativa o **TraceMemory**                               |
-| `-trace_instr`    | Ativa o **TraceInstructions**                         |
-| `-trace_dasm`     | Ativa o **TraceDisassembly**                          |
-| `-yara <arquivo>` | Aplica regras YARA antes da instrumentação (opcional) |
+| Parameter        | Description                                          |
+| ---------------- | ---------------------------------------------------- |
+| `-intercept_fcn` | Enables **FunctionInterceptor**                      |
+| `-trace_exfcn`   | Enables **TraceFcnCall**                             |
+| `-trace_mem`     | Enables **TraceMemory**                              |
+| `-trace_instr`   | Enables **TraceInstructions**                        |
+| `-trace_dasm`    | Enables **TraceDisassembly**                         |
+| `-yara <file>`   | Applies YARA rules before instrumentation (optional) |
 
-### 6.2.2. Sintaxe básica
+### 6.2.2. Basic syntax
 
-> ⚠️ **Atenção:** Substitua os placeholders (PATH_PIN_x64, PATH_CONTRADEF) e o caminho do programa alvo pelos caminhos reais dos artefatos.
+> ⚠️ **Attention:** Replace the placeholders (`PATH_PIN_x64`, `PATH_CONTRADEF`) and the target program path with the actual artifact paths.
 
 ```powershell
-<PATH_PIN_x64>\pin.exe -t <PATH_CONTRADEF>\contradef.dll -intercept_fcn -trace_exfcn -trace_mem -trace_instr -trace_dasm -- C:\Samples\alvo.exe
+<PATH_PIN_x64>\pin.exe -t <PATH_CONTRADEF>\contradef.dll -intercept_fcn -trace_exfcn -trace_mem -trace_instr -trace_dasm -- C:\Samples\target.exe
 ```
 
-*Os arquivos de log são gravados no diretório atual do terminal.
+*Log files are written to the terminal’s current working directory.*
 
 ---
 
-# 7. Teste mínimo
+# 7. Minimal Test
 
-> Este **teste rápido** mostra que a pintool está funcional sem exigir o uso de 
-> amostras de malware nem desligar o antivírus.  
-> Ele roda diretamente no host (Windows x64) usando o executável de linha de comando
-> **`7za.exe`** da ferramenta **7-Zip**, versão portátil.
+> This **quick test** shows that the pintool is functional without requiring
+> malware samples or antivirus deactivation.
+> It runs directly on the host (Windows x64) using the command-line executable
+> **`7za.exe`** from the portable **7-Zip** package.
 
-## 7.1. Pré-requisitos
+## 7.1. Prerequisites
 
-* Host Windows 10/11 **64 bits**.
-* Pasta **`Ambiente_Experimentacao`** do repositório da Contradef contendo:
+* Windows 10/11 **64-bit** host.
+* The **`Experiment_Environment`** folder from the Contradef repository containing:
+
+```text
+pin\                        ← Extracted Intel Pin 3.28
+Experiment_Environment
+├── ContradefDll\           ← Ready-to-use precompiled contradef.dll
+└── 7za.exe                 ← Portable 7-Zip CLI executable (x64)
 ```
 
-pin\                       ← Intel Pin 3.28 descompactado
-Ambiente\_Experimentacao
-├── ContradefDll\          ← contradef.dll pronto (pre-compilado)
-└── 7za.exe                ← Executável CLI portátil do 7-Zip (x64)
+## 7.2. Step by step
 
-```
+1. Download and extract 7-Zip Extra (portable CLI)
 
-## 7.2. Passo a passo
+* Visit:
+  [https://www.7-zip.org/download.html](https://www.7-zip.org/download.html)
 
-1. Baixar e extrair o 7-Zip Extra (CLI portátil)
+* Download the standalone package:
+  [7z2409-extra.7z (x64)](https://www.7-zip.org/a/7z2409-extra.7z)
 
-- Acesse:  
-   [https://www.7-zip.org/download.html](https://www.7-zip.org/download.html)
+* Extract and copy the executable:
+  `x64\7za.exe → Experiment_Environment\`
 
-- Baixe o pacote standalone:  
-   🔗 [7z2409-extra.7z (x64)](https://www.7-zip.org/a/7z2409-extra.7z)
+2. Open PowerShell
 
-- Extraia e copie o executável:  
-   `x64\7za.exe → Ambiente_Experimentacao\`
+3. Go to the repository test directory (`Experiment_Environment`)
 
-2. Abrir o PowerShell
-
-3. Ir para o diretório de testes do repositório (Ambiente_Experimentacao)
-
-> *Abaixo um exemplo. Substitua pelo caminho (diretório) real no seu PC.*
+> *Example below. Replace it with the actual path on your PC.*
 
 ```powershell
-cd "C:\Users\usuario\Downloads\Contradef-main\Ambiente_Experimentacao"
+cd "C:\Users\user\Downloads\Contradef-main\Experiment_Environment"
 ```
 
-4. Executar a Contradef com um módulo leve
+4. Run Contradef with a lightweight module
 
 ```powershell
 ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -intercept_fcn -- .\7za.exe
 ```
 
-> O parâmetro `-intercept_fcn` ativa apenas o **FunctionInterceptor**, gerando um log pequeno.
+> The `-intercept_fcn` parameter enables only **FunctionInterceptor**, generating a small log.
 
-5. Verificar a saída
+5. Check the output
 
-Após o término, você deverá ver um arquivo com nome semelhante a:
+After execution finishes, you should see a file with a name similar to:
 
-```
+```text
 contradef.<PID>.FunctionInterceptor.cdf
 ```
 
-Abra-o com o **Bloco de Notas**, **VS Code** ou **EmEditor** para inspecionar as chamadas de API interceptadas.
+Open it with **Notepad**, **VS Code**, or **EmEditor** to inspect the intercepted API calls.
 
-6. Executar a Contradef com todos os módulos (opcional)
-
-Para habilitar todos os módulos simultaneamente, execute:
+6. Run Contradef with all modules enabled (optional)
 
 ```powershell
 ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -intercept_fcn -trace_exfcn -trace_mem -trace_instr -trace_dasm -- .\7za.exe
 ```
 
-Com isso, é possível confirmar que a pintool está operando corretamente antes de avançar para testes com *malware* em ambiente isolado.
+This allows you to confirm that the pintool is operating correctly before moving on to isolated-environment tests.
 
 ---
 
-# 8. Experimentos
+# 8. Experiments
 
-## 8.1. Preparando o Ambiente de Experimentação
+## 8.1. Preparing the Experiment Environment
 
-### 8.1.1. Instalar o VirtualBox
+### 8.1.1. Install VirtualBox
 
-1. Acesse <https://www.virtualbox.org/>  
-2. Clique em **Download VirtualBox** para seu sistema operacional.  
-3. Execute o instalador com as opções padrão.
+1. Go to [https://www.virtualbox.org/](https://www.virtualbox.org/)
+2. Click **Download VirtualBox** for your operating system.
+3. Run the installer using the default options.
 
-### 8.1.2. Baixar a imagem ISO do Windows
+### 8.1.2. Download the Windows ISO image
 
-* ISO de avaliação do **Windows 10 Enterprise x64**  
-  <https://go.microsoft.com/fwlink/p/?LinkID=2208844&clcid=0x416&culture=pt-br&country=BR>
+* **Windows 10 Enterprise x64** evaluation ISO
+  [https://go.microsoft.com/fwlink/p/?LinkID=2208844&clcid=0x416&culture=pt-br&country=BR](https://go.microsoft.com/fwlink/p/?LinkID=2208844&clcid=0x416&culture=pt-br&country=BR)
 
-* Outras opções (inclui Windows 11):  
-  <https://www.microsoft.com/en-us/evalcenter/download-windows-10-enterprise>
+* Other options (including Windows 11):
+  [https://www.microsoft.com/en-us/evalcenter/download-windows-10-enterprise](https://www.microsoft.com/en-us/evalcenter/download-windows-10-enterprise)
 
-### 8.1.3. Criar a VM no VirtualBox \[[Ver detalhes](./docs/Configuracao_ambiente_analise/1_VirtualBox/README.md)\]
+### 8.1.3. Create the VM in VirtualBox
 
-1. **Máquina → Novo** → selecione *Windows 10/11 x64*.  
-2. Aloque **4 – 8 GB de RAM**, **4 – 6 vCPUs** e **80 – 200 GB** de disco (VDI).  
+1. **Machine → New** → select *Windows 10/11 x64*.
+2. Allocate **4–8 GB of RAM**, **4–6 vCPUs**, and **80–200 GB** of disk (VDI).
 
-### 8.1.4. Instalar o Windows na VM \[[Ver detalhes](./docs/Configuracao_ambiente_analise/2_Instalacao_Windows/README.md)\]
+### 8.1.4. Install Windows inside the VM
 
-1. Selecione a ISO como mídia de boot.  
-2. Siga o assistente de instalação normalmente e configure idioma e partição.
-4. Aguarde a etapa de Instalando o Windows ser concluída; a VM reiniciará automaticamente. Caso não aconteça, reinicie manualmente.
-3. Após a instalação, siga com o assistente até a tela "Entrar com a conta da Microsoft", digite um endereço fictício qualquer como **user@user.com** e clique em **Avançar**.
-4. O instalador mostrará o link **Configure o Windows com uma conta local**; Clique nesse link para prosseguir sem conta Microsoft.
-5. Informe o nome de usuário local **analista** e clique em **Avançar**.
-6. Deixe em branco a senha para o usuário local e clique em **Avançar**.
-7. Complete o assistente de instalação.
+1. Select the ISO as boot media.
+2. Follow the installation wizard normally and configure language and partition.
+3. Wait until the Windows installation step is complete; the VM will restart automatically. If it does not, restart it manually.
+4. After installation, continue through the setup wizard until the “Sign in with Microsoft account” screen, type any fake address such as **[user@user.com](mailto:user@user.com)**, and click **Next**.
+5. The installer will show the **Set up Windows with a local account** link; click it to proceed without a Microsoft account.
+6. Enter the local username **analyst** and click **Next**.
+7. Leave the password blank for the local user and click **Next**.
+8. Complete the installation wizard.
 
-### 8.1.5. Criar snapshot da VM “limpa” \[[Ver detalhes](./docs/Configuracao_ambiente_analise/3_VBox_snapshot_limpo/README.md)\]
+### 8.1.5. Create a clean VM snapshot
 
-* No VirtualBox, abra a guia **Snapshots** → **Criar** → nomeie como **Ambiente Limpo**.
+* In VirtualBox, open the **Snapshots** tab → **Take** → name it **Clean Environment**.
 
-### 8.1.6. Ajustes no Windows convidado (VM) \[[Ver detalhes](./docs/Configuracao_ambiente_analise/4_Configuração_Windows/README.md)\]
+### 8.1.6. Adjustments inside the Windows guest (VM)
 
-1. **Instalar Guest Additions** (opcional para compartilhamento de pastas).  
-2. **Baixar e descompactar o Contradef** (ZIP do GitHub).  
-Descompactar o arquivo no diretório `C:\Users\analista\Experimento`, assim, o diretório principal do repositório será `C:\Users\analista\Experimento\Contradef-main`.
-* *Depois de descompactar, o nome padrão da pasta do repositório será `Contradef-main`*
-3. Baixar e descompactar o Pin. Baixe em <https://software.intel.com/sites/landingpage/pintool/downloads/pin-3.28-98749-g6643ecee5-msvc-windows.zip>
-4. Copie o conteúdo descompactado para a pasta `pin\` no repositório. 
+1. **Install Guest Additions** (optional for shared folders).
+2. **Download and extract Contradef** (GitHub ZIP).
+   Extract the file into `C:\Users\analyst\Experiment`, so the main repository directory becomes `C:\Users\analyst\Experiment\Contradef-main`.
+   *After extraction, the default repository folder name will be `Contradef-main`.*
+3. Download and extract Pin from [https://software.intel.com/sites/landingpage/pintool/downloads/pin-3.28-98749-g6643ecee5-msvc-windows.zip](https://software.intel.com/sites/landingpage/pintool/downloads/pin-3.28-98749-g6643ecee5-msvc-windows.zip)
+4. Copy the extracted contents to the `pin\` folder inside the repository.
 
-    > ⚠️ **Atenção:** Use exclusivamente a versão **MSVC** do Intel Pin; a Contradef não é compatível com o build baseado em **Clang**.
-    > Após baixar o Pin 3.28, extraia o pacote e mova **somente** o conteúdo (diretórios *ia32*, *intel64*, *extras*, *doc*, o executável `pin.exe` etc.) para a pasta `pin\` do repositório, evitando manter a subpasta gerada pela extração.
-
-    ```
-    pin/
-    ├── doc/
-    ├── extras/
-    ├── ia32/
-    ├── intel64/
-    ├── pin.exe
-    └── … (demais diretórios)
-    ```
-
-5. **Desativar “Proteção contra Violações”**:  
-* *Configurações → Atualização e Segurança → Segurança do Windows → Proteção contra vírus e ameaças → Gerenciar configurações → Proteção contra violações* → **Desativar**.  
-6. **Acessar a pasta principal do repositório**:
-
-    ```powershell
-    cd "C:\Users\analista\Experimento\Contradef-main"
-    ```
-
-7. **Executar o script de desativação de Defender e UAC**:  
-    ```text
-    .\Scripts\desativar_defender_uac.bat  (executar como Administrador)
-    ```
-
-    Após a execução do script, **Reinicie a VM** quando solicitado.
-
-8. **Criar snapshot “Base-Tools”** para preservar esse estado antes de iniciar testes reais.
-
-## 8.2. Reproduzindo os Experimentos \[[Ver detalhes](./docs/Configuracao_ambiente_analise/5_Execucao_experimentos/README.md)\]
-
-A seguir apresentamos um roteiro mínimo para repetir os experimentos descritos no artigo.  
-
->## ⚠️ **Importante:** 
->    - Execute cada passo a seguir **somente dentro da VM de análise** para evitar comprometimento do host.
->    - Todos os comandos partem do diretório **`Ambiente_Experimentacao`** do repositório, ex.: `C:\Users\analista\Experimento\Contradef-main\Ambiente_Experimentacao`.
-
-### 8.2.1. Preparação
-
-1. **Instale o 7-Zip**  
-   <https://www.7-zip.org/a/7z2409-x64.exe>
-2. Extraia os arquivos `Ambiente_Experimentacao\Amostras\*.zip` na **mesma pasta** usando a senha `infected`.  
-3. **Desative a rede da VM** antes de executar qualquer amostra com a Contradef.
-
-#### Estrutura de pastas esperada
+> ⚠️ **Attention:** Use only the **MSVC** version of Intel Pin; Contradef is not compatible with the **Clang**-based build.
+> After downloading Pin 3.28, extract the package and move **only** the contents (directories such as *ia32*, *intel64*, *extras*, *doc*, the `pin.exe` executable, etc.) into the `pin\` folder in the repository, avoiding the extraction-generated subfolder.
 
 ```text
-Contradef-main                 → diretório principal do repositório
-├── pin\                       → binários originais do Pin 3.28
-└── Ambiente_Experimentacao\
-    ├── ContradefDll\          → contradef.dll já compilado
-    └── Amostras\              → amostras compactadas
-        ├── 36685efcf34c7a7a6f6dd2e48199e4700b5ab8fe3945a50297703dd8daced74f.zip     → amostra 1 (VMProtect)
-        └── 0f20b0c906f3ad95dbf75ed526b2fe4341fdf62ab8c971fc10e340091af75b3b.zip     → amostra 2 (Comportamento evasivo)
-````
+pin/
+├── doc/
+├── extras/
+├── ia32/
+├── intel64/
+├── pin.exe
+└── … (other directories)
+```
 
-Após descompactar:
+5. **Disable “Tamper Protection”**
+   *Settings → Update & Security → Windows Security → Virus & threat protection → Manage settings → Tamper Protection* → **Disable**.
+6. **Open the main repository folder**:
+
+```powershell
+cd "C:\Users\analyst\Experiment\Contradef-main"
+```
+
+7. **Run the Defender and UAC disable script**:
 
 ```text
-Contradef-main\Ambiente_Experimentacao\Amostras\
-├── 36685efcf34c7a7a6f6dd2e48199e4700b5ab8fe3945a50297703dd8daced74f.exe         → amostra 1 (VMProtect)
-└── 0f20b0c906f3ad95dbf75ed526b2fe4341fdf62ab8c971fc10e340091af75b3b.exe         → amostra 2 (Comportamento evasivo)
+.\Scripts\disable_defender_uac.bat  (run as Administrator)
 ```
 
-### 8.2.2. Terminal de execução
+After running the script, **restart the VM** when prompted.
 
-**Abra o PowerShell como Administrador** (`Iniciar → digite “powershell” → clique com o botão direito → Executar como administrador`).
+8. **Create a “Base-Tools” snapshot** to preserve this state before starting real tests.
+
+## 8.2. Reproducing the experiments
+
+Below we present a minimal workflow to reproduce the experiments described in the article.
+
+> ## ⚠️ **Important:**
+>
+> * Execute each step below **only inside the analysis VM** to avoid compromising the host.
+> * All commands assume the **`Experiment_Environment`** directory in the repository, for example: `C:\Users\analyst\Experiment\Contradef-main\Experiment_Environment`.
+
+### 8.2.1. Preparation
+
+1. **Install 7-Zip**
+   [https://www.7-zip.org/a/7z2409-x64.exe](https://www.7-zip.org/a/7z2409-x64.exe)
+2. Extract the files `Experiment_Environment\Samples\*.zip` into the **same folder** using the password `infected`.
+3. **Disable the VM network** before running any sample with Contradef.
+
+#### Expected folder structure
+
+```text
+Contradef-main                  → main repository directory
+├── pin\                        → original Pin 3.28 binaries
+└── Experiment_Environment\
+    ├── ContradefDll\           → precompiled contradef.dll
+    └── Samples\                → compressed samples
+        ├── 36685efcf34c7a7a6f6dd2e48199e4700b5ab8fe3945a50297703dd8daced74f.zip
+        ├── 0f20b0c906f3ad95dbf75ed526b2fe4341fdf62ab8c971fc10e340091af75b3b.zip
+        └── 430b487c0bc9b53382537422209acbd1c6ae63773cacf0c9f7d61f23e7fa8485.zip
+```
+
+After extraction:
+
+```text
+Contradef-main\Experiment_Environment\Samples\
+├── 36685efcf34c7a7a6f6dd2e48199e4700b5ab8fe3945a50297703dd8daced74f.exe
+├── 0f20b0c906f3ad95dbf75ed526b2fe4341fdf62ab8c971fc10e340091af75b3b.exe
+└── 430b487c0bc9b53382537422209acbd1c6ae63773cacf0c9f7d61f23e7fa8485.exe
+```
+
+### 8.2.2. Execution terminal
+
+**Open PowerShell as Administrator** (`Start → type “powershell” → right-click → Run as administrator`).
 
 ```powershell
-cd "C:\Users\analista\Experimento\Contradef-main\Ambiente_Experimentacao"
+cd "C:\Users\analyst\Experiment\Contradef-main\Experiment_Environment"
 ```
 
-> *Dica:* use aspas se o caminho contiver espaços.
+> *Tip:* use quotes if the path contains spaces.
 
-* Todos os **logs** serão salvos no diretório de trabalho atual (`Ambiente_Experimentacao`). Se quiser separar execuções, crie uma subpasta antes de rodar os comandos, mude para a pasta e forneça caminhos absolutos para `pin.exe`, `contradef.dll` e para a amostra.
-* ⚠️ **Restabeleça o snapshot limpo** após cada análise para evitar contaminação cruzada entre amostras.
+* All **logs** will be saved in the current working directory (`Experiment_Environment`). If you want to separate executions, create a subfolder before running the commands, change into it, and provide absolute paths to `pin.exe`, `contradef.dll`, and the sample.
+* ⚠️ **Restore the clean snapshot** after each analysis to avoid cross-contamination between samples.
 
-### 8.2.3. Medição de tempo (opcional)
+### 8.2.3. Time measurement (optional)
 
-Use `Measure-Command` para cronometrar a execução do Pin/Contradef, Ex.:
+Use `Measure-Command` to time Pin/Contradef execution, for example:
 
 ```powershell
-# Execmplo de medição de tempo com Measure-Command
-Measure-Command { ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -trace_exfcn -- .\Amostras\36685efcf34c7a7a6f6dd2e48199e4700b5ab8fe3945a50297703dd8daced74f.exe }
+# Example of time measurement with Measure-Command
+Measure-Command { ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -trace_exfcn -- .\Samples\36685efcf34c7a7a6f6dd2e48199e4700b5ab8fe3945a50297703dd8daced74f.exe }
 ```
 
-### 8.2.4. Execução da Amostra 1 (VMProtect)
+### 8.2.4. Running Sample 1
 
-#### 8.2.4.1. Módulos isolados
+#### 8.2.4.1. Individual modules
 
-  - FunctionInterceptor:
-```powershell
-Measure-Command { ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -intercept_fcn -- .\Amostras\36685efcf34c7a7a6f6dd2e48199e4700b5ab8fe3945a50297703dd8daced74f.exe }
-```
-
-  - TraceFcnCall:
-```powershell
-Measure-Command { ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -trace_exfcn -- .\Amostras\36685efcf34c7a7a6f6dd2e48199e4700b5ab8fe3945a50297703dd8daced74f.exe }
-```
-
-  - TraceMemory:
-```powershell
-Measure-Command { ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -trace_mem -- .\Amostras\36685efcf34c7a7a6f6dd2e48199e4700b5ab8fe3945a50297703dd8daced74f.exe }
-```
-
-  - TraceInstructions:
-```powershell
-Measure-Command { ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -trace_instr -- .\Amostras\36685efcf34c7a7a6f6dd2e48199e4700b5ab8fe3945a50297703dd8daced74f.exe }
-```
-
-  - TraceDisassembly:
-```powershell
-Measure-Command { ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -trace_dasm -- .\Amostras\36685efcf34c7a7a6f6dd2e48199e4700b5ab8fe3945a50297703dd8daced74f.exe }
-```
-
-#### 8.2.4.2. Guardar os resultados da amostra (Ex. amostra 1)
-
-1. Crie uma pasta, por ex. **Resultados-Amostra-1** dentro de
-   `Ambiente_Experimentacao`.
-2. Mova todos os `.cdf` recém gerados para essa pasta.
-
-#### 8.2.4.3. Execução completa (todos os módulos)
+* FunctionInterceptor:
 
 ```powershell
-Measure-Command { ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -intercept_fcn -trace_exfcn -trace_mem -trace_instr -trace_dasm -- .\Amostras\36685efcf34c7a7a6f6dd2e48199e4700b5ab8fe3945a50297703dd8daced74f.exe }
+Measure-Command { ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -intercept_fcn -- .\Samples\36685efcf34c7a7a6f6dd2e48199e4700b5ab8fe3945a50297703dd8daced74f.exe }
 ```
 
-Em seguida, mova os `.cdf` para uma pasta dedicada, como
-**Resultados-Execucao-Completa-Amostra-1**.
-
-### 8.2.5. Execução da Amostra 2 (Comportamento evasivo)
-
-#### 8.2.5.1. Módulos isolados
-
-  - FunctionInterceptor:
-```powershell
-Measure-Command { ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -intercept_fcn -- .\Amostras\0f20b0c906f3ad95dbf75ed526b2fe4341fdf62ab8c971fc10e340091af75b3b.exe }
-```
-
-  - TraceFcnCall:
-```powershell
-Measure-Command { ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -trace_exfcn -- .\Amostras\0f20b0c906f3ad95dbf75ed526b2fe4341fdf62ab8c971fc10e340091af75b3b.exe }
-```
-
-  - TraceMemory:
-```powershell
-Measure-Command { ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -trace_mem -- .\Amostras\0f20b0c906f3ad95dbf75ed526b2fe4341fdf62ab8c971fc10e340091af75b3b.exe }
-```
-
-  - TraceInstructions:
-```powershell
-Measure-Command { ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -trace_instr -- .\Amostras\0f20b0c906f3ad95dbf75ed526b2fe4341fdf62ab8c971fc10e340091af75b3b.exe }
-```
-
-  - TraceDisassembly
-```powershell
-Measure-Command { ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -trace_dasm -- .\Amostras\0f20b0c906f3ad95dbf75ed526b2fe4341fdf62ab8c971fc10e340091af75b3b.exe }
-```
-
-#### 8.2.5.2. Guardar os resultados da amostra (Ex. amostra 2)
-
-1. Crie uma pasta, por ex. **Resultados-Amostra-2** dentro de
-   `Ambiente_Experimentacao`.
-2. Mova todos os `.cdf` recém gerados para essa pasta.
-
-#### 8.2.5.3. Execução completa (todos os módulos)
+* TraceFcnCall:
 
 ```powershell
-Measure-Command { ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -intercept_fcn -trace_exfcn -trace_mem -trace_instr -trace_dasm -- .\Amostras\0f20b0c906f3ad95dbf75ed526b2fe4341fdf62ab8c971fc10e340091af75b3b.exe }
+Measure-Command { ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -trace_exfcn -- .\Samples\36685efcf34c7a7a6f6dd2e48199e4700b5ab8fe3945a50297703dd8daced74f.exe }
 ```
 
-Em seguida, mova os `.cdf` para uma pasta dedicada, como
-**Resultados-Execucao-Completa-Amostra-2**.
+* TraceMemory:
 
-### 8.2.6 Observações de desempenho
+```powershell
+Measure-Command { ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -trace_mem -- .\Samples\36685efcf34c7a7a6f6dd2e48199e4700b5ab8fe3945a50297703dd8daced74f.exe }
+```
 
-* Os tempos obtidos podem variar conforme o hardware do host (hospedeiro); resultados diferentes dos apresentados no artigo são esperados em máquinas com diferentes caracteristicas de processamento ou disco.
-* Em hosts **bare-metal** equipados com SSD ou NVMe, a geração dos arquivos de log é muito mais ágil, já que o gargalo principal do Pin + Contradef é a gravação em disco.
-* Logs com até **2 GB** abrem sem problemas no **VS Code**; acima desse limite recomenda-se o **EmEditor** ([https://www.emeditor.com/](https://www.emeditor.com/)) ou outra ferramenta voltada a arquivos de grande porte.
+* TraceInstructions:
+
+```powershell
+Measure-Command { ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -trace_instr -- .\Samples\36685efcf34c7a7a6f6dd2e48199e4700b5ab8fe3945a50297703dd8daced74f.exe }
+```
+
+* TraceDisassembly:
+
+```powershell
+Measure-Command { ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -trace_dasm -- .\Samples\36685efcf34c7a7a6f6dd2e48199e4700b5ab8fe3945a50297703dd8daced74f.exe }
+```
+
+#### 8.2.4.2. Save the sample results
+
+1. Create a folder, for example **Sample-1-Results**, inside `Experiment_Environment`.
+2. Move all newly generated `.cdf` files into that folder.
+
+#### 8.2.4.3. Full execution (all modules)
+
+```powershell
+Measure-Command { ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -intercept_fcn -trace_exfcn -trace_mem -trace_instr -trace_dasm -- .\Samples\36685efcf34c7a7a6f6dd2e48199e4700b5ab8fe3945a50297703dd8daced74f.exe }
+```
+
+Then move the `.cdf` files into a dedicated folder such as **Full-Execution-Sample-1**.
+
+### 8.2.5. Running Sample 2
+
+#### 8.2.5.1. Individual modules
+
+* FunctionInterceptor:
+
+```powershell
+Measure-Command { ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -intercept_fcn -- .\Samples\0f20b0c906f3ad95dbf75ed526b2fe4341fdf62ab8c971fc10e340091af75b3b.exe }
+```
+
+* TraceFcnCall:
+
+```powershell
+Measure-Command { ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -trace_exfcn -- .\Samples\0f20b0c906f3ad95dbf75ed526b2fe4341fdf62ab8c971fc10e340091af75b3b.exe }
+```
+
+* TraceMemory:
+
+```powershell
+Measure-Command { ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -trace_mem -- .\Samples\0f20b0c906f3ad95dbf75ed526b2fe4341fdf62ab8c971fc10e340091af75b3b.exe }
+```
+
+* TraceInstructions:
+
+```powershell
+Measure-Command { ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -trace_instr -- .\Samples\0f20b0c906f3ad95dbf75ed526b2fe4341fdf62ab8c971fc10e340091af75b3b.exe }
+```
+
+* TraceDisassembly:
+
+```powershell
+Measure-Command { ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -trace_dasm -- .\Samples\0f20b0c906f3ad95dbf75ed526b2fe4341fdf62ab8c971fc10e340091af75b3b.exe }
+```
+
+#### 8.2.5.2. Save the sample results
+
+1. Create a folder, for example **Sample-2-Results**, inside `Experiment_Environment`.
+2. Move all newly generated `.cdf` files into that folder.
+
+#### 8.2.5.3. Full execution (all modules)
+
+```powershell
+Measure-Command { ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -intercept_fcn -trace_exfcn -trace_mem -trace_instr -trace_dasm -- .\Samples\0f20b0c906f3ad95dbf75ed526b2fe4341fdf62ab8c971fc10e340091af75b3b.exe }
+```
+
+Then move the `.cdf` files into a dedicated folder such as **Full-Execution-Sample-2**.
+
+
+
+### 8.2.6. Running Sample 3
+
+#### 8.2.6.1. Individual modules
+
+* FunctionInterceptor:
+
+```powershell
+Measure-Command { ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -intercept_fcn -- .\Samples\430b487c0bc9b53382537422209acbd1c6ae63773cacf0c9f7d61f23e7fa8485.exe }
+```
+
+* TraceFcnCall:
+
+```powershell
+Measure-Command { ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -trace_exfcn -- .\Samples\430b487c0bc9b53382537422209acbd1c6ae63773cacf0c9f7d61f23e7fa8485.exe }
+```
+
+* TraceMemory:
+
+```powershell
+Measure-Command { ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -trace_mem -- .\Samples\430b487c0bc9b53382537422209acbd1c6ae63773cacf0c9f7d61f23e7fa8485.exe }
+```
+
+* TraceInstructions:
+
+```powershell
+Measure-Command { ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -trace_instr -- .\Samples\430b487c0bc9b53382537422209acbd1c6ae63773cacf0c9f7d61f23e7fa8485.exe }
+```
+
+* TraceDisassembly:
+
+```powershell
+Measure-Command { ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -trace_dasm -- .\Samples\430b487c0bc9b53382537422209acbd1c6ae63773cacf0c9f7d61f23e7fa8485.exe }
+```
+
+#### 8.2.6.2. Save the sample results
+
+1. Create a folder, for example **Sample-3-Results**, inside `Experiment_Environment`.
+2. Move all newly generated `.cdf` files into that folder.
+
+#### 8.2.6.3. Full execution (all modules)
+
+```powershell
+Measure-Command { ..\pin\intel64\bin\pin.exe -t .\ContradefDll\contradef.dll -intercept_fcn -trace_exfcn -trace_mem -trace_instr -trace_dasm -- .\Samples\430b487c0bc9b53382537422209acbd1c6ae63773cacf0c9f7d61f23e7fa8485.exe }
+```
+
+Then move the `.cdf` files into a dedicated folder such as **Full-Execution-Sample-3**.
+
+
+### 8.2.7. Performance notes
+
+* Measured times may vary depending on the host hardware; results different from those presented in the article are expected on machines with different processing or disk characteristics.
+* On **bare-metal** hosts equipped with SSD or NVMe, log generation is much faster, since the main bottleneck of Pin + Contradef is disk writing.
+* Logs up to **2 GB** open fine in **VS Code**; above that limit, **EmEditor** or another large-file-oriented tool is recommended.
 
 ---
 
-## 8.3. Inspeção de Resultados
+## 8.3. Inspecting results
 
-Esta seção mostra como abrir os arquivos `.cdf` (gerados pela instrumentação) e inspecionar os logs diretamente na VM. Caso prefira, também é possível transferi-los para o sistema host.
+This section shows how to open the `.cdf` files (generated by instrumentation) and inspect the logs directly inside the VM. If preferred, they can also be transferred to the host system.
 
-### 8.3.1 Acessar os logs de execução
+### 8.3.1. Accessing execution logs
 
-Concluídos os experimentos, os arquivos `.cdf` podem ser inspecionados diretamente na VM ou transferidos para o host para análise externa.
+Once the experiments are complete, the `.cdf` files can be inspected directly inside the VM or transferred to the host for external analysis.
 
-> ⚙️ **Opcional** — se preferir analisar no host, ative **Pastas Compartilhadas** no VirtualBox e compartilhe apenas os arquivos `.cdf`.
+> ⚙️ **Optional** — if you prefer to analyze them on the host, enable **Shared Folders** in VirtualBox and share only the `.cdf` files.
 
-> ⚠️ **Importante** – os resultados podem variar de uma execução para outra, mesmo usando a mesma amostra:  
-> • Fluxos internos diferentes (threads, caminhos de código) geram ordem e quantidade de eventos distintos.  
-> • Durante desempacotamento ou realocação de código, endereços de memória mudam, refletindo-se nos *logs*.  
-> Essas diferenças são esperadas e não indicam falha da ferramenta nem inconsistência nos resultados.
+> ⚠️ **Important** – results may vary from one execution to another, even with the same sample:
+> • Different internal flows (threads, code paths) generate different event order and quantities.
+> • During unpacking or code relocation, memory addresses change and are reflected in the *logs*.
+> These differences are expected and do not indicate a failure of the tool or inconsistency in the results.
 
-### 8.3.2 Instalar o EmEditor para arquivos grandes
+### 8.3.2. Install EmEditor for large files
 
-1. Acesse <https://www.emeditor.com/#download>.  
-2. Clique em **Download Now**, execute o instalador e confirme em **Install**.
+1. Go to [https://www.emeditor.com/#download](https://www.emeditor.com/#download).
+2. Click **Download Now**, run the installer, and confirm with **Install**.
 
-### 8.3.3 Abrir e inspecionar os logs
+### 8.3.3. Open and inspect the logs
 
-1. Clique com o botão direito no arquivo `.cdf` → **Abrir com → EmEditor**.  
-   <p align="center"><img src="docs/Configuracao_ambiente_analise/5_Execucao_experimentos/12.png" alt="Abrir log no EmEditor" width="60%"></p>
+1. Right-click the `.cdf` file → **Open with → EmEditor**.
 
-2. Use os recursos do EmEditor para explorar o traço: busca por palavras-chave (endereços, APIs, strings), expressões regulares, marcadores, filtragem por coluna etc.  
-   <p align="center"><img src="docs/Configuracao_ambiente_analise/5_Execucao_experimentos/13.png" alt="Trace exibido no EmEditor" width="80%"></p>
+   <p align="center"><img src="docs/Configuracao_ambiente_analise/5_Execucao_experimentos/12.png" alt="Open log in EmEditor" width="60%"></p>
 
-Mesmo que dois *logs* de uma mesma amostra apresentem diferenças pontuais, os eventos essenciais — chamadas de API críticas, regiões de memória executável e sequências de instruções-chave — permanecem consistentes e suficientes para replicar as conclusões do artigo.
+2. Use EmEditor’s features to explore the trace: keyword search (addresses, APIs, strings), regular expressions, bookmarks, column filtering, etc.
+
+   <p align="center"><img src="docs/Configuracao_ambiente_analise/5_Execucao_experimentos/13.png" alt="Trace displayed in EmEditor" width="80%"></p>
+
+Even if two logs from the same sample show slight differences, the essential events — critical API calls, executable memory regions, and key instruction sequences — remain consistent and sufficient to reproduce the conclusions of the article.
 
 ---
 
-# 9. Licença
+# 9. License
 
-Este projeto está licenciado sob os termos da [Licença MIT](./LICENSE).
+This project is licensed under the terms of the [MIT License](./LICENSE).
 
-> ⚠️ **Aviso Legal:** Este projeto foi desenvolvido exclusivamente para fins educacionais e de pesquisa em segurança da informação. O uso indevido, malicioso ou em ambientes de produção é de responsabilidade exclusiva do usuário.  
-> A execução dos experimentos envolve a interação com amostras de software malicioso — utilize sempre em ambientes isolados e controlados.
+> ⚠️ **Legal Notice:** This project was developed exclusively for educational purposes and information security research. Improper or malicious use, or use in production environments, is the sole responsibility of the user.
+> The experiments involve interaction with malicious software samples — always use isolated and controlled environments.
 
-> 📌 O projeto depende de ferramentas de terceiros com licenças próprias, como [Intel PIN](https://www.intel.com/content/www/us/en/developer/articles/tool/pin-a-dynamic-binary-instrumentation-tool.html) e [YARA](https://virustotal.github.io/yara/). Verifique e respeite os termos de uso dessas ferramentas.
+> 📌 The project depends on third-party tools with their own licenses, such as [Intel PIN](https://www.intel.com/content/www/us/en/developer/articles/tool/pin-a-dynamic-binary-instrumentation-tool.html) and [YARA](https://virustotal.github.io/yara/). Please verify and comply with the terms of use of these tools.
